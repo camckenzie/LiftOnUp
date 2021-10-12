@@ -1,54 +1,53 @@
 import {
     View,
     StyleSheet,
-    ActivityIndicator,
     TouchableOpacity,
   } from 'react-native';
-  import {Text, Icon, Image, Button} from 'react-native-elements';
+  import {Text, Image, Button} from 'react-native-elements';
   import React, {Component} from 'react';
   class Intro extends React.Component {
-    static navigationOptions = {
-      headerShown: false,
-    };
     
+    static navigationOptions = {
+      headerShown: true,
+    };
+    // styles for Intro Screen
     render() {
-      
-
         const styles = StyleSheet.create({
             container: {
-              // top:150,
-              backgroundColor: '#F4F6FA',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignContent:'center'
+              flex: 1,
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "center",
             },
+            
             headerContainer: {
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: 40
+              textAlign: 'center',
+              padding: 30,
+              top:0
             },
             contentView: {
-              marginTop: 10,
+              top: 0,
               justifyContent: 'center',
               alignItems: 'center',
             },
           });
           return (
             <View style={styles.container}>
-               <View style={styles.headerContainer}>
-           
-            </View>
-            <View style={styles.contentView}>
+              {/* Logo view */}
             <Image 
-            source = {require('./LiftOnUp.png')} 
+            source = {require('../../assets/LiftOnUp.png')} 
           style={{width:300,height:200}}/> 
-           
-              <Text h4 tyle={{marginTop: 0}}>Welcome to LiftOnUp</Text>
-              <Text h5 style={{textAlign: 'center'}}>
+
+          {/* Heading Display */}
+           <View style={styles. headerContainer}>
+              <Text h4 style={{marginBottom: 5,textAlign:'center'}}>Welcome to LiftOnUp</Text>
+              <Text h5 >
                 The best App for track Fitness workout
               </Text>
+              </View>
+              <View style={styles.contentView}>
           <Button
-            onPress={() => this.props.navigation.navigate('Registation')}
+            onPress={() => this.props.navigation.navigate('Registration')}
             title="Get started"
             loading={false}
             loadingProps={{size: 'small', color: 'white'}}
@@ -65,12 +64,12 @@ import {
           </Text>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Login')}>
-            <Text h4 style={{textAlign: 'center', color: '#004d99',fontWeight: 'bold', fontSize: 20}}>
+            <Text style={{textAlign: 'center', color: '#004d99',fontWeight: 'bold',fontSize:20}}>
               Sign in
             </Text>
           </TouchableOpacity>
-        </View>
           </View>
+    </View>
 
 );
 }

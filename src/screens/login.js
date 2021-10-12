@@ -8,23 +8,53 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import firebase from '../../config/config.js';
+import 'firebase/auth';
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-    };
+  constructor() {
+    super();
+    this.state = { 
+      email: '', 
+      password: '',
+      isLoading: false
+    }
+  }
+  updateInputVal = (val, prop) => {
+    const state = this.state;
+    state[prop] = val;
+    this.setState(state);
   }
 
+  userLogin = () => {
+    if(this.state.email === '' && this.state.password === '') {
+      Alert.alert('Enter details to signin!')
+    } else {
+      this.setState({
+        isLoading: true,
+      })
+      firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then((res) => {
+        console.log(res)
+        console.log('User logged-in successfully!')
+        this.setState({
+          isLoading: false,
+          email: '', 
+          password: ''
+        })
+        this.props.navigation.navigate('Dashboard')
+      })
+      .catch(error => this.setState({ errorMessage: error.message }))
+    }
+  }
   static navigationOptions = {
     title: "Log In",
   };
 
 
-
+// Styles for Login screen
   render() {
     const styles = StyleSheet.create({
       container: {
@@ -32,11 +62,6 @@ class Login extends React.Component {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-      },
-      icon: {
-        fontSize: 161,
-        textAlign: "center",
-        marginBottom: 25,
       },
       input_box: {
         width: "75%",
@@ -61,7 +86,6 @@ class Login extends React.Component {
         justifyContent: "center",
       },
       btn_shape: {
-        // backgroundColor: "rgba(99,206,237,1)",
         borderRadius: 10,
         backgroundColor:"#004d99",
         width: "40%",
@@ -83,19 +107,19 @@ class Login extends React.Component {
 
 return (
     <View style={styles.container}>
-      {/* <Text style={styles.icon}>🏃</Text> */}
+    {/* Logo View in screen */}
       <Image 
-	source = {require('./LiftOnUp.png')} 
+	source = {require('../../assets/LiftOnUp.png')} 
     style={{ width: 300, height: 200 }}/> 
+
+  {/* Input Emaild and Password feild */}
       <View style={styles.input_box}>
-        <Text style={styles.input_title}>Username</Text>
+        <Text style={styles.input_title}>Email ID</Text>
         <TextInput
           style={styles.input_placeholder}
           autoCapitalize="none"
           placeholder="Username"
-          onChangeText={(input) => {
-            this.setState({ username: input });
-          }}
+          onChangeText={(val) => this.updateInputVal(val, 'email')}
         />
       </View>
       <View style={styles.input_box}>
@@ -107,27 +131,18 @@ return (
           autoCapitalize="none"
           placeholder="Password"
           secureTextEntry={true}
-          onChangeText={(input) => {
-            this.setState({ password: input });
-          }}
+          onChangeText={(val) => this.updateInputVal(val, 'password')}
+          maxLength={15}
         />
       </View>
       <View style={styles.btn_box}>
         <TouchableOpacity
-          onPress={() => this.logIn()}
+          o onPress={() => this.userLogin()}
           style={styles.btn_shape}
         >
           <Text style={styles.btn_text}>Log In</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => this.signUp()}
-          style={[
-            styles.btn_shape,
-            { backgroundColor: "#00264d" },
-          ]}
-        >
-          <Text style={styles.btn_text}>Sign Up</Text>
-        </TouchableOpacity>
+        
       </View>
       <ActivityIndicator
         animating={this.state.loading}
