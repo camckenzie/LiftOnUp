@@ -368,7 +368,6 @@ attr fontProviderFetchStrategy
 attr fontProviderFetchTimeout
 attr fontProviderPackage
 attr fontProviderQuery
-attr fontProviderSystemFontFamily
 attr fontStyle
 attr fontVariationSettings
 attr fontWeight
@@ -500,7 +499,6 @@ attr navigationContentDescription
 attr navigationIcon
 attr navigationMode
 attr navigationViewStyle
-attr nestedScrollViewStyle
 attr number
 attr numericModifiers
 attr overlapAnchor
@@ -533,7 +531,6 @@ attr progressBarPadding
 attr progressBarStyle
 attr queryBackground
 attr queryHint
-attr queryPatterns
 attr radioButtonStyle
 attr rangeFillColor
 attr ratingBarStyle
@@ -573,7 +570,6 @@ attr shapeAppearanceLargeComponent
 attr shapeAppearanceMediumComponent
 attr shapeAppearanceOverlay
 attr shapeAppearanceSmallComponent
-attr shortcutMatchRequired
 attr showAsAction
 attr showDividers
 attr showMotionSpec
@@ -754,8 +750,6 @@ color abc_tint_spinner
 color abc_tint_switch_track
 color accent_material_dark
 color accent_material_light
-color androidx_core_ripple_material_light
-color androidx_core_secondary_text_default_material_light
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -913,6 +907,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color notification_material_background_media_default_color
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -1256,6 +1251,10 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen subtitle_corner_radius
+dimen subtitle_outline_width
+dimen subtitle_shadow_offset
+dimen subtitle_shadow_radius
 dimen test_mtrl_calendar_day_cornerSize
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
@@ -1474,6 +1473,7 @@ id accessibility_label
 id accessibility_role
 id accessibility_state
 id accessibility_value
+id action0
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -1510,6 +1510,7 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id buttonPanel
+id cancel_action
 id cancel_button
 id catalyst_redbox_title
 id center
@@ -1548,6 +1549,7 @@ id disableHome
 id dropdown_menu
 id edit_query
 id end
+id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id exitUntilCollapsed
@@ -1595,6 +1597,7 @@ id line3
 id listMode
 id list_item
 id masked
+id media_actions
 id message
 id middle
 id mini
@@ -1698,6 +1701,7 @@ id src_in
 id src_over
 id standard
 id start
+id status_bar_latest_event_content
 id stretch
 id submenuarrow
 id submit_area
@@ -1706,15 +1710,10 @@ id tag_accessibility_actions
 id tag_accessibility_clickable_spans
 id tag_accessibility_heading
 id tag_accessibility_pane_title
-id tag_on_apply_window_listener
-id tag_on_receive_content_listener
-id tag_on_receive_content_mime_types
 id tag_screen_reader_focusable
-id tag_state_description
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
-id tag_window_insets_animation_callback
 id test_checkbox_android_button_tint
 id test_checkbox_app_button_tint
 id text
@@ -1866,8 +1865,17 @@ layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
 layout notification_action
 layout notification_action_tombstone
+layout notification_media_action
+layout notification_media_cancel_action
+layout notification_template_big_media
+layout notification_template_big_media_custom
+layout notification_template_big_media_narrow
+layout notification_template_big_media_narrow_custom
 layout notification_template_custom_big
 layout notification_template_icon_group
+layout notification_template_lines_media
+layout notification_template_media
+layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout redbox_item_frame
@@ -1977,16 +1985,10 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
-string default_web_client_id
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
-string gcm_defaultSenderId
-string google_api_key
-string google_app_id
-string google_crash_reporting_api_key
-string google_storage_bucket
 string header_description
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
@@ -2036,7 +2038,6 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string progressbar_description
-string project_id
 string radiogroup_description
 string rn_tab_description
 string scrollbar_description
@@ -2406,9 +2407,14 @@ style TextAppearance_AppCompat_Widget_Switch
 style TextAppearance_AppCompat_Widget_TextView_SpinnerItem
 style TextAppearance_Compat_Notification
 style TextAppearance_Compat_Notification_Info
+style TextAppearance_Compat_Notification_Info_Media
 style TextAppearance_Compat_Notification_Line2
+style TextAppearance_Compat_Notification_Line2_Media
+style TextAppearance_Compat_Notification_Media
 style TextAppearance_Compat_Notification_Time
+style TextAppearance_Compat_Notification_Time_Media
 style TextAppearance_Compat_Notification_Title
+style TextAppearance_Compat_Notification_Title_Media
 style TextAppearance_Design_CollapsingToolbar_Expanded
 style TextAppearance_Design_Counter
 style TextAppearance_Design_Counter_Overflow
@@ -2767,7 +2773,6 @@ styleable BottomAppBar backgroundTint elevation fabAlignmentMode fabAnimationMod
 styleable BottomNavigationView backgroundTint elevation itemBackground itemHorizontalTranslationEnabled itemIconSize itemIconTint itemRippleColor itemTextAppearanceActive itemTextAppearanceInactive itemTextColor labelVisibilityMode menu
 styleable BottomSheetBehavior_Layout android_elevation backgroundTint behavior_expandedOffset behavior_fitToContents behavior_halfExpandedRatio behavior_hideable behavior_peekHeight behavior_saveFlags behavior_skipCollapsed shapeAppearance shapeAppearanceOverlay
 styleable ButtonBarLayout allowStacking
-styleable Capability queryPatterns shortcutMatchRequired
 styleable CardView android_minWidth android_minHeight cardBackgroundColor cardCornerRadius cardElevation cardMaxElevation cardPreventCornerOverlap cardUseCompatPadding contentPadding contentPaddingBottom contentPaddingLeft contentPaddingRight contentPaddingTop
 styleable Chip android_textAppearance android_textColor android_ellipsize android_maxWidth android_text android_checkable checkedIcon checkedIconEnabled checkedIconVisible chipBackgroundColor chipCornerRadius chipEndPadding chipIcon chipIconEnabled chipIconSize chipIconTint chipIconVisible chipMinHeight chipMinTouchTargetSize chipStartPadding chipStrokeColor chipStrokeWidth chipSurfaceColor closeIcon closeIconEnabled closeIconEndPadding closeIconSize closeIconStartPadding closeIconTint closeIconVisible ensureMinTouchTargetSize hideMotionSpec iconEndPadding iconStartPadding rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec textEndPadding textStartPadding
 styleable ChipGroup checkedChip chipSpacing chipSpacingHorizontal chipSpacingVertical singleLine singleSelection
@@ -2783,7 +2788,7 @@ styleable ExtendedFloatingActionButton_Behavior_Layout behavior_autoHide behavio
 styleable FloatingActionButton backgroundTint backgroundTintMode borderWidth elevation ensureMinTouchTargetSize fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec useCompatPadding
 styleable FloatingActionButton_Behavior_Layout behavior_autoHide
 styleable FlowLayout itemSpacing lineSpacing
-styleable FontFamily fontProviderAuthority fontProviderCerts fontProviderFetchStrategy fontProviderFetchTimeout fontProviderPackage fontProviderQuery fontProviderSystemFontFamily
+styleable FontFamily fontProviderAuthority fontProviderCerts fontProviderFetchStrategy fontProviderFetchTimeout fontProviderPackage fontProviderQuery
 styleable FontFamilyFont android_font android_fontWeight android_fontStyle android_ttcIndex android_fontVariationSettings font fontStyle fontVariationSettings fontWeight ttcIndex
 styleable ForegroundLinearLayout android_foreground android_foregroundGravity foregroundInsidePadding
 styleable Fragment android_name android_id android_tag

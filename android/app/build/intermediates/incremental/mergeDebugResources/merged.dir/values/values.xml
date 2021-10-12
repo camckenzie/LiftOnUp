@@ -53,7 +53,6 @@
     <attr format="reference" name="materialThemeOverlay"/>
     <attr format="dimension" name="minTouchTargetSize"/>
     <attr format="reference" name="navigationViewStyle"/>
-    <attr format="reference" name="nestedScrollViewStyle"/>
     <attr format="reference" name="popupMenuBackground"/>
     <attr format="reference" name="recyclerViewStyle"/>
     <attr format="color" name="rippleColor"/>
@@ -94,8 +93,6 @@
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
-    <color name="androidx_core_ripple_material_light">#1f000000</color>
-    <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
     <color name="background_floating_material_dark">@color/material_grey_800</color>
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
@@ -193,6 +190,7 @@
     <color name="mtrl_textinput_hovered_box_stroke_color">#DE000000</color>
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
+    <color name="notification_material_background_media_default_color">#ff424242</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
@@ -532,6 +530,10 @@
     <dimen name="notification_subtext_size">13sp</dimen>
     <dimen name="notification_top_pad">10dp</dimen>
     <dimen name="notification_top_pad_large_text">5dp</dimen>
+    <dimen name="subtitle_corner_radius">2dp</dimen>
+    <dimen name="subtitle_outline_width">2dp</dimen>
+    <dimen name="subtitle_shadow_offset">2dp</dimen>
+    <dimen name="subtitle_shadow_radius">2dp</dimen>
     <dimen name="test_mtrl_calendar_day_cornerSize">52dp</dimen>
     <dimen name="tooltip_corner_radius">2dp</dimen>
     <dimen name="tooltip_horizontal_padding">16dp</dimen>
@@ -611,15 +613,10 @@
     <item name="tag_accessibility_clickable_spans" type="id"/>
     <item name="tag_accessibility_heading" type="id"/>
     <item name="tag_accessibility_pane_title" type="id"/>
-    <item name="tag_on_apply_window_listener" type="id"/>
-    <item name="tag_on_receive_content_listener" type="id"/>
-    <item name="tag_on_receive_content_mime_types" type="id"/>
     <item name="tag_screen_reader_focusable" type="id"/>
-    <item name="tag_state_description" type="id"/>
     <item name="tag_transition_group" type="id"/>
     <item name="tag_unhandled_key_event_manager" type="id"/>
     <item name="tag_unhandled_key_listeners" type="id"/>
-    <item name="tag_window_insets_animation_callback" type="id"/>
     <item name="text" type="id"/>
     <item name="text2" type="id"/>
     <item name="textinput_counter" type="id"/>
@@ -749,16 +746,10 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
-    <string name="default_web_client_id" translatable="false">219945897356-6l0fhl5jvhs1va5ern1ls37gc3aegb3p.apps.googleusercontent.com</string>
     <string name="error_icon_content_description">Error</string>
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
-    <string name="gcm_defaultSenderId" translatable="false">219945897356</string>
-    <string name="google_api_key" translatable="false">AIzaSyBxFj5ZXdBu1SoBsUp0IOTMWJbqgDGPqjE</string>
-    <string name="google_app_id" translatable="false">1:219945897356:android:28737afd18ed5981cf1aa9</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBxFj5ZXdBu1SoBsUp0IOTMWJbqgDGPqjE</string>
-    <string name="google_storage_bucket" translatable="false">reactnativefirebase-c9724.appspot.com</string>
     <string name="header_description" translatable="false">Heading</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
@@ -808,7 +799,6 @@
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
     <string name="progressbar_description" translatable="false">Progress Bar</string>
-    <string name="project_id" translatable="false">reactnativefirebase-c9724</string>
     <string name="radiogroup_description" translatable="false">Radio Group</string>
     <string name="rn_tab_description" translatable="false">Tab</string>
     <string name="scrollbar_description" translatable="false">Scroll Bar</string>
@@ -3149,12 +3139,17 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+    <style name="TextAppearance.Compat.Notification.Info.Media"/>
     <style name="TextAppearance.Compat.Notification.Line2" parent="TextAppearance.Compat.Notification.Info"/>
+    <style name="TextAppearance.Compat.Notification.Line2.Media" parent="TextAppearance.Compat.Notification.Info.Media"/>
+    <style name="TextAppearance.Compat.Notification.Media"/>
     <style name="TextAppearance.Compat.Notification.Time">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+    <style name="TextAppearance.Compat.Notification.Time.Media"/>
     <style name="TextAppearance.Compat.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title"/>
+    <style name="TextAppearance.Compat.Notification.Title.Media"/>
     <style name="TextAppearance.Design.CollapsingToolbar.Expanded" parent="TextAppearance.AppCompat.Display1">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
   </style>
@@ -5335,13 +5330,6 @@
              enough space to lay them out side-by-side. -->
         <attr format="boolean" name="allowStacking"/>
     </declare-styleable>
-    <declare-styleable name="Capability">
-        <!-- Resource reference to the string array of query patterns for a custom capability. -->
-        <attr format="reference" name="queryPatterns"/>
-        <!-- Indicates whether a parameter in a capability template can only contain a matched
-             shortcut id and not an arbitrary string. -->
-        <attr format="boolean" name="shortcutMatchRequired"/>
-    </declare-styleable>
     <declare-styleable name="CardView">
         <!-- Background color for CardView. -->
         <attr format="color" name="cardBackgroundColor"/>
@@ -5873,11 +5861,6 @@
               timeout and wait until a reply is received from the font provider. -->
             <enum name="forever" value="-1"/>
         </attr>
-        <!-- Provides the system font family name to check before downloading the font. For
-        example if the fontProviderQuery asked for "Sans Serif", it is possible to define
-        fontProviderSystemFontFamily as "sans-serif" to tell the system to use "sans-serif" font
-        family if it exists on the system. -->
-        <attr format="string" name="fontProviderSystemFontFamily"/>
     </declare-styleable>
     <declare-styleable name="FontFamilyFont">
         <!-- The style of the given font file. This will be used when the font is being loaded into

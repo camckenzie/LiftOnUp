@@ -106,6 +106,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2D1731C7CED0447683C7A2A3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		686BB394C38FCFB1944C2CFD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +121,6 @@
 				402A07F2523AA16A3EE9A71C /* Pods-LiftOnUp-LiftOnUpTests.debug.xcconfig */,
 				05D0BBBD5DB28C679C5ED5DB /* Pods-LiftOnUp-LiftOnUpTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -134,6 +140,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				686BB394C38FCFB1944C2CFD /* Pods */,
+				2D1731C7CED0447683C7A2A3 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";

@@ -17,6 +17,8 @@ import org.reactnative.maskedview.RNCMaskedViewPackage;
 import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 // @react-native-firebase/auth
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+// react-native-firebase
+import io.invertase.firebase.RNFirebasePackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-linear-gradient
@@ -77,6 +79,7 @@ public class PackageList {
       new RNCMaskedViewPackage(),
       new ReactNativeFirebaseAppPackage(),
       new ReactNativeFirebaseAuthPackage(),
+      new RNFirebasePackage(),
       new RNGestureHandlerPackage(),
       new LinearGradientPackage(),
       new SafeAreaContextPackage(),
