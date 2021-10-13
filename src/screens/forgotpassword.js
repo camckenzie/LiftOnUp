@@ -21,7 +21,7 @@ class ForgotPassword extends Component {
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        Alert.Alert("Emaile was sent")
+        Alert.alert("Emaile was sent")
         // Password reset email sent!
         // ..
       })
@@ -100,7 +100,7 @@ class ForgotPassword extends Component {
             </View>
             <View style={styles.btn_box}>
             <TouchableOpacity
-                o onPress={() => this.resetMyPassword()}
+                o onPress={() => this.resetMyPassword(this.state.email)}
                 style={[styles.btn_shape,{backgroundColor: "#039BE5"}]}
             >
             <Text style={styles.btn_text}>Reset my Password</Text>
