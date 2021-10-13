@@ -17,7 +17,7 @@ class ForgotPassword extends Component {
       }
   // Styles for forgetpassword screen
 
-  resetMyPassword = () =>{
+  resetMyPassword = () =>{// This function is implenmented from https://firebase.google.com/docs/auth/web/manage-users
     const auth = getAuth();
     sendPasswordResetEmail(auth, this.state.email)
       .then(() => {
@@ -33,7 +33,7 @@ class ForgotPassword extends Component {
       });
   }
   
-  render() {
+  render() {// copied from login screen
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -100,7 +100,7 @@ class ForgotPassword extends Component {
             </View>
             <View style={styles.btn_box}>
             <TouchableOpacity
-                o onPress={() => this.resetMyPassword()}
+                o onPress={() => this.resetMyPassword()}//The button will intrigue the sendPasswordResetEmail function with the value parsed through the input box
                 style={[styles.btn_shape,{backgroundColor: "#039BE5"}]}
             >
             <Text style={styles.btn_text}>Reset my Password</Text>
