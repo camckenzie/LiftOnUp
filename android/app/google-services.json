@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "219945897356",
+    "firebase_url": "https://reactnativefirebase-c9724-default-rtdb.firebaseio.com",
+    "project_id": "reactnativefirebase-c9724",
+    "storage_bucket": "reactnativefirebase-c9724.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219945897356:android:cac25209b36a6a22cf1aa9",
+        "android_client_info": {
+          "package_name": "com.liftonup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219945897356-6l0fhl5jvhs1va5ern1ls37gc3aegb3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxFj5ZXdBu1SoBsUp0IOTMWJbqgDGPqjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219945897356-6l0fhl5jvhs1va5ern1ls37gc3aegb3p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "219945897356-80supjairb5vluqb951vs5sdv23gamf5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.liftonup"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
