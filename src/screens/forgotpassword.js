@@ -32,6 +32,10 @@ class ForgotPassword extends Component {
         // ..
       });
   }
+
+  static navigationOptions = {
+    title: "Forgot Password",
+  };
   
   render() {// copied from login screen
     const styles = StyleSheet.create({
@@ -60,13 +64,13 @@ class ForgotPassword extends Component {
       },
       btn_box: {
         flexDirection: "row",
-        width: "75%",
+        width: "87%",
         justifyContent: "center",
       },
       btn_shape: {
         borderRadius: 10,
         backgroundColor:"#004d99",
-        width: "100%",
+        width: "40%",
         height: 40,
         marginHorizontal: 5,
         justifyContent: "center",
@@ -98,15 +102,18 @@ class ForgotPassword extends Component {
             />
 
             </View>
+         
             <View style={styles.btn_box}>
-            <TouchableOpacity
-                o onPress={() => this.resetMyPassword()}//The button will intrigue the sendPasswordResetEmail function with the value parsed through the input box
-                style={[styles.btn_shape,{backgroundColor: "#039BE5"}]}
-            >
-            <Text style={styles.btn_text}>Reset my Password</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.resetMyPassword()}//The button will intrigue the sendPasswordResetEmail function with the value parsed through the input box
+          style={styles.btn_shape}
+        >
+          <Text style={styles.btn_text}>Reset Password</Text>
+        </TouchableOpacity>
         
-            </View>
+      </View>
+
+
         </View>
 
     );

@@ -138,19 +138,18 @@ return (
       </View>
       <View style={styles.btn_box}>
         <TouchableOpacity
-          o onPress={() => this.userLogin()}
+           onPress={() => this.userLogin()}
           style={styles.btn_shape}
         >
           <Text style={styles.btn_text}>Log In</Text>
         </TouchableOpacity>
         
       </View>
-      <View style={styles.btn_box}>
+      <View   style={{ fontSize:20,color:"#00264d",padding:10 }} >
         <TouchableOpacity
-          o onPress={() => this.goToForgotPassword()}
-          style={[styles.btn_shape,{backgroundColor: "#039BE5"}]}
+           onPress={() => this.goToForgotPassword()}
         >
-          <Text style={styles.btn_text}>Forgot Password?</Text>
+          <Text  style={{textAlign: 'center', color: '#004d99',fontWeight: 'bold',fontSize:15}} >Forgot Password?</Text>
         </TouchableOpacity>
         
       </View>

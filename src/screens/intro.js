@@ -65,7 +65,7 @@ import {
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Login')}>
             <Text style={{textAlign: 'center', color: '#004d99',fontWeight: 'bold',fontSize:20}}>
-              Sign in
+              Log In
             </Text>
           </TouchableOpacity>
           </View>
