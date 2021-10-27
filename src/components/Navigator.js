@@ -5,14 +5,16 @@ import Intro from '../screens/Intro.js';
 import Register from '../screens/Register';
 import RestPassword from '../screens/Restpassword.js'
 import Home from '../screens/Home.js'
-// import Workout from '../screens/workout.js'
+import MyPlan from '../screens/myPlan.js'
 
 const StackNavigator = createStackNavigator({
-    Intro: Intro,
-    Login: Login,
-    Register: Register,
+    // Intro: Intro,
+    // Login: Login,
+    // Register: Register,
     Home:Home,
-    RestPassword: RestPassword,
-    // Workout: Workout,
+    // MyPlan: MyPlan,
+    // RestPassword: RestPassword,
+   
 });
+
 export default createAppContainer(StackNavigator);
