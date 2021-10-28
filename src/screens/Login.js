@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
 			 <View>
             <Image 
             source = {require('./LiftOnUp.png')} 
-          style={{width:300,height:200}}/> 
+          style={{width:300,height:200,top:100}}/> 
             </View>
 			<View style={styles.formContainer}>
 				{/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -117,7 +117,7 @@ export default function Login({ navigation }) {
            	onPress={() => {
 				navigation.navigate('RestPassword');}}
         >
-          <Text  style={{textAlign: 'center', color: '#004d99',fontWeight: 'bold',fontSize:15}} >Forgot/Reset Password?</Text>
+          <Text  style={{textAlign: 'center', color: '#004d99',fontWeight: 'bold',fontSize:15}} >Reset Password?</Text>
         </TouchableOpacity>
         
       </View>
@@ -139,25 +139,17 @@ export default function Login({ navigation }) {
 							navigation.navigate('Register');
 						}} />
 				</View> */}
- {/* <View style={styles.btn_box}>
-                    
-                    <TouchableOpacity
-                        //  title="Register"
-						icon={
-							<Icon
-								name="check-circle"
-								size={15}
-								color="white" />}
-                         onPress={() => register()}
-                          style={[
-                            styles.btn_shape,
-                            { backgroundColor: "#00264d" },
-                          ]}
-						  onPress={() => {
-							navigation.navigate('Register');}}>
-                        <Text style={styles.btn_text}>Register</Text>
-                    </TouchableOpacity>     
-                </View> */}
+				<Text  style={{textAlign: 'center', fontSize:15}} >If you don't have an Account.</Text>
+				<View   style={{ fontSize:20,color:"#00264d",padding:5 }} >
+						<TouchableOpacity
+							onPress={() => {
+								navigation.navigate('Register');}}
+						>
+						
+						<Text style={{textAlign: 'center', color: '#004d99',fontWeight: 'bold',fontSize:15}}>Click Here</Text>
+						</TouchableOpacity>
+						
+					</View>
 				
 				{showLoading &&
 					<View style={styles.activity}>
@@ -178,7 +170,7 @@ const styles = StyleSheet.create({
         // height: 300,
 		width:"80%",
         padding: 10,
-        top:0,
+        top:100,
         justifyContent: 'center',
     },
     subContainer: {
