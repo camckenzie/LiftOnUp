@@ -34,143 +34,150 @@ export class MyPlan extends React.Component {
   render() {
     return(
 
-      <View style={styles.container}>
-        <View>
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <View style={{alignItems: "flex-end"}}>
-                <Text>Barbell Press</Text>
-                <Text style={styles.innerText}>Sets: 3</Text>
-                <Text style={styles.innerText}>Reps: 15</Text>
-                <Text style={styles.innerText}>Lbs: 125</Text>
-              </View>
-          </TouchableOpacity>
-        </View>
-
-        <Separator />
-
-
-
-
-        <View>
-          <Image
-            source = {require('../../assets/LiftOnUp.png')}
-            style={{width:50, height:50}}/>
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <Text>Deadlift</Text>
-          </TouchableOpacity>
-        </View>
-
-
-
-
-
-        <Separator />
-        <View>
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <Text>Front Squat</Text>
-              <Text>
-                <View style={{borderWidth:1}}>
-                  <Text style={styles.innerText}>Sets: 3</Text>
-                </View>
-                <View style={{borderWidth:1}}>
-                  <Text style={styles.innerText}>Reps: 15</Text>
-                </View>
-                <View style={{borderWidth:1, borderRadius: 20}}>
-                  <Text style={styles.innerText}>Weight: 125</Text>
-                </View>
-
-              </Text>
-
-              
-          </TouchableOpacity>
-        </View>
-        <Separator />
-        <View>
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <Text>Leg Press</Text>
-          </TouchableOpacity>
-        </View>
-        <Separator />
-
-        <View>
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <ListItem>
-                <Image 
-                    source = {require('../../assets/LiftOnUp.png')} 
-                  style={{width:60,height:60}}/>
-                <ListItem.Content>
-                  <ListItem.Title>Leg Curl</ListItem.Title>
-                  <View >
-                    <Text >3x15 reps</Text>
-                  </View>
-                </ListItem.Content>
-              
-                  <View >
-                    <Text >3x15 reps</Text>
-                  </View>
-               
-            </ListItem>
-          </TouchableOpacity>
-        </View>
-        <Separator /> 
-        
-      </View>
-
-    );
-  }
-}
-
-//Separates each line of buttons
-const Separator = () => (
-  <View style={styles.separator} />
-);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    marginHorizontal: 16,
-  },
-
-  title: {
-    textAlign: "left",
-    marginVertical: 8,
-  },
-  fixtoText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: '#737373',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  innerText: {
-    fontSize:10,
-  },
-
-  wo_btn: {
+            //The parent container that controls the general format
+            <View style={styles.container}>
+            {/* ScrollView allows scrolling */}
+            <ScrollView>
+              {/* Container that handles to body */}
+              <View style={styles.contentContainer}>
+                {/* Below are a set of 6 buttons:
+                Exercise: AxB reps, C lbs */}
+                <TouchableOpacity
+                  style={styles.wo_btn}
+                  onPress={onPress}
+                  >
+                    <ListItem>
+                      <Image
+                        source={require('../../assets/Workouts/Deadlift.png')}
+                        style={{width:60, height:60}}/>
+                        <ListItem.Content>
+                          <ListItem.Title>Deadlift</ListItem.Title>
+                            <Text>3x15 reps</Text>
+                        </ListItem.Content>
+                    </ListItem>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={styles.wo_btn}
+                  onPress={onPress}
+                  >
+                    <ListItem>
+                      <Image
+                        source={require('../../assets/Workouts/Squat.png')}
+                        style={{width:60, height:60}}/>
+                        <ListItem.Content>
+                          <ListItem.Title>Squat</ListItem.Title>
+                            <Text>3x15 reps</Text>
+                        </ListItem.Content>
+                    </ListItem>
+                </TouchableOpacity>
     
-    backgroundColor: "#DDDDDD",
-    padding: 10,
-  },
-
-})
+                <TouchableOpacity
+                  style={styles.wo_btn}
+                  onPress={onPress}
+                  >
+                    <ListItem>
+                      <Image
+                        source={require('../../assets/Workouts/LegExtension.jpg')}
+                        style={{width:60, height:60}}/>
+                        <ListItem.Content>
+                          <ListItem.Title>Leg Extension</ListItem.Title>
+                            <Text>3x15 reps</Text>
+                        </ListItem.Content>
+                    </ListItem>
+                </TouchableOpacity>
+    
+                <TouchableOpacity
+                  style={styles.wo_btn}
+                  onPress={onPress}
+                  >
+                    <ListItem>
+                      <Image
+                        source={require('../../assets/Workouts/LegCurl.jpg')}
+                        style={{width:60, height:60}}/>
+                        <ListItem.Content>
+                          <ListItem.Title>Leg Curl</ListItem.Title>
+                            <Text>3x15 reps</Text>
+                        </ListItem.Content>
+                    </ListItem>
+                </TouchableOpacity>
+    
+    
+              </View>
+    
+                {/* This is the footer, the buttons at bottom */}
+                <View styles={styles.footer}>
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('EditDay1')}
+                    style={styles.start_shape}>
+                      <Text style={styles.start_text}>Edit</Text>
+                    </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={onPress}
+                    style={styles.start_shape}>
+                      <Text style={styles.start_text}>Start</Text>
+                    </TouchableOpacity>
+                </View>
+              </ScrollView>
+          </View>
+    
+    
+        );
+      }
+    
+    }
+    
+    
+    const styles = StyleSheet.create({
+      title: {
+        textAlign: "left",
+        marginVertical: 8,
+      },
+      container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        marginHorizontal: 16,
+      },
+      contentContainer: {
+        flex: 1,
+        justifyContent: 'flex-start',
+      },
+      wo_btn: {
+        //alignItems: "flex-start",
+        backgroundColor: "#DDDDDD",
+        padding: 10,
+        marginVertical: 5,
+      },
+      innerText: {
+        fontSize:10,
+      },
+    
+      footer: {
+        height: 100,
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      start_shape: {
+        alignItems: 'center',
+        borderRadius: 10,
+        backgroundColor:"#004d99",
+        width: '40%',
+        height: 40,
+        marginHorizontal: 5,
+        marginVertical: 5,
+        justifyContent: 'center',
+        // THIS CENTERS THE BUTTON
+        alignSelf: 'center'
+      },
+      start_text: {
+        color: "rgba(255,255,255,1)",
+        fontSize: 16,
+        textAlign: "center",
+        fontWeight: "bold",
+        alignContent: 'center',
+      },
+    })
+    
 
 
 export default MyPlan

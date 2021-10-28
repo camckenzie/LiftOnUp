@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>421282877229-2lchqmc7hs0qcpf2054l6qse3hvmsifi.apps.googleusercontent.com</string>
+	<string>183797238365-eb7i6otq7fkiqpe5u22tbf3836j22is0.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.421282877229-2lchqmc7hs0qcpf2054l6qse3hvmsifi</string>
+	<string>com.googleusercontent.apps.183797238365-eb7i6otq7fkiqpe5u22tbf3836j22is0</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCYa8FTaJrsO8ZQWVELwYnRWapfsojQ7tU</string>
+	<string>AIzaSyAHXm_mOxVkxacKVeKPiImEMUmUuDEir68</string>
 	<key>GCM_SENDER_ID</key>
-	<string>421282877229</string>
+	<string>183797238365</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>org.reactjs.native.example.LiftOnUp</string>
 	<key>PROJECT_ID</key>
-	<string>liftonup-b742c</string>
+	<string>liftonup-f9944</string>
 	<key>STORAGE_BUCKET</key>
-	<string>liftonup-b742c.appspot.com</string>
+	<string>liftonup-f9944.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:421282877229:ios:d2f9389782912e3372cda4</string>
-	<key>DATABASE_URL</key>
-	<string>https://liftonup-b742c-default-rtdb.firebaseio.com</string>
+	<string>1:183797238365:ios:c0ca5bf3302abe8522dbb4</string>
 </dict>
 </plist>

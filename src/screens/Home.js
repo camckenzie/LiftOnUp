@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, SafeAreaView, onPress,FlatList, Image,StyleSheet, TouchableOpacity} from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import {createStackNavigator} from 'react-navigation-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MyPlan from './myPlan.js'
-
+import { ListItem, Avatar } from 'react-native-elements'
+import HomeBottomTabs from '../components/homeBottomTabs';
 
 const Workout = [
     {
@@ -52,22 +53,44 @@ const Workout = [
       state: "    Not Started",
     },
   ];
-  function Item({name,excercise,state}){
-  
+  function Item({name,excercise,state,navigation}){
+  	const gotoTestStackScreen = () => {
+      navigation.navigate('MyPlan');
+    };
     return(
       <TouchableOpacity 
-      onPress={() => navigation.navigate('myPlan')}
       style={styles.listItem}>
         <Text styles={styles.listName}>{name}</Text>
         <Text styles={styles.listExcercise}>{excercise}</Text>
         <Text styles={styles.listState}>{state}</Text>
       </TouchableOpacity>
+      // <View>
+      //    < Button title="Add me"    onPress={(gotoTestStackScreen)} />
+                
+      // </View>
+    );
+  }
+  function WorkoutScreen() {
+    return (
+      <View style={{ flex: 1 }}>
+        <View>
+        {/* <Text style={styles.headerText}>Current</Text> */}
+        {/* <Button title="Add me"    onPress={() =>navigation.navigate('MyPlan')} /> */}
+        <FlatList 
+        data={Workout} 
+        renderItem={({item}) => (
+            <Item name={item.name} excercise={item.excercise} state={item.state} 
+            />
+        )} 
+      />
+    </View>
+      </View>
     );
   }
   
 function ProfileScreen() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <Text>Profile!</Text>
         {/* <Text>Welcome {user.email}</Text> */}
       </View>
@@ -81,21 +104,7 @@ function ProfileScreen() {
       </View>
     );
   }
-  function WorkoutScreen() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <View>
-        <Text style={styles.headerText}>Current</Text>
-        <FlatList 
-        data={Workout} 
-        renderItem={({item}) => (
-            <Item name={item.name} excercise={item.excercise} state={item.state} />
-        )} 
-      />
-    </View>
-      </View>
-    );
-  }
+
   function ExercisesScreen() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -141,6 +150,13 @@ function ProfileScreen() {
   function MyTabs() {
     return (
       <Tab.Navigator>
+               <Tab.Screen name="Workout" component={WorkoutScreen} 
+       options={{
+        tabBarLabel: 'Workout',
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="home" color={color} size={size} />
+        ),
+      }}  />
         <Tab.Screen name="Profile" component={ProfileScreen}
         options={{
           tabBarLabel: 'Profile',
@@ -155,13 +171,7 @@ function ProfileScreen() {
             <Icon name="compass"    type='font-awesome' color={color} size={size} />
           ),
         }} />
-        <Tab.Screen name="Workout" component={WorkoutScreen} 
-       options={{
-        tabBarLabel: 'Workout',
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="home" color={color} size={size} />
-        ),
-      }}  />
+ 
         <Tab.Screen name="Exercises" component={ExercisesScreen} 
         options={{
           tabBarLabel: 'Exercises',
@@ -202,9 +212,19 @@ function ProfileScreen() {
   if (!user) {
       return navigation.navigate('Login');
   }
+  const navigationOptions = {
+    title: 'Intro',
+    headerShown: false,
+  };
+  
   return (
+   
     <NavigationContainer>
-      <MyTabs />
+       <View>
+    <Button title="Add me"    onPress={() =>navigation.navigate('MyPlan')} />
+    
+   </View>  
+    <MyTabs />
     </NavigationContainer>
   );
       // return (
@@ -216,8 +236,8 @@ function ProfileScreen() {
   }
   
   
-  Home.navigationOptions = ({ navigation }) => ({
-      title: 'Home',
+  MyTabs.navigationOptions = ({ navigation }) => ({
+      title: Tab.Screen,
       headerRight: () => <Button
               buttonStyle={{ padding: 0, marginRight: 20, backgroundColor: 'transparent' }}
               icon={
