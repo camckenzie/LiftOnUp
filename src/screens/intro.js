@@ -8,12 +8,14 @@ import {
   class Intro extends React.Component {
     
     static navigationOptions = {
-      headerShown: true,
+      // title: 'Introduction',
+      headerShown: false,
     };
     // styles for Intro Screen
     render() {
         const styles = StyleSheet.create({
             container: {
+              top:80,
               flex: 1,
               flexDirection: "column",
               justifyContent: "flex-start",
@@ -22,7 +24,7 @@ import {
             
             headerContainer: {
               textAlign: 'center',
-              padding: 30,
+              padding: 20,
               top:0
             },
             contentView: {
@@ -34,9 +36,11 @@ import {
           return (
             <View style={styles.container}>
               {/* Logo view */}
+            <View>
             <Image 
             source = {require('../../assets/LiftOnUp.png')} 
           style={{width:300,height:200}}/> 
+            </View>
 
           {/* Heading Display */}
            <View style={styles. headerContainer}>
@@ -47,7 +51,7 @@ import {
               </View>
               <View style={styles.contentView}>
           <Button
-            onPress={() => this.props.navigation.navigate('Registration')}
+            onPress={() => this.props.navigation.navigate('Register')}
             title="Get started"
             loading={false}
             loadingProps={{size: 'small', color: 'white'}}
