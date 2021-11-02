@@ -16,7 +16,7 @@ import { ListItem } from "react-native-elements";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-
+import NumericInput from 'react-native-numeric-input'
 // export class EditDay1 extends React.Component {
 export default function EditDay1({ navigation }) {
   
@@ -77,27 +77,33 @@ export default function EditDay1({ navigation }) {
               {/* Buttons need ListItem format */}
               <ListItem>
                 <Image
-                    source = {require('../../assets/LiftOnUp.png')} 
+                    source={require('../../assets/Workouts/Deadlift.png')}
                   style={{width:60, height:60}}/>
                   <ListItem.Content>
                     <ListItem.Title>Deadlift</ListItem.Title>
                   {/* These are the titles of the fields in a row */}
                       <View style={{flexDirection:"row"}}>
-                      <Text>Sets</Text>
-                      <Text style={{marginHorizontal: 40}}>Reps</Text>
+                      <Text style={{padding:10}}>Sets</Text>
+                      <Text style={{marginHorizontal: 60,padding:10}}>Reps</Text>
                       </View>
                   
                   {/* These hold the text inputs in a row */}
                       <View style ={{flexDirection:"row"}}>
-                        <TextInput 
-                           onChangeText={setsets}
-                           value={sets}
-                           
-                        style={styles.edits}
-                        maxLength = {3}></TextInput>
-                        <TextInput 
-                        style={styles.editsReps}
-                        maxLength = {3}></TextInput>
+
+                      <View><NumericInput 
+                        
+                        totalWidth={70} 
+                        totalHeight={28} 
+                        iconSize={28}
+                     onChangeText={setsets}
+                          value={sets}/></View> 
+                            <View style={{marginLeft:30,alignContent:"center"}}><NumericInput 
+                        
+                        totalWidth={70} 
+                        totalHeight={28} 
+                        iconSize={28}
+                     onChangeText={setsets}
+                          value={sets}/></View> 
                       </View>
                   </ListItem.Content>
               </ListItem>
@@ -109,27 +115,36 @@ export default function EditDay1({ navigation }) {
             >
               <ListItem>
                 <Image
-                     source = {require('../../assets/LiftOnUp.png')} 
+                      source={require('../../assets/Workouts/LegCurl.jpg')}
                   style={{width:60, height:60}}/>
                   <ListItem.Content>
                     <ListItem.Title>Leg Curl</ListItem.Title>
                       <View style={{flexDirection:"row"}}>
-                      <Text>Sets</Text>
-                      <Text style={{marginHorizontal: 40}}>Reps</Text>
+                      <Text style={{padding:10}}>Sets</Text>
+                      <Text style={{marginHorizontal: 60,padding:10}}>Reps</Text>
                       </View>
 
                       <View style ={{flexDirection:"row"}}>
-                        <TextInput 
+                        {/* <TextInput 
                            onChangeText={setsets}
                            value={sets}
                            style={styles.edits}
                         style={styles.edits}
-                        maxLength = {3}></TextInput>
-                        <TextInput 
-                          onChangeText={setreps}
-                          value={reps}
-                        style={styles.editsReps}
-                        maxLength = {3}></TextInput>
+                        maxLength = {3}></TextInput> */}
+                    <View><NumericInput 
+                        
+                        totalWidth={70} 
+                        totalHeight={28} 
+                        iconSize={28}
+                     onChangeText={setsets}
+                          value={sets}/></View> 
+                            <View style={{marginLeft:30,alignContent:"center"}}><NumericInput 
+                        
+                        totalWidth={70} 
+                        totalHeight={28} 
+                        iconSize={28}
+                     onChangeText={setsets}
+                          value={sets}/></View> 
                       </View>
                   </ListItem.Content>
               </ListItem>
@@ -141,16 +156,16 @@ export default function EditDay1({ navigation }) {
             >
               <ListItem>
                 <Image
-                    source = {require('../../assets/LiftOnUp.png')} 
+                  source={require('../../assets/Workouts/LegExtension.jpg')}
                   style={{width:60, height:60}}/>
                   <ListItem.Content>
                     <ListItem.Title>Leg Extension</ListItem.Title>
                       <View style={{flexDirection:"row"}}>
-                      <Text>Sets</Text>
-                      <Text style={{marginHorizontal: 40}}>Reps</Text>
+                      <Text style={{padding:10}}>Sets</Text>
+                      <Text style={{marginHorizontal: 50,padding:10}}>Reps</Text>
                       </View>
                       <View style ={{flexDirection:"row"}}>
-                        <TextInput 
+                        {/* <TextInput 
                            onChangeText={setsets}
                            value={sets}
                            style={styles.edits}
@@ -159,7 +174,21 @@ export default function EditDay1({ navigation }) {
                         <TextInput style={styles.editsReps}
                        onChangeText={setreps}
                        value={reps}
-                       maxLength = {3}></TextInput>
+                       maxLength = {3}></TextInput> */}
+                         <View><NumericInput 
+                        
+                        totalWidth={70} 
+                        totalHeight={28} 
+                        iconSize={28}
+                     onChangeText={setsets}
+                          value={sets}/></View> 
+                            <View style={{marginLeft:30,alignContent:"center"}}><NumericInput 
+                        
+                        totalWidth={70} 
+                        totalHeight={28} 
+                        iconSize={28}
+                     onChangeText={setsets}
+                          value={sets}/></View> 
                       </View>
                   </ListItem.Content>
               </ListItem>
@@ -171,17 +200,17 @@ export default function EditDay1({ navigation }) {
             >
               <ListItem>
                 <Image
-                      source = {require('../../assets/LiftOnUp.png')} 
+                    source={require('../../assets/Workouts/Squat.png')}
                   style={{width:60, height:60}}/>
                   <ListItem.Content>
                     <ListItem.Title >Squat</ListItem.Title>
                       <View style={{flexDirection:"row"}}>
-                      <Text>Sets</Text>
-                      <Text style={{marginHorizontal: 40}}>Reps</Text>
+                      <Text style={{padding:10}}>Sets</Text>
+                      <Text style={{marginHorizontal: 60,padding:10}}>Reps</Text>
                       </View>
 
                       <View style ={{flexDirection:"row"}}>
-                        <TextInput  style={{width:60,}} 
+                        {/* <TextInput  style={{width:60,}} 
                          onChangeText={setsets}
                          value={sets}
                          style={styles.edits}
@@ -191,8 +220,22 @@ export default function EditDay1({ navigation }) {
                         onChangeText={setreps}
                         value={reps}
                         style={styles.editsReps}
-                        maxLength = {3}></TextInput>
-
+                        maxLength = {3}></TextInput> */}
+                      <View><NumericInput 
+                        
+                        totalWidth={70} 
+                        totalHeight={28} 
+                        iconSize={28}
+                     onChangeText={setsets}
+                          value={sets}/></View> 
+                            <View style={{marginLeft:30,alignContent:"center"}}
+                            ><NumericInput 
+                        
+                        totalWidth={70} 
+                        totalHeight={28} 
+                        iconSize={28}
+                     onChangeText={setsets}
+                          value={sets}/></View> 
                       </View>
                   </ListItem.Content>
               </ListItem>
@@ -230,7 +273,7 @@ const styles = StyleSheet.create({
     // marginHorizontal: 40,
     color: "#121212",
     backgroundColor: "rgba(230,230,230,1)",
-    width:"10%"
+    width:"1%"
     
   },
   editsReps: {
@@ -249,7 +292,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "left",
-    marginVertical: 8,
+    marginVertical: 5,
   },
   container: {
     flex: 1,
@@ -264,16 +307,16 @@ const styles = StyleSheet.create({
     //alignItems: "flex-start",
     backgroundColor: "#DDDDDD",
     padding: 10,
-    marginVertical: 5,
+    marginVertical: 2,
   },
   innerText: {
     fontSize:10,
   },
 
   footer: {
-    height: 100,
+    width: "100%",
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: "flex-start",
   },
   start_shape: {
     alignItems: 'center',

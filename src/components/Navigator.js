@@ -4,7 +4,7 @@ import Login from '../screens/Login.js';
 import Intro from '../screens/Intro.js';
 import Register from '../screens/Register';
 import RestPassword from '../screens/Restpassword.js'
-import Home from '../screens/Home.js'
+import Home from '../screens/homeApp.js'
 import MyPlan from '../screens/myPlan.js'
 import EditDay1 from '../screens/editDay1.js'
 

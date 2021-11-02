@@ -214,6 +214,6 @@ const styles = StyleSheet.create({
 })
 
 Login.navigationOptions = ({ navigation }) => ({
-	title: 'Login',
+	// title: 'Login',
 	headerShown: false,
 });
