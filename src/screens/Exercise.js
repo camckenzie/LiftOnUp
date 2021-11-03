@@ -90,11 +90,13 @@ const Section = ({ children, title }) => {
         <Text style={colorStyle}>Previous</Text>
         <Text style={colorStyle}>lbs</Text>
         <Text style={colorStyle}>Reps</Text>
-        <CheckBox
+        {/* <CheckBox
           disabled={false}
           value={true}
           onValueChange={(newValue) => setToggleCheckBox(newValue)}
-        />
+        /> */}
+        <Text style={{width: "8%"}}></Text>
+
       </View>
       <FitnessSection title="1" />
       <FitnessSection title="2" />
@@ -113,6 +115,9 @@ const Exercise = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const colorStyle = {
+    color: isDarkMode ? Colors.white : Colors.black,
+  };
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -130,12 +135,12 @@ const Exercise = () => {
           <Section title="Incline Bench Press(Barbell)"></Section>
           <Section title="Strict Military Press(Barbell)"></Section>
           <TouchableOpacity style={styles.button1}>
-            <Text style={styles.alignText0}>
+            <Text style={[styles.alignText0, colorStyle]}>
                 Cancel Exercise
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button0}>
-            <Text style={styles.alignText0}>
+            <Text style={[styles.alignText0, colorStyle]}>
                 Complete Exercise
             </Text>
           </TouchableOpacity>
@@ -199,24 +204,26 @@ const styles = StyleSheet.create({
   },
   //Complete button
   button0: {
-    borderRadius: 15,
+    borderRadius: 10,
     backgroundColor: "gainsboro",
     padding: 8,
     marginTop: 10,
     marginBottom: 25,
+    marginLeft:"5%",
+    width: "90%",
   },
   alignText0: {
     textAlign: "center",
-    fontWeight:'bold',
-    color:"black"
   },
   //Cancel button
   button1: {
-    borderRadius: 15,
+    borderRadius: 10,
     backgroundColor: "#ffa1a1",
     padding: 8,
     marginTop: 25,
     marginBottom: 10,
+    marginLeft:"5%",
+    width: "90%",
 
   },
 });
