@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "183797238365",
+    "project_id": "liftonup-f9944",
+    "storage_bucket": "liftonup-f9944.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183797238365:android:6121972731ea9b4022dbb4",
+        "android_client_info": {
+          "package_name": "com.liftonup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183797238365-ukgr1d62pcechu459dsqknmuoanekplf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADWJQ3pEFiXp7KIz3endi-q5f6abZ8nxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183797238365-ukgr1d62pcechu459dsqknmuoanekplf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "183797238365-eb7i6otq7fkiqpe5u22tbf3836j22is0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.LiftOnUp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
