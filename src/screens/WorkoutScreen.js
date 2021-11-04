@@ -11,9 +11,11 @@ import {
   SafeAreaView
 } from 'react-native';
 import EditDay1 from './editDay1.js'
-export default class Craigslist extends Component {
+export default class WorkoutSCreen extends Component {
 
   constructor(props) {
+  const handlePress = () => props.navigation.navigate('Add a workout');
+
     super(props);
     this.state = {
       activitiesList: [],   
@@ -35,6 +37,7 @@ export default class Craigslist extends Component {
   }
 
 createNewWorkoutName = () => {
+  const handlePress = () => props.navigation.navigate('Add a workout');
   Alert.alert('Workout Name', 'Please Create... ');
 }
   render() {

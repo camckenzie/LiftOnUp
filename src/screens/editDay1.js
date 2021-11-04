@@ -239,9 +239,7 @@ export default function EditDay1({ navigation }) {
                       </View>
                   </ListItem.Content>
               </ListItem>
-          </TouchableOpacity>
-          
-
+          </TouchableOpacity>         
         </View>
 
           {/* This is the footer, the buttons at bottom */}
@@ -251,10 +249,10 @@ export default function EditDay1({ navigation }) {
               style={styles.start_shape}>
                 <Text style={styles.start_text}>Add Workout</Text>
               </TouchableOpacity>
-            <TouchableOpacity
+              <TouchableOpacity
              onPress={() => addWorkout()}
               style={styles.start_shape}>
-                <Text style={styles.start_text}>Save Changes</Text>
+                <Text style={styles.start_text}>Start Workout</Text>
               </TouchableOpacity>
           </View>
           </ScrollView>

@@ -1,22 +1,15 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import
- MaterialCommunityIcons
-from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import {
-  NavigationContainer
-} from '@react-navigation/native';
-import {
-  createStackNavigator
-} from '@react-navigation/stack';
-import {
-  createBottomTabNavigator
-} from '@react-navigation/bottom-tabs';
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import WorkoutScreen from './WorkoutScreen';
-import DetailsScreen from './DetailsScreen';
+import AccountScreen from './AccountScreen';
 import EditDay1 from './editDay1';
+import ProgressScreen from './ProgressScreen';
+import ExerciseHomeScreen from './ExerciseHomeScreen';
+import ExerciseDetailsScreen from '../screens/ExerciseDetailsScreen';
 
 
 const Stack = createStackNavigator();
@@ -44,31 +37,60 @@ function HomeStack() {
   );
 }
 
-function SettingsStack() {
+function ExerciseStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Settings"
+      initialRouteName="Exercise"
       screenOptions={{
         headerStyle: { backgroundColor: '#004d99' },
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: 'bold' }
       }}>
       <Stack.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{ title: 'Setting Page' }}/>
-      <Stack.Screen
-        name="Details"
-        component={DetailsScreen}
-        options={{ title: 'Details Page' }}/>
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{ title: 'Profile Page' }}/>
+        name="Exercise"
+        component={ExerciseHomeScreen}
+        options={{ title: 'Exercise Page' }}/>
+         <Stack.Screen
+          name="ExerciseDetailsScreen"
+          component={ExerciseDetailsScreen}
+          options={{ title: 'ExerciseDetailsScreen' }} />
     </Stack.Navigator>
   );
 }
 
+function ProgressStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Progress"
+      screenOptions={{
+        headerStyle: { backgroundColor: '#004d99' },
+        headerTintColor: '#fff',
+        headerTitleStyle: { fontWeight: 'bold' }
+      }}>
+      <Stack.Screen
+        name="Progress"
+        component={ProgressScreen}
+        options={{ title: 'Progress Page' }}/>
+    </Stack.Navigator>
+  );
+}
+
+function AccountStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Account"
+      screenOptions={{
+        headerStyle: { backgroundColor: '#004d99' },
+        headerTintColor: '#fff',
+        headerTitleStyle: { fontWeight: 'bold' }
+      }}>
+      <Stack.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{ title: 'Account Page' }}/>
+    </Stack.Navigator>
+  );
+}
 function homeApp() {
   return (
     <NavigationContainer>
@@ -91,8 +113,8 @@ function homeApp() {
             ),
           }}  />
         <Tab.Screen
-          name="SettingsStack"
-          component={SettingsStack}
+          name="ExerciseStack"
+          component={ExerciseStack}
           options={{
             tabBarLabel: 'Exercise',
             tabBarIcon: ({ color, size }) => (
@@ -103,35 +125,9 @@ function homeApp() {
               />
             ),
           }} />
-           <Tab.Screen
-          name="Discover"
-          component={SettingsStack}
-          options={{
-            tabBarLabel: 'Discover',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="compass"
-                color={color}
-                size={size}
-              />
-            ),
-          }} />
-           <Tab.Screen
-          name="Profile"
-          component={SettingsStack}
-          options={{
-            tabBarLabel: 'Account',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="account-circle"
-                color={color}
-                size={size}
-              />
-            ),
-          }} />
-           <Tab.Screen
+          <Tab.Screen
           name="Progress"
-          component={SettingsStack}
+          component={ProgressStack}
           options={{
             tabBarLabel: 'Progress',
             tabBarIcon: ({ color, size }) => (
@@ -142,6 +138,20 @@ function homeApp() {
               />
             ),
           }} />
+           <Tab.Screen
+          name="AccountStack"
+          component={AccountStack}
+          options={{
+            tabBarLabel: 'Account',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="account-circle"
+                color={color}
+                size={size}
+              />
+            ),
+          }} />
+ 
       </Tab.Navigator>
     </NavigationContainer>
   );
