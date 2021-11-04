@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CheckBox from "@react-native-community/checkbox";
-// import Section from './screen';
-// import Navbar from './header';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -227,3 +226,5 @@ const styles = StyleSheet.create({
 
   },
 });
+// The checkbox library 
+//https://npm.io/package/@react-native-community/checkbox

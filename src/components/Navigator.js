@@ -7,7 +7,7 @@ import RestPassword from '../screens/Restpassword.js'
 import Home from '../screens/homeApp.js'
 import MyPlan from '../screens/myPlan.js'
 import EditDay1 from '../screens/editDay1.js'
-import Exercise from '../screens/Exercise.js';
+import StartRoutine from '../screens/StartRoutine.js';
 
 const StackNavigator = createStackNavigator({
     // Intro: Intro,
@@ -17,9 +17,9 @@ const StackNavigator = createStackNavigator({
     // Home:Home,
     // MyPlan: MyPlan,
     // EditDay1:EditDay1,
-    Exercise:Exercise,
+    StartRoutine:StartRoutine,
     
 });
-
+// StartRoutine
 
 export default createAppContainer(StackNavigator);
