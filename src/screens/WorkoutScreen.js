@@ -11,6 +11,8 @@ import {
   SafeAreaView
 } from 'react-native';
 import EditDay1 from './editDay1.js'
+import CreateWorkout from './createWorkout.js'
+
 export default class WorkoutSCreen extends Component {
 
   constructor(props) {
@@ -62,7 +64,7 @@ createNewWorkoutName = () => {
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.count}>{item.count}</Text>
                 <TouchableOpacity style={styles.followButton} onPress={()=> this.clickEventListener(item)}>
-                  <Text style={styles.followButtonText}>Explore now</Text>  
+                  <Text style={styles.followButtonText}>Delete</Text>  
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
@@ -71,8 +73,8 @@ createNewWorkoutName = () => {
     </SafeAreaView>
     {/* Work Name Create */}
       <View styles={styles.footer}>
-                <TouchableOpacity style={styles.start_shape} onPress={()=> this.createNewWorkoutName()}>
-                  <Text style={styles.start_text}>Create Workout Name</Text>  
+                <TouchableOpacity style={styles.start_shape}   onPress={() => navigate("Create")}>
+                  <Text style={styles.start_text}>Create Routine</Text>  
                 </TouchableOpacity>
           </View>
          

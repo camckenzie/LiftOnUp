@@ -10,7 +10,7 @@ import AccountScreen from '../screens/AccountScreen.js'
 import ProgressScreen from '../screens/ProgressScreen';
 import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
 import ExerciseDetailsScreen from '../screens/ExerciseDetailsScreen';
-// import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
+import CreateWorkout from '../screens/createWorkout';
 // import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
 
 const StackNavigator = createStackNavigator({
@@ -23,6 +23,7 @@ const StackNavigator = createStackNavigator({
     ProgressScreen:ProgressScreen,
     ExerciseHomeScreen:ExerciseHomeScreen,
     ExerciseDetailsScreen:ExerciseDetailsScreen,
+    CreateWorkout:CreateWorkout,
     // // AddWorkout:AddWorkout,
     // EditDay1:EditDay1,
     // ExerciseHomeScreen:ExerciseHomeScreen,

@@ -10,6 +10,7 @@ import EditDay1 from './editDay1';
 import ProgressScreen from './ProgressScreen';
 import ExerciseHomeScreen from './ExerciseHomeScreen';
 import ExerciseDetailsScreen from '../screens/ExerciseDetailsScreen';
+import CreateWorkout from '../screens/createWorkout';
 
 
 const Stack = createStackNavigator();
@@ -33,6 +34,10 @@ function HomeStack() {
           name="Details"
           component={EditDay1}
           options={{ title: 'MyPlan' }} />
+        <Stack.Screen
+          name="Create"
+          component={CreateWorkout}
+          options={{ title: 'Create Workout' }} />
       </Stack.Navigator>
   );
 }
