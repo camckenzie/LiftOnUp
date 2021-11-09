@@ -10,216 +10,183 @@ import {
   onPress,
   TouchableOpacity,
   ScrollView,
-  
+
 } from "react-native";
 import { ListItem } from "react-native-elements";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { Login } from './Login';
 
 // export class EditDay1 extends React.Component {
 export default function EditDay1({ navigation }) {
-  
+
   // updateInputVal = (val, prop) => {
   //   const [input, setInput] = React.useState("")
   // }
   // static navigationOptions = {
   //   title: "Day 1 Edit",
   // };
-  
+
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
   function onAuthStateChanged(user) {
-      setUser(user);
-      if (initializing) setInitializing(false);
+    setUser(user);
+    if (initializing) setInitializing(false);
   }
+  const [Workout, setWorkout] = useState("");
+  const [sets, setsets] = useState('');
+  const [reps, setreps] = useState('');
+  const [sets1, setsets1] = useState('');
+  const [reps1, setreps1] = useState('');
+  const [sets2, setsets2] = useState('');
+  const [reps2, setreps2] = useState('');
+  const [sets3, setsets3] = useState('');
+  const [reps3, setreps3] = useState('');
 
-
-  const [ sets, setsets ] = useState('');
-  const [ reps, setreps ] = useState('');  
-  // const[exercise, setexercise] = useState('Squat');
-  const ref = firestore().collection('WorkoutCollection').doc('Day1').collection('Deadlift');
-  async function addWorkout() {    
-      await ref.add({      
-        sets:sets,      
-        reps: reps,
-      });    
-      setsets('');
-      setreps('');  
-      // setexercise('');
-  } 
-
+  async function addWorkout(user) {
+    // console.log(user);   
+    function saveWorkout() {
+      firestore().collection('WorkoutCollection').doc(user).set({
+        week1: {
+          day1: {
+            Workout: Workout,
+            sets: sets,
+            reps: reps
+          }
+        }
+      });
+    }
+    setsets('');
+    setreps('');
+    setsets1('');
+    setreps1('');
+    setsets2('');
+    setreps2('');
+    setsets3('');
+    setreps3('');
+  }
   useEffect(() => {
-      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      return subscriber; // unsubscribe on unmount
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
   }, []);
 
   if (initializing) return null;
 
   if (!user) {
-      return navigation.navigate('Login');
+    return navigation.navigate('Login');
   }
 
-    return(
-      
-      //The parent container that controls the general format
-      <View style={styles.container}>
-        <ScrollView>
-        {/* Container that handles to body */}
+  // function loadWorkout() {
+  //   return (
+  //     <TouchableOpacity style={styles.wo_btn} onPress={onPress} >
+  //       <ListItem>
+  //         <Image source={require('../../assets/Workouts/Deadlift.png')}style={{ width: 60, height: 60 }} />
+  //         <ListItem.Content>
+  //           <ListItem.Title>Deadlift</ListItem.Title>
+  //           <View style={{ flexDirection: "row" }}>
+  //             <TextInput style={{ width: 60, }} onChangeText={setsets} value={sets} style={styles.edits} maxLength={3}></TextInput> 
+  //             <TextInput onChangeText={setreps} value={reps} style={styles.editsReps} maxLength={3}></TextInput>
+  //           </View>
+  //         </ListItem.Content>
+  //       </ListItem>
+  //     </TouchableOpacity>
+  //   )
+  // }
+  return (
+
+    <View style={styles.container}>
+      <ScrollView>
         <View style={styles.contentContainer}>
-          {/* Below are a set of 6 buttons:
-          Exercise: AxB reps, C lbs */}
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              {/* Buttons need ListItem format */}
-              <ListItem>
-                <Image
-                    source = {require('../../assets/LiftOnUp.png')} 
-                  style={{width:60, height:60}}/>
-                  <ListItem.Content>
-                    <ListItem.Title>Deadlift</ListItem.Title>
-                  {/* These are the titles of the fields in a row */}
-                      <View style={{flexDirection:"row"}}>
-                      <Text>Sets</Text>
-                      <Text style={{marginHorizontal: 40}}>Reps</Text>
-                      </View>
-                  
-                  {/* These hold the text inputs in a row */}
-                      <View style ={{flexDirection:"row"}}>
-                        <TextInput 
-                           onChangeText={setsets}
-                           value={sets}
-                           
-                        style={styles.edits}
-                        maxLength = {3}></TextInput>
-                        <TextInput 
-                        style={styles.editsReps}
-                        maxLength = {3}></TextInput>
-                      </View>
-                  </ListItem.Content>
-              </ListItem>
+          {/* {loadWorkout()} */}
+          <TouchableOpacity style={styles.wo_btn} onPress={onPress} >
+            <ListItem>
+              <Image source={require('../../assets/Workouts/Deadlift.png')} style={{ width: 60, height: 60 }} />
+              <ListItem.Content>
+                <ListItem.Title>Deadlift</ListItem.Title>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Sets</Text>
+                  <Text style={{ marginHorizontal: 40 }}>Reps</Text>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <TextInput style={{ width: 60, }} onChangeText={setsets} value={sets} style={styles.edits} maxLength={3}></TextInput>
+                  <TextInput onChangeText={setreps} value={reps} style={styles.editsReps} maxLength={3}></TextInput>
+                </View>
+              </ListItem.Content>
+            </ListItem>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <ListItem>
-                <Image
-                     source = {require('../../assets/LiftOnUp.png')} 
-                  style={{width:60, height:60}}/>
-                  <ListItem.Content>
-                    <ListItem.Title>Leg Curl</ListItem.Title>
-                      <View style={{flexDirection:"row"}}>
-                      <Text>Sets</Text>
-                      <Text style={{marginHorizontal: 40}}>Reps</Text>
-                      </View>
-
-                      <View style ={{flexDirection:"row"}}>
-                        <TextInput 
-                           onChangeText={setsets}
-                           value={sets}
-                           style={styles.edits}
-                        style={styles.edits}
-                        maxLength = {3}></TextInput>
-                        <TextInput 
-                          onChangeText={setreps}
-                          value={reps}
-                        style={styles.editsReps}
-                        maxLength = {3}></TextInput>
-                      </View>
-                  </ListItem.Content>
-              </ListItem>
+          <TouchableOpacity style={styles.wo_btn} onPress={onPress}>
+            <ListItem>
+              <Image source={require('../../assets/Workouts/LegCurl.jpg')} style={{ width: 60, height: 60 }} />
+              <ListItem.Content>
+                <ListItem.Title>Leg Curl</ListItem.Title>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Sets</Text>
+                  <Text style={{ marginHorizontal: 40 }}>Reps</Text>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <TextInput style={{ width: 60, }} onChangeText={setsets1} value={sets} style={styles.edits} maxLength={3}></TextInput>
+                  <TextInput onChangeText={setreps1} value={reps} style={styles.editsReps} maxLength={3}></TextInput>
+                </View>
+              </ListItem.Content>
+            </ListItem>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <ListItem>
-                <Image
-                    source = {require('../../assets/LiftOnUp.png')} 
-                  style={{width:60, height:60}}/>
-                  <ListItem.Content>
-                    <ListItem.Title>Leg Extension</ListItem.Title>
-                      <View style={{flexDirection:"row"}}>
-                      <Text>Sets</Text>
-                      <Text style={{marginHorizontal: 40}}>Reps</Text>
-                      </View>
-                      <View style ={{flexDirection:"row"}}>
-                        <TextInput 
-                           onChangeText={setsets}
-                           value={sets}
-                           style={styles.edits}
-                        style={styles.edits}
-                        maxLength = {3}></TextInput>
-                        <TextInput style={styles.editsReps}
-                       onChangeText={setreps}
-                       value={reps}
-                       maxLength = {3}></TextInput>
-                      </View>
-                  </ListItem.Content>
-              </ListItem>
+          <TouchableOpacity style={styles.wo_btn} onPress={onPress} >
+            <ListItem>
+              <Image source={require('../../assets/Workouts/LegExtension.jpg')}style={{ width: 60, height: 60 }} />
+              <ListItem.Content>
+                <ListItem.Title>Leg Extension</ListItem.Title>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Sets</Text>
+                  <Text style={{ marginHorizontal: 40 }}>Reps</Text>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <TextInput style={{ width: 60, }} onChangeText={setsets2} value={sets2} style={styles.edits} maxLength={3}></TextInput>
+                  <TextInput onChangeText={setreps2} value={reps2} style={styles.editsReps} maxLength={3}></TextInput>
+                </View>
+              </ListItem.Content>
+            </ListItem>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <ListItem>
-                <Image
-                      source = {require('../../assets/LiftOnUp.png')} 
-                  style={{width:60, height:60}}/>
-                  <ListItem.Content>
-                    <ListItem.Title >Squat</ListItem.Title>
-                      <View style={{flexDirection:"row"}}>
-                      <Text>Sets</Text>
-                      <Text style={{marginHorizontal: 40}}>Reps</Text>
-                      </View>
-
-                      <View style ={{flexDirection:"row"}}>
-                        <TextInput  style={{width:60,}} 
-                         onChangeText={setsets}
-                         value={sets}
-                         style={styles.edits}
-                         maxLength = {3}></TextInput>
-                        
-                        <TextInput 
-                        onChangeText={setreps}
-                        value={reps}
-                        style={styles.editsReps}
-                        maxLength = {3}></TextInput>
-
-                      </View>
-                  </ListItem.Content>
-              </ListItem>
+          <TouchableOpacity style={styles.wo_btn} onPress={onPress} >
+            <ListItem>
+              <Image source={require('../../assets/Workouts/Squat.png')} style={{ width: 60, height: 60 }} />
+              <ListItem.Content>
+                <ListItem.Title >Squat</ListItem.Title>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Sets</Text>
+                  <Text style={{ marginHorizontal: 40 }}>Reps</Text>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <TextInput style={{ width: 60, }} onChangeText={setsets3} value={sets3} style={styles.edits} maxLength={3}></TextInput>
+                  <TextInput onChangeText={setreps3} value={reps3} style={styles.editsReps} maxLength={3}></TextInput>
+                </View>
+              </ListItem.Content>
+            </ListItem>
           </TouchableOpacity>
-          
 
         </View>
 
-          {/* This is the footer, the buttons at bottom */}
-          <View styles={styles.footer}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('EditDay1')}
-              style={styles.start_shape}>
-                <Text style={styles.start_text}>Add Workout</Text>
-              </TouchableOpacity>
-            <TouchableOpacity
-             onPress={() => addWorkout()}
-              style={styles.start_shape}>
-                <Text style={styles.start_text}>Save Changes</Text>
-              </TouchableOpacity>
-          </View>
-          </ScrollView>
-      </View>
+        {/* This is the footer, the buttons at bottom */}
+        <View styles={styles.footer}>
+          {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('EditDay1')} style={styles.start_shape}> 
+          <Text style={styles.start_text}>Add Workout</Text>
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={() => addWorkout(user.email)}
+            style={styles.start_shape}>
+            <Text style={styles.start_text}>Save Changes</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
 
 
-    );
-  }
+  );
+}
 
 
 const styles = StyleSheet.create({
@@ -230,8 +197,8 @@ const styles = StyleSheet.create({
     // marginHorizontal: 40,
     color: "#121212",
     backgroundColor: "rgba(230,230,230,1)",
-    width:"10%"
-    
+    width: "10%"
+
   },
   editsReps: {
     alignItems: 'center',
@@ -244,8 +211,8 @@ const styles = StyleSheet.create({
     // marginHorizontal: 40,
     color: "#121212",
     backgroundColor: "rgba(230,230,230,1)",
-    width:"10%"
-    
+    width: "10%"
+
   },
   title: {
     textAlign: "left",
@@ -267,7 +234,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   innerText: {
-    fontSize:10,
+    fontSize: 10,
   },
 
   footer: {
@@ -278,7 +245,7 @@ const styles = StyleSheet.create({
   start_shape: {
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor:"#004d99",
+    backgroundColor: "#004d99",
     width: '40%',
     height: 40,
     marginHorizontal: 5,

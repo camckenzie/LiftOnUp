@@ -7,30 +7,31 @@
 //  */
 
 //  import React from 'react';
-//  // import type {Node} from 'react';
-//  import { createAppContainer } from 'react-navigation';
-//  import { createStackNavigator } from 'react-navigation-stack';
-//  import Login from './src/screens/Login';
-//  import Register from './src/screens/Register';
-//  import Home from './src/screens/Home';
-//  import Reset from './src/screens/Restpassword';
-//  import {
-//    SafeAreaView,
-//    ScrollView,
-//    StatusBar,
-//    StyleSheet,
-//    Text,
-//    useColorScheme,
-//    View,
-//  } from 'react-native';
+ // import type {Node} from 'react';
+ import { createAppContainer } from 'react-navigation';
+ import { createStackNavigator } from 'react-navigation-stack';
+ import Login from './src/screens/Login';
+ import Register from './src/screens/Register';
+ import Home from './src/screens/Home';
+ import Reset from './src/screens/Restpassword';
+ import 'react-native-gesture-handler';
+ import {
+   SafeAreaView,
+   ScrollView,
+   StatusBar,
+   StyleSheet,
+   Text,
+   useColorScheme,
+   View,
+ } from 'react-native';
  
-//  import {
-//    Colors,
-//    DebugInstructions,
-//    Header,
-//    LearnMoreLinks,
-//    ReloadInstructions,
-//  } from 'react-native/Libraries/NewAppScreen';
+ import {
+   Colors,
+   DebugInstructions,
+   Header,
+   LearnMoreLinks,
+   ReloadInstructions,
+ } from 'react-native/Libraries/NewAppScreen';
  
 //  const RootStack = createStackNavigator(
 //    {
