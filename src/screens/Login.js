@@ -3,8 +3,6 @@ import { StyleSheet, ActivityIndicator, View, Text, Alert,Image,TouchableOpacity
 import { Button, Input, Icon } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 
-
-
 export default function Login({ navigation }) {
 
 	const [email, setEmail] = useState('');
@@ -34,9 +32,6 @@ export default function Login({ navigation }) {
           style={{width:300,height:200,top:100}}/> 
             </View>
 			<View style={styles.formContainer}>
-				{/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-					<Text style={{ fontSize: 28, height: 50 }}>Please Login!</Text>
-				</View> */}
 				<View style={styles.subContainer}>
 					<Input
 						style={styles.textInput}
@@ -78,39 +73,6 @@ export default function Login({ navigation }) {
         </TouchableOpacity>
         
       </View>
-{/* 
-				<View style={styles.subContainer}>
-					<Button
-						style={styles.textInput}
-						icon={
-							<Icon
-								name="input"
-								size={15}
-								color="white"
-								
-							/>
-						}
-						title="Login"
-						onPress={() => login()} />
-				</View> */}
-				{/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-					<Text>Forgot Password?</Text>
-				</View> */}
-				{/* <View style={styles.subContainer}>
-					<Button
-						style={styles.textInput}
-						icon={
-							<Icon
-								name="refresh"
-								size={15}
-								color="white"
-							/>
-						}
-						title="Reset Password"
-						onPress={() => {
-							navigation.navigate('RestPassword');
-						}} />
-				</View> */}
 
 <View   style={{ fontSize:20,color:"#00264d",padding:10 }} >
         <TouchableOpacity
@@ -121,24 +83,7 @@ export default function Login({ navigation }) {
         </TouchableOpacity>
         
       </View>
-				{/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-					<Text>Not a user?</Text>
-				</View> */}
-				{/* <View style={styles.subContainer}>
-					<Button
-						style={styles.textInput}
-						icon={
-							<Icon
-								name="check-circle"
-								size={15}
-								color="white"
-							/>
-						}
-						title="Register"
-						onPress={() => {
-							navigation.navigate('Register');
-						}} />
-				</View> */}
+				
 				<Text  style={{textAlign: 'center', fontSize:15}} >If you don't have an Account.</Text>
 				<View   style={{ fontSize:20,color:"#00264d",padding:5 }} >
 						<TouchableOpacity
@@ -163,11 +108,9 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: 'center',
         alignItems: 'center',
     },
     formContainer: {
-        // height: 300,
 		width:"80%",
         padding: 10,
         top:100,

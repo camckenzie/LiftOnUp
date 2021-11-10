@@ -16,7 +16,7 @@ import CreateWorkout from './createWorkout.js'
 export default class WorkoutSCreen extends Component {
 
   constructor(props) {
-  const handlePress = () => props.navigation.navigate('Add a workout');
+  // const handlePress = () => props.navigation.navigate('Add a workout');
 
     super(props);
     this.state = {
@@ -25,19 +25,25 @@ export default class WorkoutSCreen extends Component {
     this.state = {
       modalVisible:false,
       userSelected:[],
+      
       data: [
-        {id:1,  name: "Monday"},
-        {id:2,  name: "Tuesday"},
-        {id:3,  name: "Wednesday"} ,
-        {id:4,  name: "Thursday"} ,
-        {id:5,  name: "Friday"} ,
-        {id:5,  name: "Saturday"} ,
-        {id:5,  name: "Sunday"} ,
+        {id:1,  name: "Monday",image:require('../../assets/Workouts/1.jpeg')},
+        {id:2,  name: "Tuesday",image:require('../../assets/Workouts/2.jpeg')},
+        {id:3,  name: "Wednesday",image:require('../../assets/Workouts/3.jpeg')} ,
+        {id:4,  name: "Thursday",image:require('../../assets/Workouts/4.jpeg')} ,
+        {id:5,  name: "Friday",image:require('../../assets/Workouts/5.jpeg')} ,
+        {id:5,  name: "Saturday",image:require('../../assets/Workouts/6.jpeg')} ,
+        {id:5,  name: "Sunday",image:require('../../assets/Workouts/7.jpeg')} ,
 
       ]
     };
   }
+  deleteItem = (id) => {
 
+    this.setState({
+     data: this.state.data.filter(item => item.id !== id)
+    }) 
+ }
 createNewWorkoutName = () => {
   const handlePress = () => props.navigation.navigate('Add a workout');
   Alert.alert('Workout Name', 'Please Create... ');
@@ -59,12 +65,12 @@ createNewWorkoutName = () => {
             <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item)}}
             onPress={() => navigate("Details", { data: item }) }
               >
-              <Image style={styles.image} source={{uri: item.image}}/>
+              <Image style={styles.image} source={item.image}/>
               <View style={styles.cardContent}>
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.count}>{item.count}</Text>
-                <TouchableOpacity style={styles.followButton} onPress={()=> this.clickEventListener(item)}>
-                  <Text style={styles.followButtonText}>Delete</Text>  
+                <TouchableOpacity style={styles.followButton} onPress={() => this.deleteItem(item.id)}>
+                  <Text style={styles.followButtonText} >Delete</Text>  
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
