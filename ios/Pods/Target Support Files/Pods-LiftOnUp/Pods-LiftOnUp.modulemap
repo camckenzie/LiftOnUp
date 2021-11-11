@@ -1,0 +1,6 @@
+module Pods_LiftOnUp {
+  umbrella header "Pods-LiftOnUp-umbrella.h"
+
+  export *
+  module * { export * }
+}
