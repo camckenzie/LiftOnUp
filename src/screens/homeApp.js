@@ -4,15 +4,15 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import WorkoutScreen from "./WorkoutScreen";
-import AccountScreen from "./AccountScreen";
-import SettingsScreen from "./SettingsScreen";
-import EditProfileScreen from "./EditProfileScreen";
-import EditDay1 from "./editDay1";
-import ProgressScreen from "./ProgressScreen";
-import ExerciseHomeScreen from "./ExerciseHomeScreen";
-import ExerciseDetailsScreen from "../screens/ExerciseDetailsScreen";
-
+import WorkoutScreen from "./workout/WorkoutScreen";
+import AccountScreen from "./account/AccountScreen";
+import SettingsScreen from "./account/SettingsScreen";
+import EditProfileScreen from "./account/EditProfileScreen";
+import EditDay1 from "./workout/editDay1";
+import ProgressScreen from "./progress/ProgressScreen";
+import ExerciseHomeScreen from "./exercise/ExerciseHomeScreen";
+import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen";
+import CreateWorkout from './workout/createWorkout';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -36,6 +36,10 @@ function HomeStack() {
         component={EditDay1}
         options={{ title: "MyPlan" }}
       />
+          <Stack.Screen
+          name="Create"
+          component={CreateWorkout}
+          options={{ title: 'Create Workout' }} />
     </Stack.Navigator>
   );
 }
@@ -95,7 +99,7 @@ function AccountStack() {
       <Stack.Screen
         name="Account"
         component={AccountScreen}
-        options={{ title: "Account Page" }}
+        options={{ title: "Profile" }}
       />
       <Stack.Screen
         name="SettingsScreen"
@@ -179,6 +183,7 @@ function homeApp() {
 homeApp.navigationOptions = ({ navigation }) => ({
   // title: 'Login',
   headerShown: false,
+  
 });
 
 export default homeApp;
