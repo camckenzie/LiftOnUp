@@ -17,6 +17,8 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import NumericInput from 'react-native-numeric-input'
+import StartRoutine from './StartRoutine';
+
 // export class EditDay1 extends React.Component {
 export default function EditDay1({ navigation }) {
   
@@ -250,7 +252,7 @@ export default function EditDay1({ navigation }) {
                 <Text style={styles.start_text}>Add Workout</Text>
               </TouchableOpacity>
               <TouchableOpacity
-             onPress={() => addWorkout()}
+              onPress={() =>  { navigation.navigate("StartRoutine");}}
               style={styles.start_shape}>
                 <Text style={styles.start_text}>Start Workout</Text>
               </TouchableOpacity>
