@@ -15,32 +15,39 @@ import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import {COLORS, SIZES} from '../../constants';
 import ExerciseDetailsScreen from './ExerciseDetailsScreen';
 import ExerciseList from './exercises.json';
+import {Picker} from '@react-native-picker/picker';
 const exercises = ExerciseList.exercises;
 
 const ExerciseHomeScreen = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [filterData, setfilterData] = useState([]);
   const [masterData, setmasterData] = useState([]);
+
+  const [selectedBP, setSelecteBP] = useState("");
+  const [selectedCat, setSelectedCat] = useState("");
+
   useEffect(() => {
     setfilterData(exercises);
     setmasterData(exercises);
-  });
+  },[]);
+
 
   const searchFilterFunction = (text) => {
     //check if searched text is not blank
     if (text){
-      const newData = masterData.filter(
-        function(item){
-          const itemData = item.name
-            ? item.name.toUpperCase()
-            : ''.toUpperCase();
+      const newData = masterData.filter(item => {
+        const itemData = `${item.name.toUpperCase()}`;
+        // function(item){
+        //   const itemData = item.name
+        //     ? item.name.toUpperCase()
+        //     : ''.toUpperCase();
           const textData = text.toUpperCase();
           return itemData.indexOf(textData) > -1;
-        }
-      );
+      });
       setfilterData(newData);
       setSearch(text);
-    } else{
+    } 
+    else{
       setfilterData(masterData);
       setSearch(text);
     }
@@ -93,6 +100,24 @@ const ExerciseHomeScreen = ({navigation}) => {
           onChangeText={(text) => searchFilterFunction(text)}
           placeholder="Search Exercise..." style={{flex: 1}} />
         </View>
+        <Picker
+          selectedValue={selectedCat}
+          style={{ height: 50, width: 200 }}
+          onValueChange={(itemValue, itemIndex) => setSelectedCat(itemValue)}
+        >
+          <Picker.Item label="Any Category" value="Any Category" />
+          <Picker.Item label="strength" value="strength" />
+          <Picker.Item label="Powerlifting" value="powerlifting" />
+        </Picker>
+        <Picker
+          selectedValue={selectedBP}
+          style={{ height: 50, width: 200 }}
+          onValueChange={(itemValue, itemIndex) => setSelecteBP(itemValue)}
+        >
+          <Picker.Item label="Any Body Part" value="Any Body Part" />
+          <Picker.Item label="Chest" value="chest" />
+          <Picker.Item label="Triceps" value="triceps" />
+        </Picker>
         <FlatList
         data={filterData}
         keyExtractor={(item,index) => index.toString()}

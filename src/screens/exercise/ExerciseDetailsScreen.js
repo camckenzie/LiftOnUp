@@ -37,6 +37,10 @@ const ExerciseDetailsScreen = ({route}) => {
           <Text>Equipment: </Text>
           {exercise.equipment}
         </Text>
+        <Text style={{fontSize: 16, opacity: 1, marginVertical: 5}}>
+          <Text>Catagory: </Text>
+          {exercise.category}
+        </Text>
         <Text style={{fontSize: 12, width: '85%'}}>
           <Text>Instructions: </Text>
           {exercise.instructions}
