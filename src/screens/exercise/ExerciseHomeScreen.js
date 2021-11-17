@@ -36,7 +36,7 @@ const ExerciseHomeScreen = ({navigation}) => {
     //check if searched text is not blank
     if (text){
       const newData = masterData.filter(item => {
-        const itemData = `${item.name.toUpperCase()}`;
+        const itemData = `${item.name.toUpperCase()} ${item.primaryMuscles[0].toUpperCase()}`;
         // function(item){
         //   const itemData = item.name
         //     ? item.name.toUpperCase()
@@ -52,6 +52,40 @@ const ExerciseHomeScreen = ({navigation}) => {
       setSearch(text);
     }
   };
+
+  //filter by category
+  const filterCatFunction = (selectedCat) => {
+    setSelectedCat(selectedCat);
+    if (selectedCat != 'Any Category') {
+      const newData = masterData.filter(item => {
+        const itemData = `${item.category.toUpperCase()}`;
+        const textData = selectedCat.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+    });
+    setfilterData(newData);//update list
+  }
+    else{
+      setfilterData(masterData);
+    }
+  };
+
+  //filter by bodyparts
+  const filterBodyFunction = (selectedBP) => {
+    setSelecteBP(selectedBP);
+    if (selectedBP != 'Any Body Part') {
+      const newData = masterData.filter(item => {
+        const itemData = `${item.primaryMuscles[0].toUpperCase()}`;
+        const textData = selectedBP.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+    });
+    setfilterData(newData);//update list
+  }
+    else{
+      setfilterData(masterData);
+    }
+  };
+  
+  
   const ItemView = ({exercise}) => {
     return (
       // Flat List Item
@@ -103,20 +137,33 @@ const ExerciseHomeScreen = ({navigation}) => {
         <Picker
           selectedValue={selectedCat}
           style={{ height: 50, width: 200 }}
-          onValueChange={(itemValue, itemIndex) => setSelectedCat(itemValue)}
+          onValueChange={(itemValue, itemIndex) => filterCatFunction(itemValue)}
         >
           <Picker.Item label="Any Category" value="Any Category" />
-          <Picker.Item label="strength" value="strength" />
+          <Picker.Item label="Strength" value="strength" />
+          <Picker.Item label="Stretching" value="stretching" />
+          <Picker.Item label="Strongman" value="strongman" />
+          <Picker.Item label="Olympic weightlifting" value="olympic weightlifting" />
+          <Picker.Item label="Plyometrics" value="plyometrics" />
           <Picker.Item label="Powerlifting" value="powerlifting" />
+          
+
         </Picker>
         <Picker
           selectedValue={selectedBP}
           style={{ height: 50, width: 200 }}
-          onValueChange={(itemValue, itemIndex) => setSelecteBP(itemValue)}
+          onValueChange={(itemValue, itemIndex) => filterBodyFunction(itemValue)}
         >
           <Picker.Item label="Any Body Part" value="Any Body Part" />
+          <Picker.Item label="Abdominals" value="abdominals" />
+          <Picker.Item label="Adductors" value="adductors" />
+          <Picker.Item label="Back" value="Back" />
+          <Picker.Item label="Biceps" value="biceps" />
           <Picker.Item label="Chest" value="chest" />
+          <Picker.Item label="Hamstring" value="hamstring" />
+          <Picker.Item label="Quadriceps" value="quadriceps" />
           <Picker.Item label="Triceps" value="triceps" />
+          <Picker.Item label="Shoulders" value="Shoulders" />
         </Picker>
         <FlatList
         data={filterData}
