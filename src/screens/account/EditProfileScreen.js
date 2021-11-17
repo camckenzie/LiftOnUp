@@ -22,14 +22,14 @@ export default function EditProfileScreen({ navigation }) {
   const [weight, setWeight] = React.useState("80 kg");
 
   return (
-    <>
+    <ScrollView>
       {/* The view that handle the Profile Picture and its changing link. */}
       <View style={styles.main}>
         <View style={styles.pic_link}>
-          {/* <Image
+          <Image
             style={styles.pic}
-            source={require("../assets/images/profile.png")}
-          ></Image> */}
+            source={require("../../../assets/images/profile.png")}
+          ></Image>
         </View>
         <View>
           <TouchableOpacity>
@@ -77,7 +77,7 @@ export default function EditProfileScreen({ navigation }) {
           <Text style={styles.button_txt}>Save</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </ScrollView>
   );
 }
 
@@ -86,6 +86,8 @@ const styles = StyleSheet.create({
   // Tha style for the changing profile link
   pic_link: {
     display: "flex",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   // Tha style for the profile picture
   pic: {
@@ -94,7 +96,6 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     marginTop: 20,
     marginBottom: 10,
-    marginRight: 30,
   },
   // The style for account info and the settings button
   input: {
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     borderColor: "gray",
+     
   },
   main: {
     display: "flex",
@@ -113,14 +115,14 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    margin: 40,
+    margin: 10,
   },
   rigt_info: {
     color: "#3399ff",
     fontWeight: "bold",
     fontSize: 15,
-    marginTop: 50,
-    marginLeft: 90,
+    // marginTop: 50,
+    // marginLeft: 90,
   },
   left_info: {
     marginRight: "auto",
@@ -132,12 +134,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     backgroundColor: "#004d99",
-    width: "45%",
-    height: 43,
+    width: "40%",
+    height: 40,
     justifyContent: "center",
     // THIS CENTERS THE BUTTON
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 10,
+    marginVertical: 10
   },
   button_txt: {
     color: "rgba(255,255,255,1)",
