@@ -10,22 +10,24 @@ import AccountScreen from "../screens/account/AccountScreen.js";
 import SettingsScreen from "../screens/account/SettingsScreen.js";
 import EditProfileScreen from "../screens/account/EditProfileScreen.js";
 import ProgressScreen from "../screens/progress/ProgressScreen";
+import ChartScreen from "../screens/progress/ChartScreen";
 import ExerciseHomeScreen from "../screens/exercise/ExerciseHomeScreen";
 import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen";
 // import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
 // import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
-import CreateWorkout from '../screens/workout/createWorkout';
+import CreateWorkout from "../screens/workout/createWorkout";
 const StackNavigator = createStackNavigator({
-  // Intro: Intro,
-  // Login: Login,
-  // RestPassword: RestPassword,
-  // Register: Register,
+  Intro: Intro,
+  Login: Login,
+  RestPassword: RestPassword,
+  Register: Register,
   Home: Home,
-  CreateWorkout:CreateWorkout,
+  CreateWorkout: CreateWorkout,
   AccountScreen: AccountScreen,
   SettingsScreen: SettingsScreen,
   EditProfileScreen: EditProfileScreen,
   ProgressScreen: ProgressScreen,
+  ChartScreen: ChartScreen,
   ExerciseHomeScreen: ExerciseHomeScreen,
   ExerciseDetailsScreen: ExerciseDetailsScreen,
   // AddWorkout:AddWorkout,
