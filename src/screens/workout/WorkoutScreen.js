@@ -31,8 +31,8 @@ export default class WorkoutSCreen extends Component {
           {id:3,  name: "Wednesday",image:require('../../../assets/Workouts/3.jpeg')} ,
           {id:4,  name: "Thursday",image:require('../../../assets/Workouts/4.jpeg')} ,
           {id:5,  name: "Friday",image:require('../../../assets/Workouts/5.jpeg')} ,
-          {id:5,  name: "Saturday",image:require('../../../assets/Workouts/6.jpeg')} ,
-          {id:5,  name: "Sunday",image:require('../../../assets/Workouts/7.jpeg')} ,
+          {id:6,  name: "Saturday",image:require('../../../assets/Workouts/6.jpeg')} ,
+          {id:7,  name: "Sunday",image:require('../../../assets/Workouts/7.jpeg')} ,
   
         ]
       };

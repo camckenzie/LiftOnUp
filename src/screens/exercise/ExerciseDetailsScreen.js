@@ -10,8 +10,9 @@ import {
 } from 'react-native';
 import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import {COLORS, SIZES} from '../../constants';
+import WorkoutScreen from '../workout/WorkoutScreen';
 
-const ExerciseDetailsScreen = ({route}) => {
+const ExerciseDetailsScreen = ({route,navigation}) => {
   const [exercise, setExercise] = useState(route.params.exercise);
   return (
     <SafeAreaView style={{flex: 1, position: 'relative'}}>
@@ -46,8 +47,8 @@ const ExerciseDetailsScreen = ({route}) => {
       <View></View>
       <View style={styles.btn_box}>
         <TouchableOpacity
-          onPress={() => login()}
-          style={styles.btn_shape}
+              onPress={() =>  { navigation.navigate("Workout");}}
+              style={styles.btn_shape}
         >
           <Text style={styles.btn_text}>Add Exercise</Text>
         </TouchableOpacity>

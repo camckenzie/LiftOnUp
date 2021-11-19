@@ -16,10 +16,10 @@ import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen";
 // import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
 import CreateWorkout from '../screens/workout/createWorkout';
 const StackNavigator = createStackNavigator({
-  // Intro: Intro,
-  // Login: Login,
-  // RestPassword: RestPassword,
-  // Register: Register,
+  Intro: Intro,
+  Login: Login,
+  RestPassword: RestPassword,
+  Register: Register,
   Home: Home,
   CreateWorkout:CreateWorkout,
   AccountScreen: AccountScreen,

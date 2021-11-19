@@ -3,7 +3,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   Text,
-  TextInput,
+  Button,
   View,
   Image,
   onPress,
@@ -33,17 +33,7 @@ export default function AccountScreen({ navigation }) {
   if (!user) {
       return navigation.navigate('Login');
   }
-  const navigationOptions = {
-    title: 'Intro',
-    headerShown: false,
-  };
   
-  // signOut = () => {
-  //   firebase.auth().signOut().then(() => {
-  //     this.props.navigation.navigate('Intro')
-  //   })
-  //   .catch(error => this.setState({ errorMessage: error.message }))
-  // }  
   return (
     <>
       {/* The view that handle the Profile Picture and its changing link. */}
@@ -93,7 +83,7 @@ export default function AccountScreen({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.button_txt}
-            onPress={() => this.signOut()}
+                   onPress={() => { auth().signOut() }}
           >Logout</Text>
         </TouchableOpacity>
       </View>

@@ -1,5 +1,16 @@
 import "react-native-gesture-handler";
-import * as React from "react";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  Button,
+  View,
+  Image,
+  onPress,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import React, { useState, useEffect } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,6 +25,8 @@ import ExerciseHomeScreen from "./exercise/ExerciseHomeScreen";
 import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen";
 import CreateWorkout from './workout/createWorkout';
 import StartRoutine from './workout/StartRoutine';
+import Login from "../screens/Login.js";
+import auth from "@react-native-firebase/auth";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -118,14 +131,39 @@ function AccountStack() {
         component={EditProfileScreen}
         options={{ title: "Edit Profile Page" }}
       />
+        <Stack.Screen
+        name="Login"
+        component={Login}
+        
+      />
     </Stack.Navigator>
   );
 }
 
-function homeApp() {
+// function homeApp() {
+export default function homeApp({ navigation }) {
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  
+  function onAuthStateChanged(user) {
+      setUser(user);
+      if (initializing) setInitializing(false);
+  }
+  
+  useEffect(() => {
+      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+      return subscriber; // unsubscribe on unmount
+  }, []);
+  
+  if (initializing) return null;
+  
+  if (!user) {
+      return navigation.navigate('Login');
+  }
   return (
+    
     <NavigationContainer>
-      <Tab.Navigator
+      <Tab.Navigator 
         initialRouteName="Workout"
         tabBarOptions={{
           activeTintColor: "#004d99",
@@ -134,17 +172,19 @@ function homeApp() {
         <Tab.Screen
           name="HomeStack"
           component={HomeStack}
-          options={{
+          options={{headerShown: false,
+
             tabBarLabel: "Workout",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
             ),
           }}
         />
+     
         <Tab.Screen
           name="ExerciseStack"
           component={ExerciseStack}
-          options={{
+          options={{headerShown: false,
             tabBarLabel: "Exercise",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -158,7 +198,7 @@ function homeApp() {
         <Tab.Screen
           name="Progress"
           component={ProgressStack}
-          options={{
+          options={{headerShown: false,
             tabBarLabel: "Progress",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -172,7 +212,7 @@ function homeApp() {
         <Tab.Screen
           name="AccountStack"
           component={AccountStack}
-          options={{
+          options={{headerShown: false,
             tabBarLabel: "Account",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -188,9 +228,12 @@ function homeApp() {
   );
 }
 homeApp.navigationOptions = ({ navigation }) => ({
-  // title: 'Login',
   headerShown: false,
-  
 });
 
-export default homeApp;
+// export default homeApp;
+// Home.navigationOptions = ({ navigation }) => ({
+//   title: 'Home',
+//   headerLeft: () => <Button  type="clear" icon={<Icon name='user' size={30} style={{marginLeft: 5}}  type='font-awesome' colour="black"/>} onPress={() => navigation.navigate('profile')}/>,
+//   // headerRight: () => <Button  type="clear" icon={<Icon name="sign-out" size={30} style={{marginRight: 5}} type='font-awesome' color="black"/>} onPress={() => { auth().signOut() }} />,
+// });
