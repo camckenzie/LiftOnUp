@@ -51,16 +51,16 @@ export default function AccountScreen({ navigation }) {
       {/* The view that handle the Profile Picture and its changing link. */}
       <View style={styles.pic_link}>
 
-          <Text>Welcome {user.email}</Text>
+          {/* <Text>Welcome {user.email}</Text> */}
 
-            <Image
+            {/* <Image
               style={styles.pic}
               source={require("../../../assets/images/profile.png")}
             ></Image>
             
             <TouchableOpacity>
               <Text style={styles.rigt_info}>Change Profile Picture</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           
           {/* Each of the following views for presnting the account info  */}
@@ -72,10 +72,10 @@ export default function AccountScreen({ navigation }) {
             <Text style={styles.left_info}>Email: </Text>
             <Text style={styles.rigt_info}>{user.email}</Text>
           </View>
-          <View style={styles.main}>
+          {/* <View style={styles.main}>
             <Text style={styles.left_info}>Birthday: </Text>
             <Text style={styles.rigt_info}>19XX-XX-XX </Text>
-          </View>
+          </View> */}
           <View style={styles.main}>
             <Text style={styles.left_info}>Target Weight: </Text>
             <Text style={styles.rigt_info}>75 kg </Text>
@@ -86,7 +86,7 @@ export default function AccountScreen({ navigation }) {
           </View>
 
           {/* divider */}
-          <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View>
+          {/* <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View> */}
 
           {/* This view to handle the setting and logout buttons */}
           <View style={styles.main1}>

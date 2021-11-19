@@ -23,7 +23,7 @@ export default function EditProfileScreen({ navigation }) {
 
   return (
     <ScrollView>
-      {/* The view that handle the Profile Picture and its changing link. */}
+      {/* The view that handle the Profile Picture and its changing link.
       <View style={styles.main}>
         <View style={styles.pic_link}>
           <Image
@@ -36,7 +36,7 @@ export default function EditProfileScreen({ navigation }) {
             <Text style={styles.rigt_info}>Change Profile Picture</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
 
       {/* Each of the following views for presnting the account info  */}
       <View style={styles.main}>
@@ -51,25 +51,29 @@ export default function EditProfileScreen({ navigation }) {
           placeholder="xyz@gmail.com"
         />
       </View>
-      <View style={styles.main}>
+      {/* <View style={styles.main}>
         <Text style={styles.left_info}>Birthday: </Text>
         <TextInput
           style={styles.input}
           value={birthday}
           placeholder="1919-12-30"
         />
-      </View>
-      <View style={styles.main}>
+      </View> */}
+      {/* <View style={styles.main}>
         <Text style={styles.left_info}>Height: </Text>
         <TextInput style={styles.input} value={height} placeholder="180 cm" />
+      </View> */}
+      <View style={styles.main}>
+        <Text style={styles.left_info}>Target Weight: </Text>
+        <TextInput style={styles.input} value={weight} placeholder="80 kg" />
       </View>
       <View style={styles.main}>
-        <Text style={styles.left_info}>Weight: </Text>
+        <Text style={styles.left_info}>Current Weight: </Text>
         <TextInput style={styles.input} value={weight} placeholder="80 kg" />
       </View>
 
       {/* divider */}
-      <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View>
+      {/* <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View> */}
 
       {/* This view to handle the save button */}
       <View style={styles.button}>
@@ -129,6 +133,11 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "black",
     fontSize: 16,
+  },
+  footer: {
+    width: "100%",
+    flexDirection: 'row',
+    alignItems: "flex-start",
   },
   button: {
     alignItems: "center",
