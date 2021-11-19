@@ -22,7 +22,9 @@ export default function EditProfileScreen({ navigation }) {
   const [weight, setWeight] = React.useState("80 kg");
 
   return (
+    <View style={styles.container}>
     <ScrollView>
+    <View style={styles.contentContainer}>
       {/* The view that handle the Profile Picture and its changing link.
       <View style={styles.main}>
         <View style={styles.pic_link}>
@@ -76,31 +78,44 @@ export default function EditProfileScreen({ navigation }) {
       {/* <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View> */}
 
       {/* This view to handle the save button */}
-      <View style={styles.button}>
-        <TouchableOpacity>
-          <Text style={styles.button_txt}>Save</Text>
-        </TouchableOpacity>
+      <View style={styles.footer}>
+        <View style={styles.button}>
+          <TouchableOpacity>
+            <Text style={styles.button_txt}>Save</Text>
+          </TouchableOpacity>
+        </View>
       </View>
+    </View>
     </ScrollView>
+    </View>
   );
 }
 
 // The styles section
 const styles = StyleSheet.create({
-  // Tha style for the changing profile link
-  pic_link: {
-    display: "flex",
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginHorizontal: 16,
   },
-  // Tha style for the profile picture
-  pic: {
-    width: 80,
-    height: 80,
-    borderRadius: 200,
-    marginTop: 20,
-    marginBottom: 10,
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
   },
+  // // Tha style for the changing profile link
+  // pic_link: {
+  //   display: "flex",
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+  // // Tha style for the profile picture
+  // pic: {
+  //   width: 80,
+  //   height: 80,
+  //   borderRadius: 200,
+  //   marginTop: 20,
+  //   marginBottom: 10,
+  // },
   // The style for account info and the settings button
   input: {
     padding: 10,
@@ -108,26 +123,31 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     borderColor: "gray",
+    alignContent: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
      
   },
   main: {
     display: "flex",
     flexDirection: "row",
     margin: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  main1: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-  },
-  rigt_info: {
-    color: "#3399ff",
-    fontWeight: "bold",
-    fontSize: 15,
-    // marginTop: 50,
-    // marginLeft: 90,
-  },
+  // main1: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   margin: 10,
+  // },
+  // rigt_info: {
+  //   color: "#3399ff",
+  //   fontWeight: "bold",
+  //   fontSize: 15,
+  //   // marginTop: 50,
+  //   // marginLeft: 90,
+  // },
   left_info: {
     marginRight: "auto",
     fontWeight: "700",
@@ -138,6 +158,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: 'row',
     alignItems: "flex-start",
+    justifyContent: 'center',
   },
   button: {
     alignItems: "center",
