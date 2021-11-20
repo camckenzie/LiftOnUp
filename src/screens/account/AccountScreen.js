@@ -35,43 +35,48 @@ export default function AccountScreen({ navigation }) {
   }
   
   return (
-    <>
+    
+    //Whats this: <>
+    <ScrollView>
       {/* The view that handle the Profile Picture and its changing link. */}
       <View style={styles.pic_link}>
-      <Text>Welcome {user.email}</Text>
 
-        <Image
-          style={styles.pic}
-          source={require("../../../assets/images/profile.png")}
-        ></Image>
-        <TouchableOpacity>
-          <Text style={styles.rigt_info}>Change Profile Picture</Text>
-        </TouchableOpacity>
-      </View>
-      {/* Each of the following views for presnting the account info  */}
-      <View style={styles.main}>
-        <Text style={styles.left_info}>Username:</Text>
-        <Text style={styles.rigt_info}>{user.email}</Text>
-      </View>
-      <View style={styles.main}>
-        <Text style={styles.left_info}>Email: </Text>
-        <Text style={styles.rigt_info}>{user.email}</Text>
-      </View>
-      <View style={styles.main}>
-        <Text style={styles.left_info}>Birthday: </Text>
-        <Text style={styles.rigt_info}>19XX-XX-XX </Text>
-      </View>
-      <View style={styles.main}>
-        <Text style={styles.left_info}>Hight: </Text>
-        <Text style={styles.rigt_info}>180 cm </Text>
-      </View>
-      <View style={styles.main}>
-        <Text style={styles.left_info}>Weight: </Text>
-        <Text style={styles.rigt_info}>80 kg </Text>
-      </View>
+          {/* <Text>Welcome {user.email}</Text> */}
 
-      {/* divider */}
-      <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View>
+            {/* <Image
+              style={styles.pic}
+              source={require("../../../assets/images/profile.png")}
+            ></Image>
+            
+            <TouchableOpacity>
+              <Text style={styles.rigt_info}>Change Profile Picture</Text>
+            </TouchableOpacity> */}
+          </View>
+          
+          {/* Each of the following views for presnting the account info  */}
+          <View style={styles.main}>
+            <Text style={styles.left_info}>Username:</Text>
+            <Text style={styles.rigt_info}>{user.email}</Text>
+          </View>
+          <View style={styles.main}>
+            <Text style={styles.left_info}>Email: </Text>
+            <Text style={styles.rigt_info}>{user.email}</Text>
+          </View>
+          {/* <View style={styles.main}>
+            <Text style={styles.left_info}>Birthday: </Text>
+            <Text style={styles.rigt_info}>19XX-XX-XX </Text>
+          </View> */}
+          <View style={styles.main}>
+            <Text style={styles.left_info}>Target Weight: </Text>
+            <Text style={styles.rigt_info}>75 kg </Text>
+          </View>
+          <View style={styles.main}>
+            <Text style={styles.left_info}>Current Weight: </Text>
+            <Text style={styles.rigt_info}>80 kg </Text>
+          </View>
+
+          {/* divider */}
+          {/* <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View> */}
 
       {/* This view to handle the setting and logout buttons */}
       <View style={styles.main1}>
@@ -87,7 +92,7 @@ export default function AccountScreen({ navigation }) {
           >Logout</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </ScrollView>
   );
 }
 // The styles section
@@ -116,7 +121,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    margin: 40,
+    margin: 10,
   },
   rigt_info: {
     color: "#3399ff",
@@ -133,16 +138,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     backgroundColor: "#004d99",
-    width: "45%",
-    height: 43,
+    width: "40%",
+    height: 40,
     justifyContent: "center",
     // THIS CENTERS THE BUTTON
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 10,
   },
   button_txt: {
     color: "rgba(255,255,255,1)",
-    fontSize: 15,
+    fontSize: 16,
     padding: 7,
     textAlign: "center",
     fontWeight: "bold",

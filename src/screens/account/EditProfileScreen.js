@@ -22,21 +22,23 @@ export default function EditProfileScreen({ navigation }) {
   const [weight, setWeight] = React.useState("80 kg");
 
   return (
-    <>
-      {/* The view that handle the Profile Picture and its changing link. */}
+    <View style={styles.container}>
+    <ScrollView>
+    <View style={styles.contentContainer}>
+      {/* The view that handle the Profile Picture and its changing link.
       <View style={styles.main}>
         <View style={styles.pic_link}>
-          {/* <Image
+          <Image
             style={styles.pic}
-            source={require("../assets/images/profile.png")}
-          ></Image> */}
+            source={require("../../../assets/images/profile.png")}
+          ></Image>
         </View>
         <View>
           <TouchableOpacity>
             <Text style={styles.rigt_info}>Change Profile Picture</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
 
       {/* Each of the following views for presnting the account info  */}
       <View style={styles.main}>
@@ -51,51 +53,69 @@ export default function EditProfileScreen({ navigation }) {
           placeholder="xyz@gmail.com"
         />
       </View>
-      <View style={styles.main}>
+      {/* <View style={styles.main}>
         <Text style={styles.left_info}>Birthday: </Text>
         <TextInput
           style={styles.input}
           value={birthday}
           placeholder="1919-12-30"
         />
-      </View>
-      <View style={styles.main}>
+      </View> */}
+      {/* <View style={styles.main}>
         <Text style={styles.left_info}>Height: </Text>
         <TextInput style={styles.input} value={height} placeholder="180 cm" />
+      </View> */}
+      <View style={styles.main}>
+        <Text style={styles.left_info}>Target Weight: </Text>
+        <TextInput style={styles.input} value={weight} placeholder="80 kg" />
       </View>
       <View style={styles.main}>
-        <Text style={styles.left_info}>Weight: </Text>
+        <Text style={styles.left_info}>Current Weight: </Text>
         <TextInput style={styles.input} value={weight} placeholder="80 kg" />
       </View>
 
       {/* divider */}
-      <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View>
+      {/* <View style={{ backgroundColor: "#e5e5e5", height: 10 }}></View> */}
 
       {/* This view to handle the save button */}
-      <View style={styles.button}>
-        <TouchableOpacity>
-          <Text style={styles.button_txt}>Save</Text>
-        </TouchableOpacity>
+      <View style={styles.footer}>
+        <View style={styles.button}>
+          <TouchableOpacity>
+            <Text style={styles.button_txt}>Save</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </>
+    </View>
+    </ScrollView>
+    </View>
   );
 }
 
 // The styles section
 const styles = StyleSheet.create({
-  // Tha style for the changing profile link
-  pic_link: {
-    display: "flex",
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginHorizontal: 16,
   },
-  // Tha style for the profile picture
-  pic: {
-    width: 80,
-    height: 80,
-    borderRadius: 200,
-    marginTop: 20,
-    marginBottom: 10,
-    marginRight: 30,
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
   },
+  // // Tha style for the changing profile link
+  // pic_link: {
+  //   display: "flex",
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+  // // Tha style for the profile picture
+  // pic: {
+  //   width: 80,
+  //   height: 80,
+  //   borderRadius: 200,
+  //   marginTop: 20,
+  //   marginBottom: 10,
+  // },
   // The style for account info and the settings button
   input: {
     padding: 10,
@@ -103,41 +123,54 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     borderColor: "gray",
+    alignContent: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+     
   },
   main: {
     display: "flex",
     flexDirection: "row",
     margin: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  main1: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 40,
-  },
-  rigt_info: {
-    color: "#3399ff",
-    fontWeight: "bold",
-    fontSize: 15,
-    marginTop: 50,
-    marginLeft: 90,
-  },
+  // main1: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   margin: 10,
+  // },
+  // rigt_info: {
+  //   color: "#3399ff",
+  //   fontWeight: "bold",
+  //   fontSize: 15,
+  //   // marginTop: 50,
+  //   // marginLeft: 90,
+  // },
   left_info: {
     marginRight: "auto",
     fontWeight: "700",
     color: "black",
     fontSize: 16,
   },
+  footer: {
+    width: "100%",
+    flexDirection: 'row',
+    alignItems: "flex-start",
+    justifyContent: 'center',
+  },
   button: {
     alignItems: "center",
     borderRadius: 10,
     backgroundColor: "#004d99",
-    width: "45%",
-    height: 43,
+    width: "40%",
+    height: 40,
     justifyContent: "center",
     // THIS CENTERS THE BUTTON
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 10,
+    marginVertical: 10
   },
   button_txt: {
     color: "rgba(255,255,255,1)",
