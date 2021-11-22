@@ -14,6 +14,27 @@ import firestore from "@react-native-firebase/firestore";
 import auth from "@react-native-firebase/auth";
 
 export default function SettingsScreen({ navigation }) {
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+  
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+    }, []);
+
+    if (initializing) return null;
+
+    if (!user) {
+        return navigation.navigate('Login');
+    }
+  
+
   return (
     <>
       {/* Profile picture and the username */}
@@ -43,9 +64,10 @@ export default function SettingsScreen({ navigation }) {
         </View>
         {/* Logout button  */}
         <View style={{ marginTop: 200 }}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.button_txt}>Logout</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.button_txt}
+            onPress={() => { auth().signOut() }}>Logout</Text>
+        </TouchableOpacity>
         </View>
       </View>
     </>

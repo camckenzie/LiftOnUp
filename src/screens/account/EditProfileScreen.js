@@ -12,14 +12,73 @@ import {
 } from "react-native";
 import firestore from "@react-native-firebase/firestore";
 import auth from "@react-native-firebase/auth";
+import { createStackNavigator } from 'react-navigation-stack';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import SettingsScreen from "./SettingsScreen";
 
 export default function EditProfileScreen({ navigation }) {
-  const [user, setUser] = React.useState("XYZ");
-  const [email, setEmail] = React.useState("XYZ@gmail.com");
-  const [birthday, setBirthday] = React.useState("19XX-XX-XX");
-  const [height, setHeight] = React.useState("180 cm");
-  const [weight, setWeight] = React.useState("80 kg");
+  // const [user, setUser] = React.useState("XYZ");
+  // const [email, setEmail] = React.useState("XYZ@gmail.com");
+  // const [birthday, setBirthday] = React.useState("19XX-XX-XX");
+  // const [height, setHeight] = React.useState("180 cm");
+  // const [weight, setWeight] = React.useState("80 kg");
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  const [Email, setEmail] = useState();
+  const [Dob, setDob] = useState();
+  const [Height, setHeight] = useState();
+  const [Weight, setWeight] = useState();
+  const [username, setUserName] = useState();
+
+
+  function onAuthStateChanged(user) {
+    setUser(user);
+    getData(user.email);
+    if (initializing) setInitializing(false);
+  }
+
+  function getData(user) {
+    console.log(user);
+    firestore().collection('Users').where('email', '==', user).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data());
+        setEmail(doc.data().email);
+        setDob(doc.data().birthday);
+        setHeight(doc.data().height);
+        setWeight(doc.data().weight);
+        setUserName(doc.data().username);
+      });
+    })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  }
+
+  function updateData(user) {
+    // console.log(user);
+    firestore().collection('Users').doc(user).update({
+      birthday: Dob,
+      email: Email,
+      height: Height,
+      weight: Weight,
+      username: username,
+
+    });
+    navigation.navigate("SettingsScreen");
+  }
+
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+  if (!user) {
+    return navigation.navigate('Login');
+  }
 
   return (
     <>
@@ -41,31 +100,36 @@ export default function EditProfileScreen({ navigation }) {
       {/* Each of the following views for presnting the account info  */}
       <View style={styles.main}>
         <Text style={styles.left_info}>Username:</Text>
-        <TextInput style={styles.input} value={user} placeholder="xyz" />
+        <TextInput style={styles.input} value={username} onChangeText={setUserName} />
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Email: </Text>
         <TextInput
           style={styles.input}
-          value={email}
-          placeholder="xyz@gmail.com"
+          value={Email}
+          onChangeText={setEmail}
         />
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Birthday: </Text>
         <TextInput
           style={styles.input}
-          value={birthday}
-          placeholder="1919-12-30"
+          value={Dob}
+          onChangeText={setDob}
         />
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Height: </Text>
-        <TextInput style={styles.input} value={height} placeholder="180 cm" />
+        <TextInput style={styles.input}
+          value={Height}
+          onChangeText={setHeight} />
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Weight: </Text>
-        <TextInput style={styles.input} value={weight} placeholder="80 kg" />
+        <TextInput style={styles.input}
+          value={Weight}
+          onChangeText={setWeight}
+        />
       </View>
 
       {/* divider */}
@@ -73,7 +137,7 @@ export default function EditProfileScreen({ navigation }) {
 
       {/* This view to handle the save button */}
       <View style={styles.button}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => updateData(user.email)}>
           <Text style={styles.button_txt}>Save</Text>
         </TouchableOpacity>
       </View>

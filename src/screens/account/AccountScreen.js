@@ -13,42 +13,69 @@ import {
 import firestore from "@react-native-firebase/firestore";
 import auth from "@react-native-firebase/auth";
 import SettingsScreen from "./SettingsScreen";
+import { useIsFocused } from '@react-navigation/native'
 
 export default function AccountScreen({ navigation }) {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
-  
+  const [Email, setEmail] = useState();
+  const [Dob, setDob] = useState();
+  const [Height, setHeight] = useState();
+  const [Weight, setWeight] = useState();
+  const [username, setUserName] = useState();
+  const isFocused = useIsFocused();
+
   function onAuthStateChanged(user) {
-      setUser(user);
-      if (initializing) setInitializing(false);
+    setUser(user);
+    // console.log(user.email);
+    getData(user.email);
+    if (initializing) setInitializing(false);
   }
-  
+
+  function getData(user) {
+    console.log(user);
+    firestore().collection('Users').where('email', '==', user).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data());
+        setEmail(doc.data().email);
+        setDob(doc.data().birthday);
+        setHeight(doc.data().height);
+        setWeight(doc.data().weight);
+        setUserName(doc.data().username);
+      });
+    })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  }
+
   useEffect(() => {
-      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      return subscriber; // unsubscribe on unmount
-  }, []);
-  
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, [isFocused]);
+
   if (initializing) return null;
-  
+
   if (!user) {
-      return navigation.navigate('Login');
+    return navigation.navigate('Login');
   }
-  const navigationOptions = {
-    title: 'Intro',
-    headerShown: false,
-  };
-  
+  // const navigationOptions = {
+  //   title: 'Intro',
+  //   headerShown: false,
+  // };
+
   // signOut = () => {
   //   firebase.auth().signOut().then(() => {
   //     this.props.navigation.navigate('Intro')
   //   })
   //   .catch(error => this.setState({ errorMessage: error.message }))
   // }  
+
   return (
     <>
       {/* The view that handle the Profile Picture and its changing link. */}
       <View style={styles.pic_link}>
-      <Text>Welcome {user.email}</Text>
+        <Text>Welcome {user.email}</Text>
 
         <Image
           style={styles.pic}
@@ -61,23 +88,23 @@ export default function AccountScreen({ navigation }) {
       {/* Each of the following views for presnting the account info  */}
       <View style={styles.main}>
         <Text style={styles.left_info}>Username:</Text>
-        <Text style={styles.rigt_info}>{user.email}</Text>
+        <Text style={styles.rigt_info}>{username}</Text>
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Email: </Text>
-        <Text style={styles.rigt_info}>{user.email}</Text>
+        <Text style={styles.rigt_info}>{Email}</Text>
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Birthday: </Text>
-        <Text style={styles.rigt_info}>19XX-XX-XX </Text>
+        <Text style={styles.rigt_info}>{Dob} </Text>
       </View>
       <View style={styles.main}>
-        <Text style={styles.left_info}>Hight: </Text>
-        <Text style={styles.rigt_info}>180 cm </Text>
+        <Text style={styles.left_info}>Height: </Text>
+        <Text style={styles.rigt_info}> {Height} cms</Text>
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Weight: </Text>
-        <Text style={styles.rigt_info}>80 kg </Text>
+        <Text style={styles.rigt_info}>{Weight} kgs </Text>
       </View>
 
       {/* divider */}
@@ -91,10 +118,10 @@ export default function AccountScreen({ navigation }) {
         >
           <Text style={styles.button_txt}>Settings</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.button_txt}
-            onPress={() => this.signOut()}
-          >Logout</Text>
+        <TouchableOpacity style={styles.button} onPress={() => { auth().signOut() }}>
+          <Text style={styles.button_txt}>
+            Logout
+          </Text>
         </TouchableOpacity>
       </View>
     </>
