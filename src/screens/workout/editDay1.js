@@ -47,7 +47,10 @@ export default function EditDay1({ navigation, route }) {
         // console.log(doc.data().workout);
         const Exercise = doc.data().workout;
         for (const Ex in Exercise) {
-          getDetails(Exercise[Ex]);
+          if (Exercise[Ex].value) {
+            getDetails(Exercise[Ex].name);
+          }
+
         }
       });
     })

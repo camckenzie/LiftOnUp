@@ -254,6 +254,7 @@ import { COLORS, SIZES } from '../../constants';
 import firestore from "@react-native-firebase/firestore";
 import auth from "@react-native-firebase/auth";
 import CheckBox from "@react-native-community/checkbox";
+import { add } from 'react-native-reanimated';
 // const exercises = ExerciseList.exercises;
 
 const Exercise = ({ navigation, route }) => {
@@ -263,9 +264,11 @@ const Exercise = ({ navigation, route }) => {
   const [filterData, setfilterData] = useState([]);
   const [masterData, setmasterData] = useState([]);
   const workoutDisplay = [];
-  const addEx = [];
+  const [addEx = [], setaddEx] = useState();
   const [days, setDay] = useState(route.params.day);
-  const [exist, setExist] = useState(route.params.page)
+  const [exist, setExist] = useState(route.params.page);
+  const [userdata, setUserdata] = useState();
+
 
 
   function onAuthStateChanged(user) {
@@ -276,9 +279,6 @@ const Exercise = ({ navigation, route }) => {
     if (exist) {
       existWork(user.email, days)
     }
-
-
-    // console.log(exist, "kjfhskjdfhs");
     if (initializing) setInitializing(false);
   }
   useEffect(() => {
@@ -293,12 +293,15 @@ const Exercise = ({ navigation, route }) => {
   }
 
   function existWork(user, days) {
-    console.log(user, days);
+    // console.log(user, days);
     firestore().collection("Users").doc(user).collection("Exercises").where("day", "==", days).get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(doc.data());
+        // console.log(doc.data());
+        setUserdata(doc.id);
+        setaddEx(doc.data().workout)
       });
     })
+    console.log(addEx);
   }
 
   function getData() {
@@ -342,36 +345,70 @@ const Exercise = ({ navigation, route }) => {
     });
     navigation.navigate("Details", { data: days });
   }
+  async function updateUserWorkout(workout, days, user, doc) {
+    await firestore().collection("Users").doc(user).collection('Exercises').doc(doc).set({
+      day: days,
+      workout: workout,
+
+    });
+    navigation.navigate("Details", { data: days });
+  }
 
   async function saveData(exercise) {
-    if (addEx.includes(exercise)) {
-      index = addEx.indexOf(exercise);
-      addEx.splice(index, 1);
+    if (addEx.some(function (el) { return el.name === exercise })) {
+      addEx.some(function (el) { if (el.name === exercise && el.value === true) { console.log(el.name, "false"); el.value = false; } else if (el.name === exercise && el.value === false) { console.log(el.name, "true"); el.value = true; } })
     } else {
-      addEx.push(exercise);
+      addEx.push({ name: exercise, value: true });
     }
+    console.log(addEx);
   }
   const ItemView = ({ exercise }) => {
-    return (
-      // Flat List Item
-      <View style={{ flexDirection: 'row' }}>
+    if (addEx.some(function (el) { if (el.name === exercise.name && el.value == true) { return true } })) {
+      // console.log("ah ryu bhai", exercise.name);
+      return (
+        // Flat List Item
+        <View style={{ flexDirection: 'row' }}>
 
-        <Text
-          style={styles.itemStyle}
-          onPress={() => navigation.navigate('ExerciseDetailsScreen', { exercise: exercise })}>
-          {exercise.name}
-          {' ('}
-          {exercise.primaryMuscles}
-          {')'}
-        </Text>
-        <CheckBox
-          boxType="square"
-          value={exercise.name}
-          onChange={() => saveData(exercise.name)}
-        />
-      </View>
+          <Text
+            style={styles.itemStyle}
+            onPress={() => navigation.navigate('ExerciseDetailsScreen', { exercise: exercise })}>
+            {exercise.name}
+            {' ('}
+            {exercise.primaryMuscles}
+            {')'}
+          </Text>
+          <CheckBox
+            boxType="square"
+            value={addEx.some(function (el) { if (el.name === exercise.name && el.value == true) { return true } })}
+            onChange={() => saveData(exercise.name)}
+          />
+        </View>
 
-    );
+      );
+    }
+    else {
+      return (
+        // Flat List Item
+        <View style={{ flexDirection: 'row' }}>
+
+          <Text
+            style={styles.itemStyle}
+            onPress={() => navigation.navigate('ExerciseDetailsScreen', { exercise: exercise })}>
+            {exercise.name}
+            {' ('}
+            {exercise.primaryMuscles}
+            {')'}
+          </Text>
+          <CheckBox
+            boxType="square"
+            value={exercise.name}
+            onChange={() => saveData(exercise.name)}
+          />
+        </View>
+
+      );
+    }
+
   };
 
   const ItemSeparatorView = () => {
@@ -386,44 +423,87 @@ const Exercise = ({ navigation, route }) => {
       />
     );
   };
-  return (
-    <SafeAreaView style={{ flex: 1, position: 'relative' }}>
-      <View style={styles.btn_box}>
-        <TouchableOpacity
-          onPress={() => addUserWorkout(addEx, days, user.email)}
-          style={styles.btn_shape}
-        >
-          <Text style={styles.btn_text}>Add Exercise</Text>
-        </TouchableOpacity>
+  if (userdata) {
+    return (
+      <SafeAreaView style={{ flex: 1, position: 'relative' }}>
+        <View style={styles.btn_box}>
+          <TouchableOpacity
+            onPress={() => updateUserWorkout(addEx, days, user.email, userdata)}
+            style={styles.btn_shape}
+          >
+            <Text style={styles.btn_text}>Update Exercise</Text>
+          </TouchableOpacity>
 
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          height: 50,
-          borderRadius: 25,
-          backgroundColor: COLORS.white,
-          marginVertical: 40,
-        }}>
-        <FontAwesome5Icons
-          name="search"
-          size={22}
-          style={{ marginHorizontal: 20 }}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            height: 50,
+            borderRadius: 25,
+            backgroundColor: COLORS.white,
+            marginVertical: 40,
+          }}>
+          <FontAwesome5Icons
+            name="search"
+            size={22}
+            style={{ marginHorizontal: 20 }}
+          />
+          <TextInput
+            onChangeText={(text) => searchFilterFunction(text)}
+            placeholder="Search Exercise..." style={{ flex: 1 }} />
+        </View>
+        <FlatList
+          data={filterData}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={({ item }) => <ItemView exercise={item} />} //display in array
         />
-        <TextInput
-          onChangeText={(text) => searchFilterFunction(text)}
-          placeholder="Search Exercise..." style={{ flex: 1 }} />
-      </View>
-      <FlatList
-        data={filterData}
-        keyExtractor={(item, index) => index.toString()}
-        ItemSeparatorComponent={ItemSeparatorView}
-        renderItem={({ item }) => <ItemView exercise={item} />} //display in array
-      />
-    </SafeAreaView>
-  );
+      </SafeAreaView>
+    );
+  }
+  else {
+    return (
+      <SafeAreaView style={{ flex: 1, position: 'relative' }}>
+        <View style={styles.btn_box}>
+          <TouchableOpacity
+            onPress={() => addUserWorkout(addEx, days, user.email)}
+            style={styles.btn_shape}
+          >
+            <Text style={styles.btn_text}>Add Exercise</Text>
+          </TouchableOpacity>
+
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            height: 50,
+            borderRadius: 25,
+            backgroundColor: COLORS.white,
+            marginVertical: 40,
+          }}>
+          <FontAwesome5Icons
+            name="search"
+            size={22}
+            style={{ marginHorizontal: 20 }}
+          />
+          <TextInput
+            onChangeText={(text) => searchFilterFunction(text)}
+            placeholder="Search Exercise..." style={{ flex: 1 }} />
+        </View>
+        <FlatList
+          data={filterData}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={({ item }) => <ItemView exercise={item} />} //display in array
+        />
+      </SafeAreaView>
+    );
+  }
+
 };
 const styles = StyleSheet.create({
   container: {
