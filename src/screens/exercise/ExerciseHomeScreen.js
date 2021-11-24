@@ -69,6 +69,7 @@ const ExerciseHomeScreen = ({ navigation }) => {
       });
       setfilterData(workoutDisplay);
       setmasterData(workoutDisplay);
+      // console.log(filterData);
     })
 
       .catch(function (error) {

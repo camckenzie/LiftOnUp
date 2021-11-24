@@ -25,9 +25,14 @@ export default function AccountScreen({ navigation }) {
   const [username, setUserName] = useState();
   const isFocused = useIsFocused();
 
+  // function onAuthStateChanged(user) {
+  //   setUser(user);
+  //   // console.log(user.email);
+  //   getData(user.email);
+  //   if (initializing) setInitializing(false);
+  // }
   function onAuthStateChanged(user) {
     setUser(user);
-    // console.log(user.email);
     getData(user.email);
     if (initializing) setInitializing(false);
   }
@@ -49,28 +54,20 @@ export default function AccountScreen({ navigation }) {
       });
   }
 
+  // const [initializing, setInitializing] = useState(true);
+  // const [user, setUser] = useState();
+
+
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
-  }, [isFocused]);
+  }, []);
 
   if (initializing) return null;
 
   if (!user) {
     return navigation.navigate('Login');
   }
-  // const navigationOptions = {
-  //   title: 'Intro',
-  //   headerShown: false,
-  // };
-
-  // signOut = () => {
-  //   firebase.auth().signOut().then(() => {
-  //     this.props.navigation.navigate('Intro')
-  //   })
-  //   .catch(error => this.setState({ errorMessage: error.message }))
-  // }  
-
   return (
     <>
       {/* The view that handle the Profile Picture and its changing link. */}
@@ -118,10 +115,10 @@ export default function AccountScreen({ navigation }) {
         >
           <Text style={styles.button_txt}>Settings</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => { auth().signOut() }}>
-          <Text style={styles.button_txt}>
-            Logout
-          </Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.button_txt}
+            onPress={() => { auth().signOut() }}
+          >Logout</Text>
         </TouchableOpacity>
       </View>
     </>
