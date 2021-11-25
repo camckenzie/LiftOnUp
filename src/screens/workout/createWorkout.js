@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
   },
   dayText: {
     // textAlign: 'center',
-    fontSize: 16,
-    fontWeight: 'bold',
-    padding: 10,
+    fontSize: 14,
+    //fontWeight: 'bold',
+    padding: 5,
   },
   body: {
     flex: 1,
