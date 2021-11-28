@@ -371,7 +371,7 @@ const Exercise = ({ navigation, route }) => {
 
           <Text
             style={styles.itemStyle}
-            onPress={() => navigation.navigate('ExerciseDetailsScreen', { exercise: exercise })}>
+            onPress={() => navigation.navigate('display', { exercise: exercise })}>
             {exercise.name}
             {' ('}
             {exercise.primaryMuscles}
@@ -393,7 +393,7 @@ const Exercise = ({ navigation, route }) => {
 
           <Text
             style={styles.itemStyle}
-            onPress={() => navigation.navigate('ExerciseDetailsScreen', { exercise: exercise })}>
+            onPress={() => navigation.navigate('display', { exercise: exercise })}>
             {exercise.name}
             {' ('}
             {exercise.primaryMuscles}
@@ -458,7 +458,7 @@ const Exercise = ({ navigation, route }) => {
           data={filterData}
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeparatorView}
-          renderItem={({ item }) => <ItemView exercise={item} />} //display in array
+          renderItem={({ item }) => <ItemView exercise={item} />} //`display` in array
         />
       </SafeAreaView>
     );

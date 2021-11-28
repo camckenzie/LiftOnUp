@@ -16,6 +16,7 @@ import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen.js"
 // import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
 import CreateWorkout from '../screens/workout/createWorkout.js';
 import WorkoutScreen from '../screens/workout/WorkoutScreen.js';
+import display from '../screens/workout/display.js'
 const StackNavigator = createStackNavigator({
   Intro: Intro,
   Login: Login,
@@ -27,6 +28,7 @@ const StackNavigator = createStackNavigator({
   AccountScreen: AccountScreen,
   SettingsScreen: SettingsScreen,
   EditProfileScreen: EditProfileScreen,
+  display: display,
   ProgressScreen: ProgressScreen,
   ExerciseHomeScreen: ExerciseHomeScreen,
   ExerciseDetailsScreen: ExerciseDetailsScreen,

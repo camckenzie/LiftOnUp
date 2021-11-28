@@ -285,6 +285,7 @@ const styles = StyleSheet.create({
   dayText: {
     // textAlign: 'center',
     fontSize: 16,
+    fontColor: 'black',
     fontWeight: 'bold',
     padding: 10,
   },
@@ -316,7 +317,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   next_text: {
-    color: "rgba(255,255,255,1)",
+    color: "black",
     fontSize: 16,
     //textAlign: "center",
     fontWeight: "bold",

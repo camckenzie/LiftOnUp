@@ -14,10 +14,12 @@ import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import { COLORS, SIZES } from '../../constants';
 
 const ExerciseDetailsScreen = ({ route }) => {
-
   const [exercise, setExercise] = useState(route.params.exercise);
   const image = require('../../../assets/Workouts/1.jpeg');
   const [page, setPage] = useState(route.params.page);
+  // console.log(page, "ksjdhfkjshd");
+  if (page === 'push') {
+  }
   return (
     <ScrollView>
       <SafeAreaView style={{ flex: 1, position: 'relative' }}>
@@ -30,7 +32,7 @@ const ExerciseDetailsScreen = ({ route }) => {
         <View
           style={{
             width: '100%',
-            height: 0.4 * SIZES.height,
+            height: 0.75 * SIZES.height,
             padding: 20,
             backgroundColor: '#C7B8F5',
             position: 'relative',
@@ -48,14 +50,14 @@ const ExerciseDetailsScreen = ({ route }) => {
             <Text>Sets: </Text>
             {exercise.Sets}
           </Text>
-          <Text style={{ fontSize: 12, width: '85%' }}>
+          <Text style={{ fontSize: 12, width: '100%' }}>
             <Text>Instructions: </Text>
             {exercise.instructions}
           </Text>
 
         </View>
         <View></View>
-        <View style={styles.btn_box}>
+        {/* <View style={styles.btn_box}>
           <TouchableOpacity
             onPress={() => login()}
             style={styles.btn_shape}
@@ -63,7 +65,7 @@ const ExerciseDetailsScreen = ({ route }) => {
             <Text style={styles.btn_text}>Add Exercise</Text>
           </TouchableOpacity>
 
-        </View>
+        </View> */}
       </SafeAreaView>
     </ScrollView>
   );
@@ -102,4 +104,5 @@ const styles = StyleSheet.create({
     borderColor: "#ebf0f7"
   },
 })
+
 export default ExerciseDetailsScreen;

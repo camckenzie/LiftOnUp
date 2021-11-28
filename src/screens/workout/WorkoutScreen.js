@@ -219,14 +219,37 @@ export default function WorkoutScreen({ navigation }) {
         // console.log(doc.id, ' => ', doc.data());
         for (const key in doc.data()) {
           if (doc.data()[key] === Boolean(true)) {
+            if (key == "Monday") {
+              count = 1;
+            }
+            else if (key == "Tuesday") {
+              count = 2;
+            }
+            else if (key == "Wednesday") {
+              count = 3;
+            }
+            else if (key == "Thursday") {
+              count = 4;
+            }
+            else if (key == "Friday") {
+              count = 5;
+            }
+            else if (key == "Saturday") {
+              count = 6;
+            }
+            else if (key == "Sunday") {
+              count = 7;
+            }
             workoutName.push({
+              count: count,
               Day: key
             });
           }
         }
         setUserExist(true);
-        setWorkout(workoutName);
-        // console.log(workout);
+        setWorkout(workoutName.sort((a, b) => {
+          return a.count - b.count;
+        }));
       });
     })
       .catch(function (error) {

@@ -87,7 +87,7 @@ export default function EditDay1({ navigation, route }) {
       // Flat List Item
       <Text
         style={styles.itemStyle}
-        onPress={() => navigation.navigate('ExerciseDetailsScreen', { exercise: exercise, page: "user" })}>
+        onPress={() => navigation.navigate('display', { exercise: exercise, page: 'push', })}>
         {exercise.name}
         {' ('}
         {exercise.primaryMuscles}
