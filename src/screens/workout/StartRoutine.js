@@ -39,7 +39,7 @@
 // //   );
 // // };
 
-// const FitnessSection = ({ children, title}) => {
+// const FitnessSection = ({ children, title }) => {
 //   const isDarkMode = useColorScheme() === "dark";
 
 //   const colorStyle = {
@@ -55,8 +55,8 @@
 //       <View style={{ marginLeft: 30 }}>
 //         <Text>___</Text>
 //       </View>
-//       <TextInput style={styles.TextInput1} maxLength ={3} />
-//       <TextInput style={styles.TextInput2}  maxLength ={3} />
+//       <TextInput style={styles.TextInput1} maxLength={3} />
+//       <TextInput style={styles.TextInput2} maxLength={3} />
 //       <CheckBox
 //         disabled={false}
 //         value={toggleCheckBox}
@@ -79,10 +79,10 @@
 //   };
 //   return (
 //     <View style={styles.sectionContainer}>
-//       <View style={{backgroundColor:"#004d99"}}>
-//       <Text style={styles.sectionTitle}>
-//         {title}
-//       </Text>
+//       <View style={{ backgroundColor: "#004d99" }}>
+//         <Text style={styles.sectionTitle}>
+//           {title}
+//         </Text>
 //       </View>
 //       <View style={styles.upperSection}>
 //         <Text style={colorStyle}>Set</Text>
@@ -94,9 +94,9 @@
 //           value={true}
 //           onValueChange={(newValue) => setToggleCheckBox(newValue)}
 //         /> */}
-        
+
 //         {/* Below is so the checkbox has no title above */}
-//         <Text style={{width: "8%"}}></Text>
+//         <Text style={{ width: "8%" }}></Text>
 
 //       </View>
 //       <FitnessSection title="1" />
@@ -126,7 +126,7 @@
 //         contentInsetAdjustmentBehavior="automatic"
 //         style={backgroundStyle}
 //       >
-//         <View 
+//         <View
 //           style={{
 //             backgroundColor: isDarkMode ? Colors.black : Colors.white,
 //           }}
@@ -137,12 +137,12 @@
 //           <Section title="Strict Military Press(Barbell)"></Section>
 //           <TouchableOpacity style={styles.cancel_button}>
 //             <Text style={[styles.button_text]}>
-//                 Cancel Routine
+//               Cancel Routine
 //             </Text>
 //           </TouchableOpacity>
 //           <TouchableOpacity style={styles.complete_button}>
 //             <Text style={styles.button_text}>
-//                 Complete Routine
+//               Complete Routine
 //             </Text>
 //           </TouchableOpacity>
 //         </View>
@@ -162,7 +162,7 @@
 //     fontSize: 18,
 //     fontWeight: "600",
 //     alignSelf: 'center',
-//     backgroundColor:"#004d99",
+//     backgroundColor: "#004d99",
 //     color: "white",
 //   },
 
@@ -202,7 +202,7 @@
 //   complete_button: {
 //     alignItems: 'center',
 //     borderRadius: 10,
-//     backgroundColor:"#004d99",
+//     backgroundColor: "#004d99",
 //     width: '40%',
 //     height: 40,
 //     marginHorizontal: 5,
@@ -222,7 +222,7 @@
 //   cancel_button: {
 //     alignItems: 'center',
 //     borderRadius: 10,
-//     backgroundColor:"#ff0000",
+//     backgroundColor: "#ff0000",
 //     width: '40%',
 //     height: 40,
 //     marginHorizontal: 5,
@@ -233,7 +233,7 @@
 
 //   },
 // });
-// // The checkbox library 
+// // The checkbox library
 // //https://npm.io/package/@react-native-community/checkbox
 
 import React, { useState, useEffect } from 'react';
@@ -371,7 +371,7 @@ const Exercise = ({ navigation, route }) => {
 
           <Text
             style={styles.itemStyle}
-            onPress={() => navigation.navigate('ExerciseDetailsScreen', { exercise: exercise })}>
+            onPress={() => navigation.navigate('display', { exercise: exercise })}>
             {exercise.name}
             {' ('}
             {exercise.primaryMuscles}
@@ -393,7 +393,7 @@ const Exercise = ({ navigation, route }) => {
 
           <Text
             style={styles.itemStyle}
-            onPress={() => navigation.navigate('ExerciseDetailsScreen', { exercise: exercise })}>
+            onPress={() => navigation.navigate('display', { exercise: exercise })}>
             {exercise.name}
             {' ('}
             {exercise.primaryMuscles}
@@ -447,6 +447,7 @@ const Exercise = ({ navigation, route }) => {
           }}>
           <FontAwesome5Icons
             name="search"
+            color="#004d99"
             size={22}
             style={{ marginHorizontal: 20 }}
           />
@@ -458,7 +459,7 @@ const Exercise = ({ navigation, route }) => {
           data={filterData}
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeparatorView}
-          renderItem={({ item }) => <ItemView exercise={item} />} //display in array
+          renderItem={({ item }) => <ItemView exercise={item} />} //`display` in array
         />
       </SafeAreaView>
     );
@@ -487,6 +488,7 @@ const Exercise = ({ navigation, route }) => {
           }}>
           <FontAwesome5Icons
             name="search"
+            color="#004d99"
             size={22}
             style={{ marginHorizontal: 20 }}
           />
@@ -495,6 +497,7 @@ const Exercise = ({ navigation, route }) => {
             placeholder="Search Exercise..." style={{ flex: 1 }} />
         </View>
         <FlatList
+        style={{ padding: 5 }}
           data={filterData}
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeparatorView}
@@ -535,7 +538,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   btn_box: {
+    top:10,
     flexDirection: "row",
+    // width: "100%",
     justifyContent: "center",
     alignContent: "flex-end",
   },

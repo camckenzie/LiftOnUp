@@ -109,9 +109,9 @@ export default function ProgressScreen({ navigation }) {
   }
 
   const Item = ({ item }) => (
-    // <View style={styles.cardContent}>
-    <Text style={styles.name}>{item.day} -------- {item.workout} Exercise/day</Text>
-    // </View>
+    <View style={styles.cardContent}>
+      <Text style={styles.name}>{item.day} -------- {item.workout} Exercise/day</Text>
+    </View>
   );
   const renderItem = ({ item }) => {
     console.log(item);

@@ -1,90 +1,3 @@
-// import React, {useState} from 'react';
-// import {
-//   View,
-//   Text,
-//   SafeAreaView,
-//   StatusBar,
-//   StyleSheet,
-//   TouchableOpacity,
-//   FlatList,
-// } from 'react-native';
-// import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
-// import {COLORS, SIZES} from '../../constants';
-// import WorkoutScreen from '../workout/WorkoutScreen';
-
-// const ExerciseDetailsScreen = ({route,navigation}) => {
-//   const [exercise, setExercise] = useState(route.params.exercise);
-//   return (
-//     <SafeAreaView style={{flex: 1, position: 'relative'}}>
-//       <StatusBar
-//         backgroundColor={'#C7B8F5'}
-//         barStyle={'dark-content'}
-//         animated={true}
-//       />
-//       <View
-//         style={{
-//           width: '100%',
-//           height: 0.4 * SIZES.height,
-//           padding: 20,
-//           backgroundColor: '#C7B8F5',
-//           position: 'relative',
-//         }}>
-//         <Text style={{fontSize: 30, lineHeight: 45}}>{exercise.name}</Text>
-//         <Text style={{fontSize: 16, opacity: 1, marginVertical: 5}}>
-//           <Text>Primary Muscles: </Text>
-//           {exercise.primaryMuscles}
-//         </Text>
-//         <Text style={{fontSize: 16, opacity: 1, marginVertical: 5}}>
-//           <Text>Equipment: </Text>
-//           {exercise.equipment}
-//         </Text>
-//         <Text style={{fontSize: 12, width: '85%'}}>
-//           <Text>Instructions: </Text>
-//           {exercise.instructions}
-//           </Text>
-
-//       </View>
-//       <View></View>
-//       <View style={styles.btn_box}>
-//         <TouchableOpacity
-//               onPress={() =>  { navigation.navigate("Workout");}}
-//               style={styles.btn_shape}
-//         >
-//           <Text style={styles.btn_text}>Add Exercise</Text>
-//         </TouchableOpacity>
-        
-//       </View>
-//     </SafeAreaView>
-//   );
-// };
-// const styles = StyleSheet.create({
-//   container: {
-//       flex: 1,
-//       // justifyContent: 'center',
-//       alignItems: 'center',
-//   },
-// btn_box: {
-//       flexDirection: "row",
-//       // width: "100%",
-//       justifyContent: "center",
-//       alignContent:"flex-end",
-//     },
-// btn_shape: {
-//       borderRadius: 5,
-//       backgroundColor: '#00264d',
-//       width: 200,
-//       height: 40,
-//       marginHorizontal: 15,
-//       justifyContent: "center",
-//     },
-//   btn_text: {
-//       color: "rgba(255,255,255,1)",
-//       fontSize: 16,
-//       textAlign: "center",
-//       fontWeight: "bold",
-//     },
-// })
-// export default ExerciseDetailsScreen;
 import React, { useState } from 'react';
 import {
   View,
@@ -99,12 +12,14 @@ import {
 } from 'react-native';
 import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import { COLORS, SIZES } from '../../constants';
-import WorkoutScreen from "../workout/WorkoutScreen";
-const ExerciseDetailsScreen = ({ route }) => {
 
+const ExerciseDetailsScreen = ({ route }) => {
   const [exercise, setExercise] = useState(route.params.exercise);
   const image = require('../../../assets/Workouts/1.jpeg');
   const [page, setPage] = useState(route.params.page);
+  // console.log(page, "ksjdhfkjshd");
+  if (page === 'push') {
+  }
   return (
     <ScrollView>
       <SafeAreaView style={{ flex: 1, position: 'relative' }}>
@@ -117,13 +32,19 @@ const ExerciseDetailsScreen = ({ route }) => {
         <View
           style={{
             width: '100%',
-            height: 0.4 * SIZES.height,
+            height: 0.75 * SIZES.height,
             padding: 20,
-            backgroundColor: '#C7B8F5',
             position: 'relative',
           }}>
-          <Text style={{ fontSize: 30, lineHeight: 45 }}>{exercise.name}</Text>
-          <Text style={{ fontSize: 16, opacity: 1, marginVertical: 5 }}>
+          <Text style={{ fontSize: 30, lineHeight: 45 ,alignSelf:"center" ,fontWeight:"500"}}>{exercise.name}</Text>
+          <View
+        style={{
+          height: 0.9,
+          width: '100%',
+          backgroundColor: '#C8C8C8',
+        }}/>
+          <Text style={{ fontSize: 18, opacity: 1, marginVertical: 8 }}>
+         
             <Text>Primary Muscles: </Text>
             {exercise.primaryMuscles}
           </Text>
@@ -135,22 +56,15 @@ const ExerciseDetailsScreen = ({ route }) => {
             <Text>Sets: </Text>
             {exercise.Sets}
           </Text>
-          <Text style={{ fontSize: 12, width: '85%' }}>
+          <Text style={{ fontSize: 15, width: '100%' }}>
             <Text>Instructions: </Text>
             {exercise.instructions}
           </Text>
 
         </View>
+       
         <View></View>
-        {/* <View style={styles.btn_box}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Workout')}
-            style={styles.btn_shape}
-          >
-            <Text style={styles.btn_text}>Add Exercise</Text>
-          </TouchableOpacity>
-
-        </View> */}
+     
       </SafeAreaView>
     </ScrollView>
   );
@@ -161,32 +75,15 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignItems: 'center',
   },
-  btn_box: {
-    flexDirection: "row",
-    // width: "100%",
-    justifyContent: "center",
-    alignContent: "flex-end",
-  },
-  btn_shape: {
-    borderRadius: 5,
-    backgroundColor: '#00264d',
-    width: 200,
-    height: 40,
-    marginHorizontal: 15,
-    justifyContent: "center",
-  },
-  btn_text: {
-    color: "rgba(255,255,255,1)",
-    fontSize: 16,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
+
+ 
   image: {
     width: 390,
-    height: 390,
+    height: 200,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: "#ebf0f7"
   },
 })
+
 export default ExerciseDetailsScreen;

@@ -1,15 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import {
-  ActivityIndicator,
   StyleSheet,
   Text,
-  TextInput,
-  View,
-  Image,
-  onPress,
   TouchableOpacity,
-  ScrollView,
   SafeAreaView,
   Button,
 
@@ -23,6 +16,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 const createWorkout = ({ navigation, route }) => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+  //const [agree, setAgree] = useState(false);
   const [Monday, setMonday] = useState(false);
   const [Tuesday, setTuesday] = useState(false);
   const [Wednesday, setWednesday] = useState(false);
@@ -30,6 +24,7 @@ const createWorkout = ({ navigation, route }) => {
   const [Friday, setFriday] = useState(false);
   const [Saturday, setSaturday] = useState(false);
   const [Sunday, setSunday] = useState(false);
+  // const Page = route.params.userExist;
   const [doc, setDoc] = useState();
 
   function onAuthStateChanged(user) {
@@ -45,8 +40,10 @@ const createWorkout = ({ navigation, route }) => {
     if (initializing) setInitializing(false);
   }
 
-  async function addUserWorkout() {
 
+  async function addUserWorkout() {
+    // const ref = firestore().collection('UserWorkout').doc(email);
+    // console.log(Plan);
     await firestore().collection('UserWorkout').add({
       userEmail: user.email,
       Monday: Monday,
@@ -58,10 +55,12 @@ const createWorkout = ({ navigation, route }) => {
       Sunday: Sunday,
       Date: new Date(),
     });
+    // console.log(Monday);
 
-  } 
+  } //
   async function updateUserWorkout() {
-    
+    // const ref = firestore().collection('UserWorkout').doc(email);
+    // console.log(Plan);
     await firestore().collection('UserWorkout').doc(doc).update({
       userEmail: user.email,
       Monday: Monday,
@@ -73,11 +72,14 @@ const createWorkout = ({ navigation, route }) => {
       Sunday: Sunday,
       Date: new Date(),
     });
+    // console.log(Monday);
 
   }
+
   async function getData(user) {
     firestore().collection('UserWorkout').where('userEmail', '==', user).get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        // console.log(doc.id, ' => ', doc.data());
         setDoc(doc.id);
         setMonday(doc.data().Monday);
         setTuesday(doc.data().Tuesday);
@@ -202,8 +204,11 @@ const createWorkout = ({ navigation, route }) => {
           Sunday
         </Text>
       </SafeAreaView>
-      <Button
+      <TouchableOpacity style={styles.start_shape} >
+      <Button 
         title="Create Plan"
+        color="rgba(255,255,255,1)"
+        textAlign='center'
         onPress={() => {
           if (route.params.userExist == true) {
             if (!Tuesday &&
@@ -217,6 +222,7 @@ const createWorkout = ({ navigation, route }) => {
             } else {
               updateUserWorkout();
               navigation.navigate('Workout');
+              // navigation.goBack();
             }
           } else {
             if (!Tuesday &&
@@ -230,9 +236,12 @@ const createWorkout = ({ navigation, route }) => {
             } else {
               addUserWorkout();
               navigation.navigate('Workout');
+              // navigation.goBack();
             }
           }
-        }} />
+
+        }} /> 
+        </TouchableOpacity>
     </SafeAreaView>
   )
 }
@@ -247,51 +256,53 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   title: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-    padding: 20,
+    textAlign: "center",
+    padding:20,
+    fontSize:20,
+    fontWeight:"bold",
+    color:"#5F5F64"
   },
-  dayText: {
-    textAlign: 'center',
-    fontSize: 14,
-    fontWeight: 'bold',
-    padding: 5,
-  },
+ //For days contanier  
   body: {
-    flex: 1,
+   marginHorizontal:30,
+   marginVertical:5,
     padding: 10,
-    justifyContent: 'flex-start',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     flexDirection: 'row',
   },
 
-  footer: {
-    width: "100%",
-    flexDirection: 'row',
-    alignItems: "flex-start",
-    alignSelf: 'center',
-  },
-
+//checkbox
   next_shape: {
     alignItems: 'center',
     borderRadius: 10,
     backgroundColor: "#004d99",
     width: '40%',
     height: 40,
-    marginHorizontal: 5,
-    marginVertical: 5,
     justifyContent: 'center',
     // THIS CENTERS THE BUTTON
     alignSelf: 'center'
   },
-  // next_text: {
-  //   color: "red",
-  //   fontSize: 16,
-  //   //textAlign: "center",
-  //   fontWeight: "bold",
-  //   //alignContent: 'center',
-  // },
+  //Days
+  next_text: {
+    color: "black",
+    fontSize: 18,
+    textAlign: "center",
+    padding:15,
+    //alignContent: 'center',
+  },
+  start_shape: {
+    alignItems: 'center',
+    borderRadius: 10,
+    backgroundColor: "#004d99",
+    width: '41%',
+    height: 45,
+    marginHorizontal: 5,
+    marginVertical: 55,
+    justifyContent: 'center',
+    // THIS CENTERS THE BUTTON
+    alignSelf: 'center'
+  },
 
 });
 

@@ -1,3 +1,4 @@
+// import React, { Component } from 'react';
 import React, { useState, useEffect } from 'react';
 import { Button, Icon } from 'react-native-elements';
 import { ListItem, Avatar } from 'react-native-elements'
@@ -23,9 +24,13 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 
-
 export default function WorkoutScreen({ navigation }) {
+  deleteItem = (count) => {
 
+    this.setState({
+     data: this.state.data.filter(item => item.count !== count)
+    }) 
+ }
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
   const [workout = [], setWorkout] = useState();
@@ -42,15 +47,40 @@ export default function WorkoutScreen({ navigation }) {
   getdata = (user) => {
     firestore().collection('UserWorkout').where('userEmail', '==', user).get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        // console.log(doc.id, ' => ', doc.data());
         for (const key in doc.data()) {
           if (doc.data()[key] === Boolean(true)) {
+            if (key == "Monday") {
+              count = 1;
+            }
+            else if (key == "Tuesday") {
+              count = 2;
+            }
+            else if (key == "Wednesday") {
+              count = 3;
+            }
+            else if (key == "Thursday") {
+              count = 4;
+            }
+            else if (key == "Friday") {
+              count = 5;
+            }
+            else if (key == "Saturday") {
+              count = 6;
+            }
+            else if (key == "Sunday") {
+              count = 7;
+            }
             workoutName.push({
+              count: count,
               Day: key
             });
           }
         }
         setUserExist(true);
-        setWorkout(workoutName);
+        setWorkout(workoutName.sort((a, b) => {
+          return a.count - b.count;
+        }));
       });
     })
       .catch(function (error) {
@@ -69,14 +99,14 @@ export default function WorkoutScreen({ navigation }) {
   if (!user) {
     return navigation.navigate('Login');
   }
-
+  
   const Item = ({ item, onPress }) => (
     <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("Details", { data: item.Day })} >
       <Image source={require('../../../assets/Workouts/1.jpeg')} style={styles.image} />
       <View style={styles.cardContent}>
         <Text style={styles.name}>{item.Day}</Text>
       </View>
-
+     
     </TouchableOpacity>
   );
   const renderItem = ({ item }) => {
@@ -84,9 +114,11 @@ export default function WorkoutScreen({ navigation }) {
       <Item item={item} onPress={() => { }} />
     );
   };
+ 
   if (userExist) {
     return (
       <View style={styles.container}>
+        
         <FlatList data={workout} renderItem={renderItem} keyExtractor={(item) => item} />
         {/* Work Name Create */}
         <View styles={styles.footer}>
@@ -173,8 +205,9 @@ const styles = StyleSheet.create({
   followButton: {
     marginTop: 10,
     height: 35,
-    width: 100,
+    width: 90,
     padding: 10,
+    marginLeft:20,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

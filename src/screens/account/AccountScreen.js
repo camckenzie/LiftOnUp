@@ -25,6 +25,12 @@ export default function AccountScreen({ navigation }) {
   const [username, setUserName] = useState();
   const isFocused = useIsFocused();
 
+  // function onAuthStateChanged(user) {
+  //   setUser(user);
+  //   // console.log(user.email);
+  //   getData(user.email);
+  //   if (initializing) setInitializing(false);
+  // }
   function onAuthStateChanged(user) {
     setUser(user);
     getData(user.email);
@@ -47,6 +53,10 @@ export default function AccountScreen({ navigation }) {
         console.log("Error getting documents: ", error);
       });
   }
+
+  // const [initializing, setInitializing] = useState(true);
+  // const [user, setUser] = useState();
+
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);

@@ -16,6 +16,7 @@ import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen";
 import CreateWorkout from './workout/createWorkout';
 import StartRoutine from './workout/StartRoutine';
 import Login from "../screens/Login.js";
+import display from "./workout/display";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,6 +49,10 @@ function HomeStack() {
         name="StartRoutine"
         component={StartRoutine}
         options={{ title: 'Create Workout' }} />
+      <Stack.Screen
+        name="display"
+        component={display}
+        options={{ title: 'Exercise Details' }} />
 
     </Stack.Navigator>
   );
@@ -71,7 +76,9 @@ function ExerciseStack() {
       <Stack.Screen
         name="ExerciseDetailsScreen"
         component={ExerciseDetailsScreen}
-        options={{ title: "ExerciseDetailsScreen" }}
+        options={{
+          title: "Exercise Detail"
+        }}
       />
     </Stack.Navigator>
   );
