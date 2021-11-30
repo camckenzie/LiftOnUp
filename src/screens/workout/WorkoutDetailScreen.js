@@ -13,7 +13,7 @@ import {
 import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import { COLORS, SIZES } from '../../constants';
 
-const display = ({ route }) => {
+const WorkoutDetailScreen = ({ route }) => {
     const [exercise, setExercise] = useState(route.params.exercise);
     const image = require('../../../assets/Workouts/1.jpeg');
     const [page, setPage] = useState(route.params.page);
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default display;
+export default WorkoutDetailScreen;

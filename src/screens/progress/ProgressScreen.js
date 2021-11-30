@@ -36,10 +36,7 @@ export default function ProgressScreen({ navigation }) {
 
   function onAuthStateChanged(user) {
     setUser(user);
-    // console.log(user.email);
-    getuser(user.email);
     getdays(user.email);
-    console.log(workout, "ah ryu lala");
     if (initializing) setInitializing(false);
   }
   useEffect(() => {
@@ -53,54 +50,42 @@ export default function ProgressScreen({ navigation }) {
     return navigation.navigate('Login');
   }
 
-  function getuser(user) {
-    firestore().collection('Users').doc(user).get().then((querySnapshot) => {
-      // console.log(querySnapshot.data());
-      setUserProfile(querySnapshot.data());
-      setExist(true);
-    })
-
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
-    // console.log();
-  }
-
   function getdays(user) {
     firestore().collection('UserWorkout').where('userEmail', '==', user).get().then((querySnapshot2) => {
       querySnapshot2.forEach((doc) => {
         for (const key in doc.data()) {
           if (doc.data()[key] === Boolean(true)) {
-            // workoutName.push({
-            //   Day: key
-            // });
             console.log(key);
             getWorkout(user, key);
           }
         }
       });
     })
-
       .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
   }
+
   function getWorkout(user, key) {
+
     firestore().collection('Users').doc(user).collection('Exercises').where('day', '==', key).get().then((querySnapshot3) => {
       querySnapshot3.forEach((doc) => {
         count = 0;
         doc.data().workout.forEach((data) => {
           if (data.value) {
-            // console.log(data.name);
             count++;
           }
         });
-        workoutcount.push({
-          day: doc.data().day,
-          workout: count,
-        });
+        if (doc.id != "") {
+          workoutcount.push({
+            day: doc.data().day,
+            workout: count,
+          });
+        }
+
       });
       setWorkout(workoutcount);
+      // console.log(workout);
     })
 
       .catch(function (error) {
@@ -125,13 +110,15 @@ export default function ProgressScreen({ navigation }) {
 
       <View>
         <Text style={styles.start_text}>Here's your weekly workout status</Text>
-        <FlatList renderItem={renderItem} keyExtractor={(item) => item} />workout
+        <FlatList data={workout} renderItem={renderItem} keyExtractor={(item) => item} />
       </View>
 
     );
   } else {
     return (
-      <></>
+      <View>
+        <Text>No data available yet</Text>
+      </View>
     );
   }
 

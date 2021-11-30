@@ -233,33 +233,17 @@ const createWorkout = ({ navigation, route }) => {
         title="Create Plan"
         onPress={() => {
           if (route.params.userExist == true) {
-            if (!Tuesday &&
-              !Wednesday &&
-              !Thursday &&
-              !Friday &&
-              !Saturday &&
-              !Sunday &&
-              !Monday) {
-              Alert.alert('Please select at least one exercise');
-            } else {
-              updateUserWorkout();
-              navigation.navigate('Workout');
-              // navigation.goBack();
-            }
+
+            updateUserWorkout();
+            navigation.navigate('Workout');
+            // navigation.goBack();
+
           } else {
-            if (!Tuesday &&
-              !Wednesday &&
-              !Thursday &&
-              !Friday &&
-              !Saturday &&
-              !Sunday &&
-              !Monday) {
-              Alert.alert('Please select at least one exercise');
-            } else {
-              addUserWorkout();
-              navigation.navigate('Workout');
-              // navigation.goBack();
-            }
+
+            addUserWorkout();
+            navigation.navigate('Workout');
+            // navigation.goBack();
+
           }
 
         }} />
