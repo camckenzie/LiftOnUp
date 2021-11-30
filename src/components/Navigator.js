@@ -18,10 +18,10 @@ import CreateWorkout from '../screens/workout/createWorkout.js';
 import WorkoutScreen from '../screens/workout/WorkoutScreen.js';
 import display from '../screens/workout/display.js'
 const StackNavigator = createStackNavigator({
-  // Intro: Intro,
-  // Login: Login,
-  // RestPassword: RestPassword,
-  // Register: Register,
+  Intro: Intro,
+  Login: Login,
+  RestPassword: RestPassword,
+  Register: Register,
   Home: Home,
   WorkoutScreen: WorkoutScreen,
   CreateWorkout: CreateWorkout,

@@ -17,7 +17,7 @@ target 'LiftOnUp' do
     # Pods for testing
     pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
   end
-  pod 'Firebase/Analytics'
+  pod 'FirebaseAnalytics'
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
