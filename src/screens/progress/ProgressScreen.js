@@ -36,10 +36,7 @@ export default function ProgressScreen({ navigation }) {
 
   function onAuthStateChanged(user) {
     setUser(user);
-    // console.log(user.email);
-    getuser(user.email);
     getdays(user.email);
-    console.log(workout, "ah ryu lala");
     if (initializing) setInitializing(false);
   }
   useEffect(() => {
@@ -53,54 +50,42 @@ export default function ProgressScreen({ navigation }) {
     return navigation.navigate('Login');
   }
 
-  function getuser(user) {
-    firestore().collection('Users').doc(user).get().then((querySnapshot) => {
-      // console.log(querySnapshot.data());
-      setUserProfile(querySnapshot.data());
-      setExist(true);
-    })
-
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
-    // console.log();
-  }
-
   function getdays(user) {
     firestore().collection('UserWorkout').where('userEmail', '==', user).get().then((querySnapshot2) => {
       querySnapshot2.forEach((doc) => {
         for (const key in doc.data()) {
           if (doc.data()[key] === Boolean(true)) {
-            // workoutName.push({
-            //   Day: key
-            // });
             console.log(key);
             getWorkout(user, key);
           }
         }
       });
     })
-
       .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
   }
+
   function getWorkout(user, key) {
+
     firestore().collection('Users').doc(user).collection('Exercises').where('day', '==', key).get().then((querySnapshot3) => {
       querySnapshot3.forEach((doc) => {
         count = 0;
         doc.data().workout.forEach((data) => {
           if (data.value) {
-            // console.log(data.name);
             count++;
           }
         });
-        workoutcount.push({
-          day: doc.data().day,
-          workout: count,
-        });
+        if (doc.id != "") {
+          workoutcount.push({
+            day: doc.data().day,
+            workout: count,
+          });
+        }
+
       });
       setWorkout(workoutcount);
+      // console.log(workout);
     })
 
       .catch(function (error) {
@@ -110,8 +95,12 @@ export default function ProgressScreen({ navigation }) {
 
   const Item = ({ item }) => (
     <View style={styles.cardContent}>
-      <Text style={styles.name}>{item.day} -------- {item.workout} Exercise/day</Text>
+     
+      <Text style={styles.name}>{item.day}</Text>
+      <Text style={styles.line}>--</Text>
+      <Text style={styles.numberEx}> {item.workout} Exercise/day</Text>
     </View>
+    
   );
   const renderItem = ({ item }) => {
     console.log(item);
@@ -124,14 +113,18 @@ export default function ProgressScreen({ navigation }) {
     return (
 
       <View>
-        <Text style={styles.start_text}>Here's your weekly workout status</Text>
-        <FlatList renderItem={renderItem} keyExtractor={(item) => item} />workout
+       <Text h1 style={styles.title}>Here's your weekly workout status</Text>
+       <TouchableOpacity style={styles.card}>
+        <FlatList data={workout} renderItem={renderItem} keyExtractor={(item) => item} />
+        </TouchableOpacity>
       </View>
 
     );
   } else {
     return (
-      <></>
+      <View>
+        <Text>No data available yet</Text>
+      </View>
     );
   }
 
@@ -146,8 +139,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cardContent: {
-    marginLeft: 20,
-    marginTop: 10
+    marginHorizontal:10,
+    marginVertical:20,
+    flexDirection:"row"
   },
   image: {
     width: 90,
@@ -167,21 +161,39 @@ const styles = StyleSheet.create({
     shadowRadius: 7.49,
     elevation: 12,
 
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 5,
+    marginRight: 5,
     marginTop: 10,
     backgroundColor: "white",
     padding: 5,
     flexDirection: 'row',
     borderRadius: 10,
   },
+  line :{
+    flexDirection:"column",
+    alignSelf: 'flex-start',
+    color: "#121212",
+    fontWeight: 'bold',
+    marginHorizontal:29,
 
+  },
+  numberEx: {
+    flexDirection:"column",
+    fontSize: 15,
+    alignSelf: 'center',
+    color: "#121212",
+    marginHorizontal:19,
+    width:120,
+  },
   name: {
-    fontSize: 18,
+    flexDirection:"column",
+    fontSize: 15,
     flex: 1,
     alignSelf: 'center',
-    color: "#3399ff",
-    fontWeight: 'bold'
+    color: "#121212",
+    marginHorizontal:20,
+    width:45,
+
   },
   count: {
     fontSize: 14,
@@ -205,6 +217,14 @@ const styles = StyleSheet.create({
   followButtonText: {
     color: "#dcdcdc",
     fontSize: 12,
+  },
+
+  title: {
+    textAlign: "center",
+    padding:20,
+    fontSize:20,
+    fontWeight:"bold",
+    color:"#5F5F64"
   },
   start_shape: {
     alignItems: 'center',

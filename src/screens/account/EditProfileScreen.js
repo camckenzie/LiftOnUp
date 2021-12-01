@@ -90,11 +90,7 @@ export default function EditProfileScreen({ navigation }) {
             source={require("../assets/images/profile.png")}
           ></Image> */}
         </View>
-        <View>
-          <TouchableOpacity>
-            <Text style={styles.rigt_info}>Change Profile Picture</Text>
-          </TouchableOpacity>
-        </View>
+       
       </View>
 
       {/* Each of the following views for presnting the account info  */}

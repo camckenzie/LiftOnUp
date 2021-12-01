@@ -343,7 +343,8 @@ const Exercise = ({ navigation, route }) => {
       workout: workout,
 
     });
-    navigation.navigate("Details", { data: days });
+    navigation.navigate("Workout");
+    // navigation.navigate("Details", { data: days });
   }
   async function updateUserWorkout(workout, days, user, doc) {
     await firestore().collection("Users").doc(user).collection('Exercises').doc(doc).set({
@@ -351,7 +352,8 @@ const Exercise = ({ navigation, route }) => {
       workout: workout,
 
     });
-    navigation.navigate("Details", { data: days });
+    navigation.navigate("Workout");
+    // navigation.navigate("Details", { data: days });
   }
 
   async function saveData(exercise) {

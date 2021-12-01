@@ -40,6 +40,7 @@ export default function EditDay1({ navigation, route }) {
     firestore().collection("Users").doc(user).collection("Exercises").where('day', '==', days).get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         // console.log(doc.data().workout);
+        setEdit(true);
         const Exercise = doc.data().workout;
         for (const Ex in Exercise) {
           if (Exercise[Ex].value) {
@@ -58,7 +59,7 @@ export default function EditDay1({ navigation, route }) {
     firestore().collection('WorkoutCollection').doc(exercise).get().then((querySnapshot) => {
       workoutDisplay.push({ name: querySnapshot.id, primaryMuscles: querySnapshot.data().Part, instructions: querySnapshot.data().Description, Reps: querySnapshot.data().Reps, Sets: querySnapshot.data().Sets, image: querySnapshot.data().Image });
       setmasterData(workoutDisplay);
-      setEdit(true);
+
     })
 
       .catch(function (error) {
@@ -68,6 +69,7 @@ export default function EditDay1({ navigation, route }) {
   }
 
   useEffect(() => {
+
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, [isFocused]);
@@ -82,7 +84,7 @@ export default function EditDay1({ navigation, route }) {
       // Flat List Item
       <Text
         style={styles.itemStyle}
-        onPress={() => navigation.navigate('display', { exercise: exercise, page: 'push', })}>
+        onPress={() => navigation.navigate('WorkoutDetailScreen', { exercise: exercise, page: 'push', })}>
         {exercise.name}
         {' ('}
         {exercise.primaryMuscles}

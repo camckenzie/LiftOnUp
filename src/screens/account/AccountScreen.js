@@ -66,13 +66,13 @@ export default function AccountScreen({ navigation }) {
   if (initializing) return null;
 
   if (!user) {
-    return navigation.navigate('Login');
+    return navigation.navigate('Intro');
   }
   return (
     <>
       {/* The view that handle the Profile Picture and its changing link. */}
       <View style={styles.pic_link}>
-        <Text>Welcome {user.email}</Text>
+        <Text h1 style={styles.title}>Welcome {username}</Text>
 
         <Image
           style={styles.pic}
@@ -87,7 +87,7 @@ export default function AccountScreen({ navigation }) {
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Email: </Text>
-        <Text style={styles.rigt_info}>{Email}</Text>
+        <Text style={styles.rigt_info}>{user.email}</Text>
       </View>
       <View style={styles.main}>
         <Text style={styles.left_info}>Birthday: </Text>
@@ -130,6 +130,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  title: {
+    textAlign: "center",
+    padding:20,
+    fontSize:20,
+    fontWeight:"bold",
+    color:"#5F5F64"
+  },
   // Tha style for the profile picture
   pic: {
     width: 80,
@@ -152,10 +159,10 @@ const styles = StyleSheet.create({
   },
   rigt_info: {
     color: "#3399ff",
-    fontWeight: "bold",
     fontSize: 15,
   },
   left_info: {
+    justifyContent:"flex-start",
     marginRight: "auto",
     fontWeight: "700",
     color: "black",

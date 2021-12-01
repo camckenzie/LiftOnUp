@@ -15,8 +15,8 @@ import ExerciseHomeScreen from "./exercise/ExerciseHomeScreen";
 import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen";
 import CreateWorkout from './workout/createWorkout';
 import StartRoutine from './workout/StartRoutine';
-import Login from "../screens/Login.js";
-import display from "./workout/display";
+import Intro from "../screens/Intro.js";
+import WorkoutDetailScreen from "./workout/WorkoutDetailScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,8 +50,8 @@ function HomeStack() {
         component={StartRoutine}
         options={{ title: 'Create Workout' }} />
       <Stack.Screen
-        name="display"
-        component={display}
+        name="WorkoutDetailScreen"
+        component={WorkoutDetailScreen}
         options={{ title: 'Exercise Details' }} />
 
     </Stack.Navigator>
@@ -128,89 +128,12 @@ function AccountStack() {
         options={{ title: "Edit Profile Page" }}
       />
       <Stack.Screen
-        name="Login"
-        component={Login}
+        name="Intro"
+        component={Intro}
       />
     </Stack.Navigator>
   );
 }
-
-// function homeApp() {
-//   return (
-//     <NavigationContainer>
-//       <Tab.Navigator
-//         initialRouteName="Workout"
-//         tabBarOptions={{
-//           activeTintColor: "#004d99",
-//         }}
-//       >
-//         <Tab.Screen
-//           name="HomeStack"
-//           component={HomeStack}
-//           options={{
-//             tabBarLabel: "Workout",
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons name="home" color={color} size={size} />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="ExerciseStack"
-//           component={ExerciseStack}
-//           options={{
-//             tabBarLabel: "Exercise",
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons
-//                 name="weight-lifter"
-//                 color={color}
-//                 size={size}
-//               />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="Progress"
-//           component={ProgressStack}
-//           options={{
-//             tabBarLabel: "Progress",
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons
-//                 name="calendar"
-//                 color={color}
-//                 size={size}
-//               />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="AccountStack"
-//           component={AccountStack}
-//           options={{
-//             tabBarLabel: "Account",
-//             tabBarIcon: ({ color, size }) => (
-//               <MaterialCommunityIcons
-//                 name="account-circle"
-//                 color={color}
-//                 size={size}
-//               />
-//             ),
-//           }}
-//         />
-//       </Tab.Navigator>
-//     </NavigationContainer>
-//   );
-// }
-// homeApp.navigationOptions = ({ navigation }) => ({
-//   // title: 'Login',
-//   headerShown: false,
-
-// });
-
-
-
-// export default homeApp;
-
-
 export default function homeApp({ navigation }) {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
@@ -228,7 +151,7 @@ export default function homeApp({ navigation }) {
   if (initializing) return null;
 
   if (!user) {
-    return navigation.navigate('Login');
+    return navigation.navigate('Intro');
   }
   return (
 
