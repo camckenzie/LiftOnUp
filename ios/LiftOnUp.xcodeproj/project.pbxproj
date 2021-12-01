@@ -13,7 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		8147DF66DF4AC8647383D696 /* libPods-LiftOnUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 373B817D8272418D6195ACC1 /* libPods-LiftOnUp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A4CE8E93272A0438004E7B87 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4CE8E92272A0438004E7B87 /* GoogleService-Info.plist */; };
+		91AF42EC2744851300A5A4B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91AF42EB2744851300A5A4B4 /* GoogleService-Info.plist */; };
 		DB5BFA76259B54ACEEA80278 /* libPods-LiftOnUp-LiftOnUpTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BABE1D6B5846D777A519B0 /* libPods-LiftOnUp-LiftOnUpTests.a */; };
 /* End PBXBuildFile section */
 
@@ -40,8 +40,8 @@
 		373B817D8272418D6195ACC1 /* libPods-LiftOnUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiftOnUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		401BBCF5A2EEF6823AA700D7 /* Pods-LiftOnUp-LiftOnUpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftOnUp-LiftOnUpTests.release.xcconfig"; path = "Target Support Files/Pods-LiftOnUp-LiftOnUpTests/Pods-LiftOnUp-LiftOnUpTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = LiftOnUp/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		91AF42EB2744851300A5A4B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3BABE1D6B5846D777A519B0 /* libPods-LiftOnUp-LiftOnUpTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiftOnUp-LiftOnUpTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4CE8E92272A0438004E7B87 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CC35FF1D1AB7AB948DCB62EE /* Pods-LiftOnUp-LiftOnUpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftOnUp-LiftOnUpTests.debug.xcconfig"; path = "Target Support Files/Pods-LiftOnUp-LiftOnUpTests/Pods-LiftOnUp-LiftOnUpTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E37B727F868754330FBCB718 /* Pods-LiftOnUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftOnUp.debug.xcconfig"; path = "Target Support Files/Pods-LiftOnUp/Pods-LiftOnUp.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -118,7 +118,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				A4CE8E92272A0438004E7B87 /* GoogleService-Info.plist */,
+				91AF42EB2744851300A5A4B4 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* LiftOnUp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* LiftOnUpTests */,
@@ -248,7 +248,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				A4CE8E93272A0438004E7B87 /* GoogleService-Info.plist in Resources */,
+				91AF42EC2744851300A5A4B4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
