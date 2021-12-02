@@ -98,14 +98,14 @@ export default function ProgressScreen({ navigation }) {
      
       <Text style={styles.name}>{item.day}</Text>
       <Text style={styles.line}>--</Text>
-      <Text style={styles.numberEx}> {item.workout} Exercise/day</Text>
+      <Text style={styles.numberEx}> {item.workout} Exercise(s)</Text>
     </View>
     
   );
   const renderItem = ({ item }) => {
     console.log(item);
     return (
-      <Item item={item} />
+      <Item item={item}/>
     );
   };
 

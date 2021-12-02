@@ -433,7 +433,7 @@ const Exercise = ({ navigation, route }) => {
             onPress={() => updateUserWorkout(addEx, days, user.email, userdata)}
             style={styles.btn_shape}
           >
-            <Text style={styles.btn_text}>Update Exercise</Text>
+            <Text style={styles.btn_text}>Update Routine</Text>
           </TouchableOpacity>
 
         </View>

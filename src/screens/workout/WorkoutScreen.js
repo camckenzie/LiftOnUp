@@ -135,7 +135,7 @@ export default function WorkoutScreen({ navigation }) {
   else {
     return (
       <View styles={styles.footer}>
-       <Text h1 style={styles.title}>Please creata a plan...</Text>
+       <Text h1 style={styles.title}>Please create a plan...</Text>
         {/* Work Name Create */}
     
           <TouchableOpacity style={styles.start_shape} onPress={() => navigation.navigate("Create", { userExist: false, })}>

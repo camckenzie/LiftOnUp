@@ -48,14 +48,6 @@ const WorkoutDetailScreen = ({ route }) => {
             <Text>Primary Muscles: </Text>
             {exercise.primaryMuscles}
           </Text>
-          <Text style={{ fontSize: 16, opacity: 1, marginVertical: 5 }}>
-            <Text>Reps: </Text>
-            {exercise.Reps}
-          </Text>
-          <Text style={{ fontSize: 16, opacity: 1, marginVertical: 5 }}>
-            <Text>Sets: </Text>
-            {exercise.Sets}
-          </Text>
           <Text style={{ fontSize: 15, width: '100%' }}>
             <Text>Instructions: </Text>
             {exercise.instructions}

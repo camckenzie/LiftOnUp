@@ -46,7 +46,7 @@ import {
            <View style={styles. headerContainer}>
               <Text h4 style={{marginBottom: 5,textAlign:'center'}}>Welcome to LiftOnUp</Text>
               <Text h5 >
-                The best App for track Fitness workout
+              The best fitness app for beginners and experts
               </Text>
               </View>
               <View style={styles.contentView}>

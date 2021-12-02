@@ -113,7 +113,7 @@ export default function EditDay1({ navigation, route }) {
       <View style={styles.container}>
         <SafeAreaView style={{ flex: 1, position: 'relative' }}>
           <View>
-            <Text h1 style={styles.title}>List of the Exercises Adeed</Text>
+            <Text h1 style={styles.title}>List of Exercises Added</Text>
           </View>
           <View style={styles.contentContainer}>
             <FlatList
@@ -129,7 +129,7 @@ export default function EditDay1({ navigation, route }) {
             <TouchableOpacity
               onPress={() => navigation.navigate('StartRoutine', { day: days, page: true })}
               style={styles.start_shape}>
-              <Text style={styles.start_text}>Edit Workout</Text>
+              <Text style={styles.start_text}>Edit Routine</Text>
             </TouchableOpacity>
           </View>
         </SafeAreaView>
@@ -156,7 +156,7 @@ export default function EditDay1({ navigation, route }) {
                         size={44}
                         />
               <Text style={{ color: "#004d99",fontSize:19, textAlign: "center",
-              fontWeight: "bold",alignContent: 'center'}}>Add Workout</Text>
+              fontWeight: "bold",alignContent: 'center'}}>Add Exercises</Text>
             </TouchableOpacity>
           </View>
         </SafeAreaView>

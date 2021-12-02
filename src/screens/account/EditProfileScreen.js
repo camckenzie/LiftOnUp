@@ -98,14 +98,7 @@ export default function EditProfileScreen({ navigation }) {
         <Text style={styles.left_info}>Username:</Text>
         <TextInput style={styles.input} value={username} onChangeText={setUserName} />
       </View>
-      <View style={styles.main}>
-        <Text style={styles.left_info}>Email: </Text>
-        <TextInput
-          style={styles.input}
-          value={Email}
-          onChangeText={setEmail}
-        />
-      </View>
+    
       <View style={styles.main}>
         <Text style={styles.left_info}>Birthday: </Text>
         <TextInput
@@ -121,7 +114,7 @@ export default function EditProfileScreen({ navigation }) {
           onChangeText={setHeight} />
       </View>
       <View style={styles.main}>
-        <Text style={styles.left_info}>Weight: </Text>
+        <Text style={styles.left_info}>Weight:</Text>
         <TextInput style={styles.input}
           value={Weight}
           onChangeText={setWeight}
