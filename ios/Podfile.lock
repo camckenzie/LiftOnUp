@@ -355,14 +355,9 @@ PODS:
     - React-Core (= 0.66.1)
     - React-jsi (= 0.66.1)
     - ReactCommon/turbomodule/core (= 0.66.1)
-  - Firebase/Analytics (8.8.0):
-    - Firebase/Core
   - Firebase/Auth (8.8.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 8.8.0)
-  - Firebase/Core (8.8.0):
-    - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 8.8.0)
   - Firebase/CoreOnly (8.8.0):
     - FirebaseCore (= 8.8.0)
   - Firebase/Firestore (8.8.0):
@@ -826,6 +821,8 @@ PODS:
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
+  - RNCPicker (2.2.1):
+    - React-Core
   - RNFBApp (12.9.3):
     - Firebase/CoreOnly (= 8.8.0)
     - React-Core
@@ -839,7 +836,7 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.10.3):
     - React-Core
-  - RNReanimated (2.2.3):
+  - RNReanimated (2.2.4):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -882,7 +879,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
-  - Firebase/Analytics
+  - FirebaseAnalytics
   - Flipper (= 0.99.0)
   - Flipper-Boost-iOSX (= 1.76.0.1.11)
   - Flipper-DoubleConversion (= 3.1.7)
@@ -934,6 +931,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCCheckbox (from `../node_modules/@react-native-community/checkbox`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
+  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
@@ -1043,6 +1041,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/checkbox"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
+  RNCPicker:
+    :path: "../node_modules/@react-native-picker/picker"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
@@ -1124,16 +1124,17 @@ SPEC CHECKSUMS:
   ReactCommon: 620442811dc6f707b4bf5e3b27d4f19c12d5a821
   RNCCheckbox: 7e2cd6ea8e200210c36fe0898bbe200826bdaf56
   RNCMaskedView: f127cd9652acfa31b91dcff613e07ba18b774db6
+  RNCPicker: cb57c823d5ce8d2d0b5dfb45ad97b737260dc59e
   RNFBApp: 729c0666395b1953198dc4a1ec6deb8fbe1c302e
   RNFBAuth: 7718be1152f5d1d0bb970a8d33094d010f1ac21c
   RNFBFirestore: eef5fd4cfbe35316af559631db06a34b8391628a
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNReanimated: b04ef2a4f0cb61b062bbcf033f84a9e470f4f60b
+  RNReanimated: 65583befd5706cc9c86ae9a081786181ced37b93
   RNScreens: 4d79118be80f79fa1f4aa131909a1d6e86280af3
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   Yoga: 2b4a01651f42a32f82e6cef3830a3ba48088237f
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 8da7e0980c791baa7ad2f7e9582d221021d6cb92
+PODFILE CHECKSUM: c1ea92ce2e6937484cc82afe3211a0db2dda2262
 
 COCOAPODS: 1.11.2

@@ -1,4 +1,4 @@
-import { createAppContainer, createBottomTabNavigator } from "react-navigation";
+import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import Login from "../screens/Login.js";
 import Intro from "../screens/Intro.js";
@@ -9,22 +9,26 @@ import EditDay1 from "../screens/workout/editDay1.js";
 import AccountScreen from "../screens/account/AccountScreen.js";
 import SettingsScreen from "../screens/account/SettingsScreen.js";
 import EditProfileScreen from "../screens/account/EditProfileScreen.js";
-import ProgressScreen from "../screens/progress/ProgressScreen";
-import ExerciseHomeScreen from "../screens/exercise/ExerciseHomeScreen";
-import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen";
+import ProgressScreen from "../screens/progress/ProgressScreen.js";
+import ExerciseHomeScreen from "../screens/exercise/ExerciseHomeScreen.js";
+import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen.js";
 // import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
 // import ExerciseHomeScreen from '../screens/ExerciseHomeScreen';
-import CreateWorkout from '../screens/workout/createWorkout';
+import CreateWorkout from '../screens/workout/createWorkout.js';
+import WorkoutScreen from '../screens/workout/WorkoutScreen.js';
+import WorkoutDetailScreen from '../screens/workout/WorkoutDetailScreen.js'
 const StackNavigator = createStackNavigator({
-  // Intro: Intro,
-  // Login: Login,
-  // RestPassword: RestPassword,
-  // Register: Register,
+  Intro: Intro,
+  Login: Login,
+  RestPassword: RestPassword,
+  Register: Register,
   Home: Home,
-  CreateWorkout:CreateWorkout,
+  WorkoutScreen: WorkoutScreen,
+  CreateWorkout: CreateWorkout,
   AccountScreen: AccountScreen,
   SettingsScreen: SettingsScreen,
   EditProfileScreen: EditProfileScreen,
+  WorkoutDetailScreen: WorkoutDetailScreen,
   ProgressScreen: ProgressScreen,
   ExerciseHomeScreen: ExerciseHomeScreen,
   ExerciseDetailsScreen: ExerciseDetailsScreen,

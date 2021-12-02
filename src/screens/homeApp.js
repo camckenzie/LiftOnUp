@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+import auth from "@react-native-firebase/auth";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,6 +15,8 @@ import ExerciseHomeScreen from "./exercise/ExerciseHomeScreen";
 import ExerciseDetailsScreen from "../screens/exercise/ExerciseDetailsScreen";
 import CreateWorkout from './workout/createWorkout';
 import StartRoutine from './workout/StartRoutine';
+import Intro from "../screens/Intro.js";
+import WorkoutDetailScreen from "./workout/WorkoutDetailScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,15 +41,19 @@ function HomeStack() {
         component={EditDay1}
         options={{ title: "MyPlan" }}
       />
-          <Stack.Screen
-          name="Create"
-          component={CreateWorkout}
-          options={{ title: 'Create Workout' }} />
-          <Stack.Screen
-          name="StartRoutine"
-          component={StartRoutine}
-          options={{ title: 'Create Workout' }} />
-          
+      <Stack.Screen
+        name="Create"
+        component={CreateWorkout}
+        options={{ title: 'Create Workout' }} />
+      <Stack.Screen
+        name="StartRoutine"
+        component={StartRoutine}
+        options={{ title: 'Create Workout' }} />
+      <Stack.Screen
+        name="WorkoutDetailScreen"
+        component={WorkoutDetailScreen}
+        options={{ title: 'Exercise Details' }} />
+
     </Stack.Navigator>
   );
 }
@@ -69,7 +76,9 @@ function ExerciseStack() {
       <Stack.Screen
         name="ExerciseDetailsScreen"
         component={ExerciseDetailsScreen}
-        options={{ title: "ExerciseDetailsScreen" }}
+        options={{
+          title: "Exercise Detail"
+        }}
       />
     </Stack.Navigator>
   );
@@ -118,12 +127,34 @@ function AccountStack() {
         component={EditProfileScreen}
         options={{ title: "Edit Profile Page" }}
       />
+      <Stack.Screen
+        name="Intro"
+        component={Intro}
+      />
     </Stack.Navigator>
   );
 }
+export default function homeApp({ navigation }) {
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
 
-function homeApp() {
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+  if (!user) {
+    return navigation.navigate('Intro');
+  }
   return (
+
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Workout"
@@ -135,16 +166,20 @@ function homeApp() {
           name="HomeStack"
           component={HomeStack}
           options={{
+            headerShown: false,
+
             tabBarLabel: "Workout",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
             ),
           }}
         />
+
         <Tab.Screen
           name="ExerciseStack"
           component={ExerciseStack}
           options={{
+            headerShown: false,
             tabBarLabel: "Exercise",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -159,6 +194,7 @@ function homeApp() {
           name="Progress"
           component={ProgressStack}
           options={{
+            headerShown: false,
             tabBarLabel: "Progress",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -173,6 +209,7 @@ function homeApp() {
           name="AccountStack"
           component={AccountStack}
           options={{
+            headerShown: false,
             tabBarLabel: "Account",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -188,9 +225,5 @@ function homeApp() {
   );
 }
 homeApp.navigationOptions = ({ navigation }) => ({
-  // title: 'Login',
   headerShown: false,
-  
 });
-
-export default homeApp;

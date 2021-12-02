@@ -12,8 +12,52 @@ import {
 } from "react-native";
 import firestore from "@react-native-firebase/firestore";
 import auth from "@react-native-firebase/auth";
-
+import { useIsFocused } from '@react-navigation/native'
 export default function SettingsScreen({ navigation }) {
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  const [Email, setEmail] = useState();
+  const [Dob, setDob] = useState();
+  const [Height, setHeight] = useState();
+  const [Weight, setWeight] = useState();
+  const [username, setUserName] = useState();
+  const isFocused = useIsFocused();
+
+  function onAuthStateChanged(user) {
+    setUser(user);
+    getData(user.email);
+    if (initializing) setInitializing(false);
+  }
+
+  function getData(user) {
+    console.log(user);
+    firestore().collection('Users').where('email', '==', user).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data());
+        setEmail(doc.data().email);
+        setDob(doc.data().birthday);
+        setHeight(doc.data().height);
+        setWeight(doc.data().weight);
+        setUserName(doc.data().username);
+      });
+    })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  }
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+  if (!user) {
+    return navigation.navigate('Login');
+  }
+
   return (
     <>
       {/* Profile picture and the username */}
@@ -22,7 +66,7 @@ export default function SettingsScreen({ navigation }) {
           style={styles.pic}
           source={require("../../../assets/images/profile.png")}
         ></Image>
-        <Text style={styles.info}>UserName</Text>
+        <Text style={styles.info}>{username}</Text>
       </View>
 
       <View style={styles.main}>
@@ -34,19 +78,8 @@ export default function SettingsScreen({ navigation }) {
             <Text style={styles.txt}>Edit Profile</Text>
           </TouchableOpacity>
         </View>
-        {/* Edit profile button to go to the manage reminders page 
-        which is not finished yet */}
-        <View style={styles.main1}>
-          <TouchableOpacity>
-            <Text style={styles.txt}>Manage Reminders</Text>
-          </TouchableOpacity>
-        </View>
-        {/* Logout button  */}
-        <View style={{ marginTop: 200 }}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.button_txt}>Logout</Text>
-          </TouchableOpacity>
-        </View>
+        
+     
       </View>
     </>
   );

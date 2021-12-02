@@ -1,16 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
 import {
-  //Dimensions,
-  ActivityIndicator,
   StyleSheet,
   Text,
-  TextInput,
   View,
-  Image,
-  onPress,
   TouchableOpacity,
-  ScrollView,
-  
+  FlatList,
+  SafeAreaView,
+
 } from "react-native";
 import { ListItem } from "react-native-elements";
 import { Button } from "react-native-elements/dist/buttons/Button";
@@ -18,251 +15,158 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import NumericInput from 'react-native-numeric-input'
 import StartRoutine from './StartRoutine';
-
+import { useIsFocused } from '@react-navigation/native'
+import {  Icon } from 'react-native-elements';
 // export class EditDay1 extends React.Component {
-export default function EditDay1({ navigation }) {
-  
-  // updateInputVal = (val, prop) => {
-  //   const [input, setInput] = React.useState("")
-  // }
-  // static navigationOptions = {
-  //   title: "Day 1 Edit",
-  // };
-  
+export default function EditDay1({ navigation, route }) {
+
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+  const [days, setDay] = useState(route.params.data);
+  const isFocused = useIsFocused();
+  const [masterData, setmasterData] = useState([]);
+  const workoutDisplay = [];
+  const [edit, setEdit] = useState(false);
 
   function onAuthStateChanged(user) {
-      setUser(user);
-      if (initializing) setInitializing(false);
+    setUser(user);
+    // console.log(days);
+    getData(user.email, days);
+    // console.log(masterData);
+    if (initializing) setInitializing(false);
   }
 
+  function getData(user) {
+    firestore().collection("Users").doc(user).collection("Exercises").where('day', '==', days).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // console.log(doc.data().workout);
+        setEdit(true);
+        const Exercise = doc.data().workout;
+        for (const Ex in Exercise) {
+          if (Exercise[Ex].value) {
+            getDetails(Exercise[Ex].name);
+          }
 
-  const [ sets, setsets ] = useState('');
-  const [ reps, setreps ] = useState('');  
-  // const[exercise, setexercise] = useState('Squat');
-  const ref = firestore().collection('WorkoutCollection').doc('Day1').collection('Deadlift');
-  async function addWorkout() {    
-      await ref.add({      
-        sets:sets,      
-        reps: reps,
-      });    
-      setsets('');
-      setreps('');  
-      // setexercise('');
-  } 
+        }
+      });
+    })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  }
+
+  getDetails = (exercise) => {
+    firestore().collection('WorkoutCollection').doc(exercise).get().then((querySnapshot) => {
+      workoutDisplay.push({ name: querySnapshot.id, primaryMuscles: querySnapshot.data().Part, instructions: querySnapshot.data().Description, Reps: querySnapshot.data().Reps, Sets: querySnapshot.data().Sets, image: querySnapshot.data().Image });
+      setmasterData(workoutDisplay);
+
+    })
+
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+
+  }
 
   useEffect(() => {
-      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      return subscriber; // unsubscribe on unmount
-  }, []);
+
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, [isFocused]);
 
   if (initializing) return null;
 
   if (!user) {
-      return navigation.navigate('Login');
+    return navigation.navigate('Login');
   }
+  const ItemView = ({ exercise }) => {
+    return (
+      // Flat List Item
+      <Text
+        style={styles.itemStyle}
+        onPress={() => navigation.navigate('WorkoutDetailScreen', { exercise: exercise, page: 'push', })}>
+        {exercise.name}
+        {' ('}
+        {exercise.primaryMuscles}
+        {')'}
+      </Text>
+    );
+  };
 
-    return(
-      
+  const ItemSeparatorView = () => {
+    return (
+      // Flat List Item Separator
+      <View
+        style={{
+          height: 0.5,
+          width: '100%',
+          backgroundColor: '#C8C8C8',
+        }}
+      />
+    );
+  };
+
+  if (edit) {
+    return (
+
       //The parent container that controls the general format
       <View style={styles.container}>
-        <ScrollView>
-        {/* Container that handles to body */}
-        <View style={styles.contentContainer}>
-          {/* Below are a set of 6 buttons:
-          Exercise: AxB reps, C lbs */}
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              {/* Buttons need ListItem format */}
-              <ListItem>
-                <Image
-                    source={require('../../../assets/Workouts/Deadlift.png')}
-                  style={{width:60, height:60}}/>
-                  <ListItem.Content>
-                    <ListItem.Title>Deadlift</ListItem.Title>
-                  {/* These are the titles of the fields in a row */}
-                      <View style={{flexDirection:"row"}}>
-                      <Text style={{padding:10}}>Sets</Text>
-                      <Text style={{marginHorizontal: 60,padding:10}}>Reps</Text>
-                      </View>
-                  
-                  {/* These hold the text inputs in a row */}
-                      <View style ={{flexDirection:"row"}}>
-
-                      <View><NumericInput 
-                        
-                        totalWidth={70} 
-                        totalHeight={28} 
-                        iconSize={28}
-                     onChangeText={setsets}
-                          value={sets}/></View> 
-                            <View style={{marginLeft:30,alignContent:"center"}}><NumericInput 
-                        
-                        totalWidth={70} 
-                        totalHeight={28} 
-                        iconSize={28}
-                     onChangeText={setsets}
-                          value={sets}/></View> 
-                      </View>
-                  </ListItem.Content>
-              </ListItem>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <ListItem>
-                <Image
-                      source={require('../../../assets/Workouts/LegCurl.jpg')}
-                  style={{width:60, height:60}}/>
-                  <ListItem.Content>
-                    <ListItem.Title>Leg Curl</ListItem.Title>
-                      <View style={{flexDirection:"row"}}>
-                      <Text style={{padding:10}}>Sets</Text>
-                      <Text style={{marginHorizontal: 60,padding:10}}>Reps</Text>
-                      </View>
-
-                      <View style ={{flexDirection:"row"}}>
-                        {/* <TextInput 
-                           onChangeText={setsets}
-                           value={sets}
-                           style={styles.edits}
-                        style={styles.edits}
-                        maxLength = {3}></TextInput> */}
-                    <View><NumericInput 
-                        
-                        totalWidth={70} 
-                        totalHeight={28} 
-                        iconSize={28}
-                     onChangeText={setsets}
-                          value={sets}/></View> 
-                            <View style={{marginLeft:30,alignContent:"center"}}><NumericInput 
-                        
-                        totalWidth={70} 
-                        totalHeight={28} 
-                        iconSize={28}
-                     onChangeText={setsets}
-                          value={sets}/></View> 
-                      </View>
-                  </ListItem.Content>
-              </ListItem>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <ListItem>
-                <Image
-                  source={require('../../../assets/Workouts/LegExtension.jpg')}
-                  style={{width:60, height:60}}/>
-                  <ListItem.Content>
-                    <ListItem.Title>Leg Extension</ListItem.Title>
-                      <View style={{flexDirection:"row"}}>
-                      <Text style={{padding:10}}>Sets</Text>
-                      <Text style={{marginHorizontal: 50,padding:10}}>Reps</Text>
-                      </View>
-                      <View style ={{flexDirection:"row"}}>
-                        {/* <TextInput 
-                           onChangeText={setsets}
-                           value={sets}
-                           style={styles.edits}
-                        style={styles.edits}
-                        maxLength = {3}></TextInput>
-                        <TextInput style={styles.editsReps}
-                       onChangeText={setreps}
-                       value={reps}
-                       maxLength = {3}></TextInput> */}
-                         <View><NumericInput 
-                        
-                        totalWidth={70} 
-                        totalHeight={28} 
-                        iconSize={28}
-                     onChangeText={setsets}
-                          value={sets}/></View> 
-                            <View style={{marginLeft:30,alignContent:"center"}}><NumericInput 
-                        
-                        totalWidth={70} 
-                        totalHeight={28} 
-                        iconSize={28}
-                     onChangeText={setsets}
-                          value={sets}/></View> 
-                      </View>
-                  </ListItem.Content>
-              </ListItem>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.wo_btn}
-            onPress={onPress}
-            >
-              <ListItem>
-                <Image
-                    source={require('../../../assets/Workouts/Squat.png')}
-                  style={{width:60, height:60}}/>
-                  <ListItem.Content>
-                    <ListItem.Title >Squat</ListItem.Title>
-                      <View style={{flexDirection:"row"}}>
-                      <Text style={{padding:10}}>Sets</Text>
-                      <Text style={{marginHorizontal: 60,padding:10}}>Reps</Text>
-                      </View>
-
-                      <View style ={{flexDirection:"row"}}>
-                        {/* <TextInput  style={{width:60,}} 
-                         onChangeText={setsets}
-                         value={sets}
-                         style={styles.edits}
-                         maxLength = {3}></TextInput>
-                        
-                        <TextInput 
-                        onChangeText={setreps}
-                        value={reps}
-                        style={styles.editsReps}
-                        maxLength = {3}></TextInput> */}
-                      <View><NumericInput 
-                        
-                        totalWidth={70} 
-                        totalHeight={28} 
-                        iconSize={28}
-                     onChangeText={setsets}
-                          value={sets}/></View> 
-                            <View style={{marginLeft:30,alignContent:"center"}}
-                            ><NumericInput 
-                        
-                        totalWidth={70} 
-                        totalHeight={28} 
-                        iconSize={28}
-                     onChangeText={setsets}
-                          value={sets}/></View> 
-                      </View>
-                  </ListItem.Content>
-              </ListItem>
-          </TouchableOpacity>         
-        </View>
+        <SafeAreaView style={{ flex: 1, position: 'relative' }}>
+          <View>
+            <Text h1 style={styles.title}>List of Exercises Added</Text>
+          </View>
+          <View style={styles.contentContainer}>
+            <FlatList
+              data={masterData}
+              keyExtractor={(item, index) => index.toString()}
+              ItemSeparatorComponent={ItemSeparatorView}
+              renderItem={({ item }) => <ItemView exercise={item} />} //display in array
+            />
+          </View>
 
           {/* This is the footer, the buttons at bottom */}
           <View styles={styles.footer}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('EditDay1')}
+              onPress={() => navigation.navigate('StartRoutine', { day: days, page: true })}
               style={styles.start_shape}>
-                <Text style={styles.start_text}>Add Workout</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-              onPress={() =>  { navigation.navigate("StartRoutine");}}
-              style={styles.start_shape}>
-                <Text style={styles.start_text}>Start Workout</Text>
-              </TouchableOpacity>
+              <Text style={styles.start_text}>Edit Routine</Text>
+            </TouchableOpacity>
           </View>
-          </ScrollView>
+        </SafeAreaView>
       </View>
 
 
     );
   }
+  else {
+    return (
+
+      //The parent container that controls the general format
+      <View style={styles.addWorkout}>
+        <SafeAreaView >
+
+          {/* This is the footer, the buttons at bottom */}
+          <View >
+            <TouchableOpacity
+              onPress={() => navigation.navigate('StartRoutine', { day: days, })}
+              >
+                 <Icon
+                        name='add'x
+                        color="#004d99"
+                        size={44}
+                        />
+              <Text style={{ color: "#004d99",fontSize:19, textAlign: "center",
+              fontWeight: "bold",alignContent: 'center'}}>Add Exercises</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </View>
+
+
+    );
+  }
+
+}
 
 
 const styles = StyleSheet.create({
@@ -273,8 +177,11 @@ const styles = StyleSheet.create({
     // marginHorizontal: 40,
     color: "#121212",
     backgroundColor: "rgba(230,230,230,1)",
-    width:"1%"
-    
+    width: "1%"
+
+  },
+  itemStyle: {
+    padding: 10,
   },
   editsReps: {
     alignItems: 'center',
@@ -284,15 +191,17 @@ const styles = StyleSheet.create({
     color: "#121212",
     fontSize: 13,
     paddingVertical: 0,
-    // marginHorizontal: 40,
     color: "#121212",
     backgroundColor: "rgba(230,230,230,1)",
-    width:"10%"
-    
+    width: "10%"
+
   },
   title: {
-    textAlign: "left",
-    marginVertical: 5,
+    textAlign: "center",
+    padding:20,
+    fontSize:20,
+    fontWeight:"bold",
+    color:"#5F5F64"
   },
   container: {
     flex: 1,
@@ -300,28 +209,34 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   contentContainer: {
+    top:40,
     flex: 1,
     justifyContent: 'flex-start',
   },
   wo_btn: {
-    //alignItems: "flex-start",
     backgroundColor: "#DDDDDD",
     padding: 10,
     marginVertical: 2,
   },
   innerText: {
-    fontSize:10,
+    fontSize: 10,
   },
 
   footer: {
     width: "100%",
     flexDirection: 'row',
-    alignItems: "flex-start",
+    alignItems: 'center',
+  },
+  addWorkout:{
+    marginVertical:290,
+    justifyContent:"center",
+     alignContent: 'center'
   },
   start_shape: {
+    bottom:10,
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor:"#004d99",
+    backgroundColor: "#004d99",
     width: '40%',
     height: 40,
     marginHorizontal: 5,
@@ -338,6 +253,3 @@ const styles = StyleSheet.create({
     alignContent: 'center',
   },
 })
-
-
-// export default EditDay1
