@@ -35,4 +35,33 @@ Lift On Up is a fitness application that will motivate people to exercise,  stay
 1) Click on "Create Routine" to start
 2) Select the days of the week you intend to workout for your weekly routine
 3) You will be brought back to the starting screen of the Workout Tab, with the days of the week you selected displayed
-4) Click into 
+
+### Creating/Updating a workout routine for a specific day
+1) Click into one of the days to view the exercises required for that day
+2) Click the "Add Exercises" button to add exercises into this specific day
+3) Select the exercises you wwould like to add using the checkboxes
+4) Use the search bar to search for exercises by name if desired
+5) After you have selected all of your desired exercises, click the "Add Exercise" button
+6) You will be brought back to the starting screen of the Workout Tab
+7) To view your changes, select the day of the week you recently updated
+
+### Updating a day's exercise routine
+1) To add or remove exercises to your selected day of the week, click the "Edit Routine" button
+2) Click the check boxes to add or remove exercises
+3) Click the "Update Routine" button when you are finished
+
+## Exercise tab
+1) Select the exercise you are interested in learning more about
+2) You may use the search bar to find an exercise by name
+3) Once an exercise is selected, you will be able to view the primary muscles it targets and detailed instructions on how to perform the exercise
+
+## Progress tab
+Select this tab to see a sumary of the exercises required for each day
+
+## Account Tab
+1) Click on this tab to see your account information, including username, birthday, height, and weight
+2) To logout of your account, click the "Logout" button
+3) To update your information, click on the "Settings" button then click "Edit Profile"
+4) Once you have written in your changes, click "Save"
+
+**NOTE:** You may have to restart the application for the changes to be displayed. Regardless, as soon as you click save, your information is updated within our database.
