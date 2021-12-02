@@ -29,3 +29,10 @@ Lift On Up is a fitness application that will motivate people to exercise,  stay
 1) Enter your email and password
 2) Click log in
 3) You wil be brought to the "Workout" tab
+
+## Workout Tab
+### Setting days of the week for your routine
+1) Click on "Create Routine" to start
+2) Select the days of the week you intend to workout for your weekly routine
+3) You will be brought back to the starting screen of the Workout Tab, with the days of the week you selected displayed
+4) Click into 
