@@ -13,5 +13,5 @@ Lift On Up is a fitness application that will motivate people to exercise,  stay
 ## Getting started
 1) First click the "Get Started" button to create an account
 2) Enter a username, valid email, and password
-3) **NOTE:** The password must be at least 6 characters long
-4) After successfully creating your account, you will automatically be logged in
+ **NOTE:** The password must be at least 6 characters long
+3) After successfully creating your account, you will automatically be logged in
