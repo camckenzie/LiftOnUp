@@ -9,3 +9,9 @@ Lift On Up is a fitness application that will motivate people to exercise,  stay
 4) XCode (for emulating the app)
 
 **NOTE:** After downloading the app, please be sure to run the command "npm install" within the main folder to download all packages and dependencies
+
+## Getting started
+1) First click the "Get Started" button to create an account
+2) Enter a username, valid email, and password
+**NOTE:** The password must be at least 6 characters long
+3) After successfully creating your account, you will automatically be logged in
